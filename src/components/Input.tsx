@@ -5,6 +5,7 @@ export function Input({...rest}: IInputProps ){
     <NBInput 
       bg='yellow'
       h={14}
+      w={20}
     />
   )
 }
