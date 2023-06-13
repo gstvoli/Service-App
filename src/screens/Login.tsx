@@ -11,13 +11,12 @@ export default function Login() {
   return (
     <View style={styles.container}>
       <VStack style={styles.box}>
-        <Heading fontSize="xl" py={25} >Service App</Heading>
+        <Heading fontSize="5xl" mb={16} color="#fff">Service App</Heading>
         <Logo />
-        <Button/>
+        <Button title='Entrar' color='#000' mt={12} mb={16} />
 
-        <Text>Ainda não tem uma conta?</Text>
-        <Link>Cadastre-se aqui!</Link>
-        <Input />
+        <Text color="#fff" fontSize="xl" fontWeight="bold" mb={3.5}>Ainda não tem uma conta?</Text>
+        <Link _text={{color: "#fff", fontSize: "xl"}} >Cadastre-se aqui!</Link>
       </VStack>
       {/* <StatusBar style="auto" /> */}
     </View>
@@ -27,7 +26,7 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#63DADF',
+    backgroundColor: '#248A8E',
     alignItems: 'center',
     justifyContent: 'center'
   },
