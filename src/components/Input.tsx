@@ -1,11 +1,16 @@
 import { Input as NBInput, IInputProps, Fade } from 'native-base'
 
-export function Input({...rest}: IInputProps ){
+type Props = IInputProps & {
+  placeholder : string;
+}
+
+export function Input({placeholder, ...rest}: Props ){
   return(
     <NBInput 
       bg='yellow'
-      h={14}
-      w={20}
+      placeholder={placeholder}
+      fontSize="sm"
+      borderRadius="2xl"
     />
   )
 }

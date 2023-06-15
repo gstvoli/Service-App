@@ -11,8 +11,8 @@ export function Button({title, color, mt, mb,...rest}: Props){
   return(
     <NBButton
       bg="coolGray.300"
-      h={50}
-      w={155}
+      h={54}
+      w={210}
       rounded="full"
       _pressed={{ bg: "lightBlue.800"}}
       mt={mt}
