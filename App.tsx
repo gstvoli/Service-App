@@ -7,7 +7,7 @@ import Terms from './src/screens/Terms';
 export default function App() {
   return (
     <NativeBaseProvider>
-      <SignIn />
+      <Terms />
     </NativeBaseProvider>
   );
 }

@@ -5,7 +5,7 @@ import { SafeAreaView as View} from "react-native-safe-area-context";
 
 import Stage1 from '../imgs/register1.svg';
 import UserLarge from '../imgs/user-large-solid.svg'
-import ArrowRigh from '../imgs/arrowRight.svg'
+import ArrowRight from '../imgs/arrowRight.svg'
 
 import { Input } from "../components/Input";
 
@@ -50,8 +50,8 @@ export default function SignIn(){
       </HStack>
       </VStack>
 
-      <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={14}>
-        <ArrowRigh />
+      <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10}>
+        <ArrowRight />
       </Button>
       <Text color="#000" fontSize="lg" fontWeight="bold" >Próximo</Text>
 
@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 40,
-    marginHorizontal: 30
+    paddingTop: 40,
+    paddingHorizontal: 30,
+    backgroundColor: '#EEEEEE'
   }
 })
