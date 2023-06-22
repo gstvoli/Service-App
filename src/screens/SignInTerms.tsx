@@ -35,7 +35,7 @@ export default function SignIn(){
 
       <HStack paddingTop={2}>
         <Checkbox value="test" mt={2}>
-          <Text fontSize="sm" fontWeight="bold">Declaro que li e concordo com os termos e condições</Text>
+          <Text fontSize="sm" fontWeight="bold">Li e concordo com os termos e condições</Text>
         </Checkbox>
       </HStack>
 
