@@ -2,9 +2,12 @@ import { StyleSheet } from 'react-native'
 import { VStack, HStack, Text, Button } from "native-base";
 import { SafeAreaView as View }from "react-native-safe-area-context";
 
+import { Input } from '../components/Input';
+
 import Stage3 from '../imgs/register3.svg'
 import ArrowRight from '../imgs/arrowRight.svg'
-import { CreditCard } from '@mui/icons-material';
+import CreditCard from '../imgs/creditcard.svg';
+import CCVisa from '../imgs/cc-visa.svg';
 
 export default function SignInCard(){
   return (
@@ -15,7 +18,24 @@ export default function SignInCard(){
 
       <HStack alignItems="center" mt={4}>
         <CreditCard  />
-        <Text color="#00ADB5" fontSize="2xl" fontWeight="bold" mt={2} ml={2}>Criar conta</Text>
+        <Text color="#00ADB5" fontSize="2xl" fontWeight="bold" mt={2} ml={2}>Dados Financeiros</Text>
+      </HStack>
+
+      <Text color="#000" fontSize="md" fontWeight="bold" my={3}>Informe seus dados financeiros abaixo.</Text>
+      <Input placeholder="Nome no cartão" my={2}/>
+      <Input placeholder="Nº do cartão (1234-5678-9101-1121)" />
+
+      <HStack alignItems="center" my={2}>
+        <CCVisa />
+        <Text mx={2} fontSize="sm" fontWeight="semibold">Data de Validade:</Text>
+        <Input placeholder='' w="15%"/>
+        <Text mx={2} fontSize="sm" fontWeight="semibold">/</Text>
+        <Input placeholder='' w="15%"/>
+      </HStack>
+
+      <HStack alignItems="center">
+        <Text fontSize="md" fontWeight="semibold" mr={2}>Código de Verificação de Cartao:</Text>
+        <Input placeholder='' w="25%"/> 
       </HStack>
 
       <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10}>

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
+    "start-dev": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web"
@@ -10,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@expo-google-fonts/inter": "^0.2.3",
     "@fontsource/roboto": "^5.0.3",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.5",
