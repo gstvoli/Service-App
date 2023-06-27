@@ -2,15 +2,15 @@ import { Input as NBInput, IInputProps, Fade } from 'native-base'
 
 type Props = IInputProps & {
   placeholder : string;
+  align? : string;
   type? : string;
   my? : number;
 }
 
-export function Input({placeholder, my, type, ...rest}: Props ){
+export function Input({placeholder, align, my, type, ...rest}: Props ){
   return(
     <NBInput 
       placeholder={placeholder}
-      textAlign="center"
       my={my}
       fontSize="md"
       fontWeight="bold"

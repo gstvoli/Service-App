@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { StyleSheet } from 'react-native'
-import { VStack, HStack, Text, Button } from "native-base";
+import { VStack, HStack, Text, Button, Checkbox } from "native-base";
 import { SafeAreaView as View }from "react-native-safe-area-context";
 
 import { Input } from '../components/Input';
@@ -10,6 +11,12 @@ import CreditCard from '../imgs/creditcard.svg';
 import CCVisa from '../imgs/cc-visa.svg';
 
 export default function SignInCard(){
+  const [checked, setChecked] = useState(false)
+
+  function handleCheck(){
+
+  }
+
   return (
     <View style={styles.container}>
       <VStack alignItems="center">
@@ -37,6 +44,27 @@ export default function SignInCard(){
         <Text fontSize="md" fontWeight="semibold" mr={2}>Código de Verificação de Cartao:</Text>
         <Input placeholder='' w="25%"/> 
       </HStack>
+
+      <HStack my={1.5} mr={5}>
+        <Checkbox value="sameAddress" isChecked={checked} onChange={setChecked}>
+          <Text>Utilizar endereço residencial para cobrança</Text>
+        </Checkbox>
+      </HStack>
+      { !checked ?  
+        <VStack>
+          <Input placeholder="Endereço de Cobrança" my={2}/>
+          <HStack alignItems="center" maxW="full" mt={1} mb={1.5}>
+            <Input placeholder="Nº da casa/apto" w="40%" mr={2} />
+            <Input placeholder="Bairro" w="58%" />
+          </HStack>
+          <HStack alignItems="center" maxW="full" mt={1}>
+            <Input placeholder="Cidade" w="75%" mr={2}/>
+            <Input placeholder="UF" w="23%"/>
+          </HStack>
+          {console.log(checked)}
+        </VStack>  
+        : console.log(checked)
+      }
 
       <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10}>
         <ArrowRight />
