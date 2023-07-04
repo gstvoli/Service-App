@@ -27,7 +27,7 @@ export default function SignInFinish(){
           <Text style={styles.boldFont} my={2}>Seu cadastro foi concluído com sucesso!</Text>
           <Text style={styles.boldFont} mb={6}>Ficamos felizes por fazer parte de nossa comunidade!</Text>
           <UsersIcon />
-          <Text color="#fff" fontWeight="bold" fontSize="2xl" mt={6} mb={1}>Faça seu login para</Text>
+          <Text color="#fff" fontWeight="bold" fontSize="2xl" mt={8} mb={1}>Faça seu login para</Text>
           
           <Link>
             <Text color="#fff" fontWeight="bold" fontSize="2xl" borderBottomWidth={4} borderBottomColor='#fff' w={200} pb={1.5} textAlign="center">acessar o app!</Text>
