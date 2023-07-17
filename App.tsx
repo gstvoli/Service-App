@@ -6,11 +6,12 @@ import SignInTerms from './src/screens/SignInTerms';
 import SignInCard from './src/screens/SignInCard'
 import SignInFinish from './src/screens/SignInFinish';
 import Login from './src/screens/Login';
+import Services from './src/screens/Services';
 
 export default function App() {
   return (
     <NativeBaseProvider>
-      <Login />
+      <Services />
     </NativeBaseProvider>
   );
 }

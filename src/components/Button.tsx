@@ -3,20 +3,24 @@ import { Button as NBButton, IButtonProps, Heading } from 'native-base'
 type Props = IButtonProps & {
   title: string;
   color: string;
+  bgColor? : string;
   mt: number;
   mb: number;
+  fs? : number;
 }
 
-export function Button({title, color, mt, mb,...rest}: Props){
+export function Button({title, color, bgColor, mt, mb, fs,...rest}: Props){
   return(
     <NBButton
       bg="coolGray.300"
       h={54}
       w={210}
       rounded="full"
-      _pressed={{ bg: "lightBlue.800"}}
+      _pressed={{ backgroundColor: "lightBlue.800"}}
       mt={mt}
       mb={mb}
+      fontSize={fs}
+      backgroundColor={bgColor}
       {...rest}
       
     >
