@@ -20,15 +20,15 @@ export default function SignInCard(){
   return (
     <View style={styles.container}>
       <VStack alignItems="center">
-      <Text color="#00ADB5" fontSize="xl" fontWeight="bold" mb={2}>Etapa 3/3</Text>
+      <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 3/3</Text>
         <Stage3 />
 
       <HStack alignItems="center" mt={4}>
         <CreditCard  />
-        <Text color="#00ADB5" fontSize="2xl" fontWeight="bold" mt={2} ml={2}>Dados Financeiros</Text>
+        <Text color="#00ADB5" fontSize="2xl" bold mt={2} ml={2}>Dados Financeiros</Text>
       </HStack>
 
-      <Text color="#000" fontSize="md" fontWeight="bold" my={3}>Informe seus dados financeiros abaixo.</Text>
+      <Text color="#000" fontSize="md" bold my={3}>Informe seus dados financeiros abaixo.</Text>
       <Input placeholder="Nome no cartão" my={2}/>
       <Input placeholder="Nº do cartão (1234-5678-9101-1121)" />
 
@@ -69,7 +69,7 @@ export default function SignInCard(){
       <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10}>
         <ArrowRight />
       </Button>
-      <Text color="#000" fontSize="lg" fontWeight="bold" >Próximo</Text>
+      <Text color="#000" fontSize="lg" bold >Próximo</Text>
 
       </VStack>
     </View>

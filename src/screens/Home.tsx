@@ -15,9 +15,9 @@ export default function Login() {
         <Logo />
         <Button title='Entrar' color='#000' mt={16} mb={12} />
 
-        <Text color="#fff" fontSize="lg" fontWeight="bold" mb={3.5}>Ainda não tem uma conta?</Text>
+        <Text color="#fff" fontSize="lg" bold mb={3.5}>Ainda não tem uma conta?</Text>
           <Link>
-            <Text color="#fff" fontSize="xl" fontWeight="bold" letterSpacing="xl" borderBottomWidth={4} borderBottomColor='#fff' pb={1.5} width={200} textAlign="center">Cadastre-se aqui!</Text>
+            <Text color="#fff" fontSize="xl" bold letterSpacing="xl" borderBottomWidth={4} borderBottomColor='#fff' pb={1.5} width={200} textAlign="center">Cadastre-se aqui!</Text>
           </Link>
       </VStack>
     </View>

@@ -17,16 +17,16 @@ export default function SignIn(){
   return (
     <View style={styles.container}>
       <VStack alignItems="center">
-        <Text color="#00ADB5" fontSize="xl" fontWeight="bold" mb={2}>Etapa 1/3</Text>
+        <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 1/3</Text>
         <Stage1 />
 
         <HStack alignItems="center" mt={4}>
           <UserLarge />
-          <Text color="#00ADB5" fontSize="2xl" fontWeight="bold" mt={2} ml={2}>Criar conta</Text>
+          <Text color="#00ADB5" fontSize="2xl" bold mt={2} ml={2}>Criar conta</Text>
         </HStack>
 
 
-        <Text color="#000" fontSize="md" fontWeight="bold" my={3}>Informe seus dados pessoais abaixo</Text>
+        <Text color="#000" fontSize="md" bold my={3}>Informe seus dados pessoais abaixo</Text>
         <Input placeholder="Seu nome completo" w="full" my={1} />
         <Input placeholder="Seu CPF" w="full" my={1} />
 
@@ -53,7 +53,7 @@ export default function SignIn(){
       <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10}>
         <ArrowRight />
       </Button>
-      <Text color="#000" fontSize="lg" fontWeight="bold" >Próximo</Text>
+      <Text color="#000" fontSize="lg" bold >Próximo</Text>
 
     </View>
   )

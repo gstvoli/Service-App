@@ -1,17 +1,168 @@
-import { Text } from 'native-base';
+import { HStack, Heading, Link, Text, VStack } from 'native-base';
 import { ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
-import { ServiceBox } from '../components/ServiceBox';
+import Painter from '../imgs/pintor.svg';
+import Wrench from '../imgs/wrench.svg';
+import Hammer from '../imgs/hammer.svg';
+import Trowel from '../imgs/trowel.svg';
+import CircleRight from '../imgs/circle-right.svg';
+import BigUser from '../imgs/bigUser.svg';
+import Ellipse from '../imgs/ellipse2.svg';
+import Star from '../imgs/star.svg';
 
 export default function Services(){
   return (
     <View style={styles.container}>
-      <Text>Bem vindo, Gustavo!</Text>
-      <Text color="#000" fontWeight="bold" fontSize="2xl">Serviços</Text>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <VStack alignItems='center'>
+      <VStack mt={-12}>
+        <Ellipse />
+        <Heading pt={2} mt={-16} mb={12} color='#FFF' textAlign='center'>Bem vindo, Gustavo!</Heading>
+      </VStack>
+      
 
-      <ScrollView horizontal={true}>
-        <ServiceBox />
+        <Heading color='#393E46' mb={3}>Serviços</Heading>
+
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <VStack style={styles.box}>
+            <Painter />
+            <Text color='#FFF' bold fontSize="md">Pintor</Text>
+          </VStack>
+          <VStack style={styles.box}>
+            <Trowel />
+            <Text color='#FFF' bold fontSize="md">Pedreiro</Text>
+          </VStack>
+          <VStack style={styles.box}>
+            <Hammer />
+            <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
+          </VStack>
+          <VStack style={styles.box}>
+            <Wrench />
+            <Text color='#FFF' bold fontSize="md">Mecânico</Text>
+          </VStack>
+          <VStack style={styles.box}>
+            <Painter />
+            <Text color='#FFF' bold fontSize="md">Pintor</Text>
+          </VStack>
+        </ScrollView> 
+
+        <Link mt={3}>
+          <Text color='#1A82E2' fontSize='lg' fontWeight='bold' mr={1} mt={-2}>Todos os serviços</Text>
+          <CircleRight />
+        </Link>
+
+        <Heading color='#393E46' my={4}>Melhores colaboradores</Heading>
+
+        <Heading fontSize="lg" mb={4}>Marcenaria</Heading>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <Link>
+            <VStack style={styles.card}>
+              <BigUser />
+              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
+              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
+              <HStack mt={2}>
+                <Star />
+                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
+              </HStack>
+            </VStack>
+          </Link>
+          <Link>
+            <VStack style={styles.card}>
+              <BigUser />
+              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
+              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
+              <HStack mt={2}>
+                <Star />
+                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
+              </HStack>
+            </VStack>
+          </Link>
+          <Link>
+            <VStack style={styles.card}>
+              <BigUser />
+              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
+              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
+              <HStack mt={2}>
+                <Star />
+                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
+              </HStack>
+            </VStack>
+          </Link>
+          <Link>
+            <VStack style={styles.card}>
+              <BigUser />
+              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
+              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
+              <HStack mt={2}>
+                <Star />
+                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
+              </HStack>
+            </VStack>
+          </Link>
+        </ScrollView>
+
+        <Link mt={6}>
+          <Text color='#1A82E2' fontSize='lg' bold mr={1} mt={-2} mb={3}>Lista de Marceneiros(as)</Text>
+          <CircleRight />
+        </Link>
+        
+        <Heading fontSize="lg" mb={4}>Pintores</Heading>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <Link>
+            <VStack style={styles.card}>
+              <BigUser />
+              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
+              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
+              <HStack mt={2}>
+                <Star />
+                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
+              </HStack>
+            </VStack>
+          </Link>
+          <Link>
+            <VStack style={styles.card}>
+              <BigUser />
+              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
+              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
+              <HStack mt={2}>
+                <Star />
+                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
+              </HStack>
+            </VStack>
+          </Link>
+          <Link>
+            <VStack style={styles.card}>
+              <BigUser />
+              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
+              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
+              <HStack mt={2}>
+                <Star />
+                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
+              </HStack>
+            </VStack>
+          </Link>
+          <Link>
+            <VStack style={styles.card}>
+              <BigUser />
+              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
+              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
+              <HStack mt={2}>
+                <Star />
+                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
+              </HStack>
+            </VStack>
+          </Link>
+        </ScrollView>
+
+        <Link mt={6}>
+          <Text color='#1A82E2' fontSize='lg' bold mr={1} mt={-2} mb={3}>Lista de Pintores(as)</Text>
+          <CircleRight />
+        </Link>
+        </VStack>
+
+        <Heading textAlign='center'>Disponíveis no momento</Heading>
+
       </ScrollView>
     </View>
   )
@@ -19,8 +170,29 @@ export default function Services(){
 
 const styles = StyleSheet.create({
   container : {
-    flex : 1,
     justifyContent : 'center',
-    alignItems : 'center'
+    alignItems : 'center',
+  },
+  box : {
+    width: 95,
+    height: 95,
+    backgroundColor : '#00ADB5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 18,
+    shadowColor: '#000',
+    shadowOpacity: 0.9,
+    elevation: 10,
+    marginVertical: 10,
+    marginHorizontal: 5
+  },
+  card : {
+    width: 150,
+    height: 220,
+    backgroundColor : '#00ADB5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 18,
+    marginHorizontal: 5
   }
 })

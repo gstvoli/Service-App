@@ -11,7 +11,7 @@ export function TitleEllipse({title} : Props){
   return(
     <View style={styles.container}>
       <Ellipse />
-      <Text mt={-16} fontSize="lg" fontWeight="bold" color="#FFF">{title}</Text>
+      <Text mt={-16} fontSize="lg" bold color="#FFF">{title}</Text>
     </View>
   )
 }

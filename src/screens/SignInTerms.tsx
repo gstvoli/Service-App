@@ -17,16 +17,16 @@ export default function SignIn(){
   return (
     <View style={styles.container}>
       <VStack alignItems="center">
-        <Text color="#00ADB5" fontSize="xl" fontWeight="bold" mb={2}>Etapa 2/3</Text>
+        <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 2/3</Text>
         <Stage2 />
 
         <HStack alignItems="center" mt={4}>
           <Terms />
-          <Text color="#00ADB5" fontSize="2xl" fontWeight="bold"  ml={2}>Termos e Condições</Text>
+          <Text color="#00ADB5" fontSize="2xl" bold  ml={2}>Termos e Condições</Text>
         </HStack>
 
 
-        <Text color="#000" textAlign="center"fontSize="md" fontWeight="bold" my={3}>Para completar seu cadastro, leia nossos termos e condições abaixo</Text>
+        <Text color="#000" textAlign="center"fontSize="md" bold my={3}>Para completar seu cadastro, leia nossos termos e condições abaixo</Text>
 
       
       <ScrollView style={styles.termsBg}>
@@ -35,14 +35,14 @@ export default function SignIn(){
 
       <HStack paddingTop={2}>
         <Checkbox value="test" mt={2}>
-          <Text fontSize="sm" fontWeight="bold">Li e concordo com os termos e condições</Text>
+          <Text fontSize="sm" bold>Li e concordo com os termos e condições</Text>
         </Checkbox>
       </HStack>
 
       <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={8}>
         <ArrowRight />
       </Button>
-      <Text color="#000" fontSize="lg" fontWeight="bold" mb={8}>Próximo</Text>
+      <Text color="#000" fontSize="lg" bold mb={8}>Próximo</Text>
 
       </VStack>
     </View>
