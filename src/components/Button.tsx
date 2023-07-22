@@ -4,27 +4,27 @@ type Props = IButtonProps & {
   title: string;
   color: string;
   bgColor? : string;
+  pbgColor? : string;
   mt: number;
   mb: number;
-  fs? : number;
+  fs? : string;
 }
 
-export function Button({title, color, bgColor, mt, mb, fs,...rest}: Props){
+export function Button({title, color, pbgColor, bgColor, mt, mb, fs,...rest}: Props){
   return(
     <NBButton
       bg="coolGray.300"
       h={54}
       w={210}
       rounded="full"
-      _pressed={{ backgroundColor: "lightBlue.800"}}
+      _pressed={{ backgroundColor: pbgColor ? pbgColor : "lightBlue.800"}}
       mt={mt}
       mb={mb}
-      fontSize={fs}
       backgroundColor={bgColor}
       {...rest}
       
     >
-      <Heading color={color} fontSize="2xl">{title}</Heading>
+      <Heading color={color} fontSize={ fs ? fs : "2xl"}>{title}</Heading>
     </NBButton>
   )
 }
