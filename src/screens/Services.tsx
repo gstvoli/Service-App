@@ -11,7 +11,7 @@ import Trowel from '../imgs/trowel.svg';
 import CircleRight from '../imgs/circle-right.svg';
 import BigUser from '../imgs/bigUser.svg';
 import UserGroup from '../imgs/user-group.svg';
-import Ellipse from '../imgs/ellipse2.svg';
+import Ellipse from '../imgs/ellipse.svg';
 import Star from '../imgs/star.svg';
 
 export default function Services(){

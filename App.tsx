@@ -7,11 +7,12 @@ import SignInCard from './src/screens/SignInCard'
 import SignInFinish from './src/screens/SignInFinish';
 import Login from './src/screens/Login';
 import Services from './src/screens/Services';
+import Profile from './src/screens/Profile';
 
 export default function App() {
   return (
     <NativeBaseProvider>
-      <Services />
+      <Profile />
     </NativeBaseProvider>
   );
 }
