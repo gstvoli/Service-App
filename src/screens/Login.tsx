@@ -1,7 +1,9 @@
 import { StyleSheet } from "react-native";
-import { LinearGradient as View} from "expo-linear-gradient";
-import { Checkbox, Text, HStack, Link } from "native-base";
-// import { SafeAreaView as View } from 'react-native-safe-area-context';
+// import { LinearGradient as View} from "expo-linear-gradient";
+import { Checkbox, Text, VStack, HStack, Link, Heading } from "native-base";
+import { SafeAreaView as View } from 'react-native-safe-area-context';
+
+import Ellipse from '../imgs/ellipse3.svg';
 
 import { Input } from "../components/Input";
 import { Button as CButton } from "../components/Button";
@@ -9,9 +11,15 @@ import { TitleEllipse } from "../components/TitleEllipse";
 
 export default function Login(){
   return (
-    <View colors={['#00ADB5', '#FFF']} locations={[0 , 0.41]} style={styles.container}>
+    <View style={styles.container}>
+    {/*  <View colors={['#00ADB5', '#FFF']} locations={[0 , 0.41]} style={styles.container}> */}
       {/* <TitleEllipse title="Entrar"/> */}
-      <Text mb={20} bold fontSize="3xl" color="#444" px={5}>Faça seu login!</Text>
+      <VStack>
+          <Ellipse />
+          <Heading pt={2} mt={-20} color='#FFF' textAlign='center' fontSize={28}>Faça seu login!</Heading>
+        </VStack>
+
+      <Text mb={20} bold fontSize="3xl" color="#444" px={5}></Text>
 
       <Input placeholder="Seu CPF" my={2}/>
       <Input placeholder="Sua senha" my={2}/>
@@ -51,7 +59,6 @@ export default function Login(){
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 30

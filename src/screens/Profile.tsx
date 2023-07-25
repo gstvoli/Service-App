@@ -32,7 +32,7 @@ export default function Profile(){
           
           <HStack my={2} alignItems="center">
             <SMAdCard />
-            <Text ml={2} fontSize='lg' color="#000" bold fontSize='lg' color="#000" bold>123.456.789-10</Text>
+            <Text ml={2} fontSize='lg' color="#000" bold>123.456.789-10</Text>
           </HStack>
 
           <HStack my={2} alignItems="center">
