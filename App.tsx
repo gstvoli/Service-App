@@ -1,5 +1,5 @@
 import { NativeBaseProvider, Heading, VStack } from 'native-base';
-import Routes from './routes';
+import { Routes } from './src/routes';
 
 export default function App() {
   return (
