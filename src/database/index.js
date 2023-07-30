@@ -1,4 +1,4 @@
-var database = require('./database');
+var database = require('./connection');
 
 var dados = {
   nome: 'Gustavo Oliveira',
@@ -7,9 +7,30 @@ var dados = {
   aniversario: '06-12-2000'
 };
 
+// database
+//   .insert(dados)
+//   .into('usuario')
+//   .then((data) => {
+//     console.log(data);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+// database
+//   .select(['id', 'nome', 'idade'])
+//   .table('usuario')
+//   .then((data) => {
+//     console.log(data);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
 database
-  .insert(dados)
-  .into('usuario')
+  .select()
+  .whereRaw("nome = 'Gustavo Oliveira'")
+  .table('usuario')
   .then((data) => {
     console.log(data);
   })
