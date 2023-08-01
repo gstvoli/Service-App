@@ -1,19 +1,6 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-const { Screen, Navigator} = createNativeStackNavigator();
-
-
-
-type RootStackParamList = {
-  Home: undefined, // undefined because you aren't passing any params to the home screen
-  SignIn: undefined,
-  SignInTerms: undefined,
-  SignInCard: undefined,
-  SignInFinish: undefined,
-  Login: undefined,
-  Services: undefined,
-  Profile: undefined; 
-};
+const { Screen, Navigator} = createDrawerNavigator();
 
 import Home from '../screens/Home';
 import SignIn from '../screens/SignIn';
@@ -25,10 +12,10 @@ import Services from '../screens/Services';
 import Profile from '../screens/Profile';
 
 
-export function StackRoutes() {
+export function DrawerRoutes() {
   return (
-    <Navigator screenOptions={{ headerShown: false}}>
-        <Screen name="Home" component={Home} />
+    <Navigator>
+        <Screen name="Home" component={Home}/>
         <Screen name="SignIn" component={SignIn} />
         <Screen name="SignInTerms" component={SignInTerms} />
         <Screen name="SignInCard" component={SignInCard} />
@@ -40,3 +27,4 @@ export function StackRoutes() {
     </Navigator>
   );
 }
+
