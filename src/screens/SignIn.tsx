@@ -9,11 +9,16 @@ import ArrowRight from '../imgs/arrowRight.svg'
 
 import { Input } from "../components/Input";
 
+import { useNavigation } from '@react-navigation/native'; 
 
 export default function SignIn(){
-
   const [value, setValue] = useState("");
+  const navigation = useNavigation();
 
+  function openScreen(){
+    navigation.navigate('SignInTerms')   
+  }
+  
   return (
     <View style={styles.container}>
       <VStack alignItems="center">
@@ -50,7 +55,7 @@ export default function SignIn(){
       </HStack>
       </VStack>
 
-      <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10}>
+      <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10} onPress={openScreen}>
         <ArrowRight />
       </Button>
       <Text color="#000" fontSize="lg" bold >Próximo</Text>

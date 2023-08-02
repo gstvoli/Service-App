@@ -15,14 +15,14 @@ import Profile from '../screens/Profile';
 export function TabRoutes() {
   return (
     <Navigator screenOptions={{ headerShown: false}}>
-        <Screen name="Home" component={Home} options={{ tabBarStyle:{display: 'none'} }}/>
-        <Screen name="SignIn" component={SignIn} options={{ tabBarStyle:{display: 'none'} }}/>
-        <Screen name="SignInTerms" component={SignInTerms} options={{ tabBarStyle:{display: 'none'} }}/>
-        <Screen name="SignInCard" component={SignInCard} options={{ tabBarStyle:{display: 'none'} }}/>
-        <Screen name="SignInFinish" component={SignInFinish} options={{ tabBarStyle:{display: 'none'} }}/>
-        <Screen name="Login" component={Login} options={{ tabBarStyle:{display: 'none'} }}/>
+        <Screen name="Home" component={Home} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
+        <Screen name="SignIn" component={SignIn} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
+        <Screen name="SignInTerms" component={SignInTerms} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
+        <Screen name="SignInCard" component={SignInCard} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
+        <Screen name="SignInFinish" component={SignInFinish} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
+        <Screen name="Login" component={Login} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
         <Screen name="Services" component={Services} />
-        <Screen name="Profile" component={Profile} />
+        <Screen name="Profile" component={Profile}/>
       {/* </Stack.Navigator> */}
     </Navigator>
   );

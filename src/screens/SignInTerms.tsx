@@ -7,13 +7,16 @@ import Stage2 from '../imgs/register2.svg';
 import Terms from '../imgs/terms.svg'
 import ArrowRight from '../imgs/arrowRight.svg'
 
-import { Input } from "../components/Input";
-
+import { useNavigation } from '@react-navigation/native'
 
 export default function SignIn(){
-
   const [value, setValue] = useState("");
+  const navigation = useNavigation();
 
+  function openScreen(){
+    navigation.navigate('SignInCard');
+  }
+  
   return (
     <View style={styles.container}>
       <VStack alignItems="center">
@@ -39,7 +42,7 @@ export default function SignIn(){
         </Checkbox>
       </HStack>
 
-      <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={8}>
+      <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={8} onPress={openScreen}>
         <ArrowRight />
       </Button>
       <Text color="#000" fontSize="lg" bold mb={8}>Próximo</Text>

@@ -5,8 +5,8 @@ export declare global {
       SignIn: undefined;
       Login: undefined;
       SignInTerms: undefined;
-      SignInCardd: undefined;
-      SignInFinishish: undefined;
+      SignInCard: undefined;
+      SignInFinish: undefined;
       Services: undefined;
       Profile: undefined;
     }

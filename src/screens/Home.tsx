@@ -12,8 +12,12 @@ import Logo from '../imgs/logo.svg';
 export default function Login() {
   const navigation = useNavigation();
 
-  function openScreen(){
+  function openRegister(){
     navigation.navigate('SignIn')   
+  }
+
+  function openApp(){
+    navigation.navigate('Login')
   }
 
   return (
@@ -21,10 +25,10 @@ export default function Login() {
       <VStack style={styles.box}>
         <Heading fontSize="5xl" mb={16} color="#fff">Service App</Heading>
         <Logo />
-        <Button title='Entrar' color='#000' mt={16} mb={12} />
+        <Button title='Entrar' color='#000' mt={16} mb={12} onPress={openApp}/>
 
         <Text color="#fff" fontSize="lg" bold mb={3.5}>Ainda não tem uma conta?</Text>
-          <Link onPress={openScreen}>
+          <Link onPress={openRegister}>
             <Text color="#fff" fontSize="xl" bold letterSpacing="xl" borderBottomWidth={4} borderBottomColor='#fff' pb={1.5} width={200} textAlign="center">Cadastre-se aqui!</Text>
           </Link>
       </VStack>

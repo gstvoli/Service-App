@@ -1,5 +1,6 @@
+import { useState } from "react";
+import { useNavigation } from '@react-navigation/native'
 import { StyleSheet } from "react-native";
-// import { LinearGradient as View} from "expo-linear-gradient";
 import { Checkbox, Text, VStack, HStack, Link, Heading } from "native-base";
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
@@ -7,9 +8,31 @@ import Ellipse from '../imgs/ellipse3.svg';
 
 import { Input } from "../components/Input";
 import { Button as CButton } from "../components/Button";
-import { TitleEllipse } from "../components/TitleEllipse";
+
+import api from "../services/api";
 
 export default function Login(){
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const navigation = useNavigation();
+
+  async function handleLogin() {
+    try{
+      const response = await api.post('login', { email, password});
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('userPass', password);
+
+      navigation.navigate('Services')
+    } catch (err){
+      alert('Falha no login! Tente novamente!')
+    }
+  }
+
+  function openRegister(){
+    navigation.navigate('SignIn')
+  }
+
   return (
     <View style={styles.container}>
     {/*  <View colors={['#00ADB5', '#FFF']} locations={[0 , 0.41]} style={styles.container}> */}
@@ -21,7 +44,7 @@ export default function Login(){
 
       <Text mb={20} bold fontSize="3xl" color="#444" px={5}></Text>
 
-      <Input placeholder="Seu CPF" my={2}/>
+      <Input placeholder="Seu e-mail" my={2}/>
       <Input placeholder="Sua senha" my={2}/>
 
       <HStack>
@@ -34,7 +57,7 @@ export default function Login(){
         </Checkbox>
       </HStack>
 
-      <CButton mt={6} mb={6} color={"#FFF"} bgColor={"#00ADB5"} title={"Entrar"} w="full"/>
+      <CButton mt={6} mb={6} color={"#FFF"} bgColor={"#00ADB5"} title={"Entrar"} w="full" onPress={handleLogin}/>
 
       {/* <Text bold fontSize="md" >ou</Text>
       
@@ -50,7 +73,7 @@ export default function Login(){
       
       <Text color="#444" bold fontSize="lg" my={1}>Ainda não tem uma conta?</Text>
 
-      <Link>
+      <Link onPress={openRegister}>
         <Text color="#00ADB5" bold fontSize="lg" borderBottomWidth={4} borderBottomColor='#00ADB5' my={1} px={4} pb={1}>Cadastre-se agora!</Text>
       </Link>
     </View>

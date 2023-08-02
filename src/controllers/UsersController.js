@@ -2,7 +2,10 @@ const connection = require('../database/connection');
 
 module.exports = {
   async index(request, response) {
-    const users = await connection('usuarios').select('*');
+    const { id } = request.body;
+    const { password } = request.body;
+
+    const users = await connection('usuarios').where('');
 
     return response.json(users);
   },

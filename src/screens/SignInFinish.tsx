@@ -11,7 +11,16 @@ import RightToBracket from '../imgs/right-to-bracket.svg'
 import { Input } from "../components/Input";
 import { LinearGradient } from "expo-linear-gradient";
 
+import { useNavigation } from '@react-navigation/native'
+
 export default function SignInFinish(){
+
+  const navigation = useNavigation();
+
+  function openScreen(){
+    navigation.navigate('Login');
+  }
+
   return (
       <LinearGradient
         colors={['#00ADB5', '#63DADF']}
@@ -35,7 +44,7 @@ export default function SignInFinish(){
         </VStack>
 
         <HStack my={4}>
-          <Link>
+          <Link onPress={openScreen}>
             <RightToBracket />
             <Text color="#444" bold fontSize="2xl" mt={1} ml={2}>Fazer login</Text>
           </Link>

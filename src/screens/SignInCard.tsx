@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native'
-import { VStack, HStack, Text, Button, Checkbox } from "native-base";
+import { VStack, HStack, Text, Button, Checkbox, useNativeBase } from "native-base";
 import { SafeAreaView as View }from "react-native-safe-area-context";
 
 import { Input } from '../components/Input';
@@ -10,8 +10,15 @@ import ArrowRight from '../imgs/arrowRight.svg'
 import CreditCard from '../imgs/creditcard.svg';
 import CCVisa from '../imgs/cc-visa.svg';
 
+import { useNavigation } from '@react-navigation/native'
+
 export default function SignInCard(){
   const [checked, setChecked] = useState(false)
+  const navigation = useNavigation();
+
+  function openScreen(){
+    navigation.navigate('SignInFinish');
+  }
 
   function handleCheck(){
 
@@ -66,7 +73,7 @@ export default function SignInCard(){
         : console.log(checked)
       }
 
-      <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10}>
+      <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10} onPress={openScreen}>
         <ArrowRight />
       </Button>
       <Text color="#000" fontSize="lg" bold >Próximo</Text>
