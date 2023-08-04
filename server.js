@@ -1,9 +1,9 @@
 const express = require('express');
-// const routes = require('./routes');
+const routes = require('./serverRoutes');
 const app = express();
 
 app.use(express.json());
-// app.use(routes);
+app.use(routes);
 
 //Starting server
 app.listen(3000, () => {
@@ -12,8 +12,4 @@ app.listen(3000, () => {
 
 app.get('/', (req, res) => {
   res.send('Hello there!');
-});
-
-app.post('/login', (req, res) => {
-  res.send('Post route!');
 });

@@ -1,9 +1,10 @@
 const connection = require('../database/connection');
+const bcrypt = require('bcrypt');
 
 module.exports = {
   async index(request, response) {
-    const { id } = request.body;
-    const { password } = request.body;
+    const { email } = request.body;
+    const { senha } = request.body;
 
     const users = await connection('usuarios').where('');
 
@@ -26,6 +27,16 @@ module.exports = {
       aniversario
     } = request.body;
 
+    const senha = bcrypt.genSalt(10, function (err, salt) {
+      if (err) {
+        return console.log(err);
+      }
+
+      bcrypt.hash(senha, salt, function (err, hash) {
+        return console.log(senha);
+      });
+    });
+
     await connection('usuario').insert({
       nome,
       cpf,
@@ -38,9 +49,10 @@ module.exports = {
       uf,
       cep,
       idade,
-      aniversario
+      aniversario,
+      senha
     });
 
-    return response.json({ id });
+    return response.json({ senha });
   }
 };
