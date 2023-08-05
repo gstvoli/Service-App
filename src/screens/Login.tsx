@@ -13,15 +13,18 @@ import api from "../services/api";
 
 export default function Login(){
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [senha, setSenha] = useState('');
 
   const navigation = useNavigation();
 
   async function handleLogin() {
+    // e.preventDefault();
+
     try{
-      const response = await api.post('login', { email, password});
-      localStorage.setItem('userEmail', email);
-      localStorage.setItem('userPass', password);
+      const response = await api.post('users', { email, senha });
+
+      localStorage.setItem('userEmail', response.data.name);
+      localStorage.setItem('userPass', senha);
 
       navigation.navigate('Services')
     } catch (err){
@@ -44,7 +47,7 @@ export default function Login(){
 
       <Text mb={20} bold fontSize="3xl" color="#444" px={5}></Text>
 
-      <Input placeholder="Seu e-mail" my={2}/>
+      <Input placeholder="Seu e-mail" value={email} isRequired={true} my={2}/>
       <Input placeholder="Sua senha" my={2}/>
 
       <HStack>

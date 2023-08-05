@@ -1,5 +1,6 @@
 const express = require('express');
 const routes = require('./serverRoutes');
+const bcrypt = require('bcrypt');
 const app = express();
 
 app.use(express.json());

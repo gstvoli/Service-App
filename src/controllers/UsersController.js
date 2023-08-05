@@ -12,6 +12,8 @@ module.exports = {
   },
 
   async create(request, response) {
+    const salt = bcrypt.genSaltSync(10);
+
     const {
       nome,
       cpf,
@@ -24,18 +26,12 @@ module.exports = {
       uf,
       cep,
       idade,
-      aniversario
+      aniversario,
+      senhaToHash
     } = request.body;
 
-    const senha = bcrypt.genSalt(10, function (err, salt) {
-      if (err) {
-        return console.log(err);
-      }
-
-      bcrypt.hash(senha, salt, function (err, hash) {
-        return console.log(senha);
-      });
-    });
+    const senha = bcrypt.hashSync(senhaToHash, salt);
+    console.log(request.body);
 
     await connection('usuario').insert({
       nome,
