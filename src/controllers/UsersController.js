@@ -6,9 +6,24 @@ module.exports = {
     const { email } = request.body;
     const { senha } = request.body;
 
-    const users = await connection('usuarios').where('');
+    const user = await connection('usuario')
+      .where('email', email)
+      .andWhere('senha', senha)
+      .select('*')
+      .first();
 
-    return response.json(users);
+    if (!user) {
+      return response
+        .status(400)
+        .json({ error: 'No User found with this email' });
+    }
+    if (!email) {
+      return response.status(400).json({ error: 'Wrong email! ' });
+    }
+    if (!senha) {
+      return response.status(400).json({ error: 'Wrong password.' });
+    }
+    return response.json(user);
   },
 
   async create(request, response) {

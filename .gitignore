@@ -10,6 +10,9 @@ npm-debug.*
 *.orig.*
 web-build/
 src/database/
+/src/services
+/src/server.js
+/src/serverRoutes.js
 
 # macOS
 .DS_Store

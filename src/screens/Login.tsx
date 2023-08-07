@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigation } from '@react-navigation/native'
-import { StyleSheet } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 import { Checkbox, Text, VStack, HStack, Link, Heading } from "native-base";
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
@@ -12,14 +12,18 @@ import { Button as CButton } from "../components/Button";
 import api from "../services/api";
 
 export default function Login(){
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
   const navigation = useNavigation();
 
   async function handleLogin() {
-    // e.preventDefault();
+    if (!email || !senha){
+      return Alert.alert('Entrar', 'Informe o e-mail e senha!');
+    }
 
+    setIsLoading(true);
     try{
       const response = await api.post('users', { email, senha });
 
@@ -27,7 +31,10 @@ export default function Login(){
       localStorage.setItem('userPass', senha);
 
       navigation.navigate('Services')
-    } catch (err){
+    } catch (e: any){
+      console.log(e.code)
+      console.log(e.message)
+      console.log(e.name)
       alert('Falha no login! Tente novamente!')
     }
   }
@@ -47,8 +54,8 @@ export default function Login(){
 
       <Text mb={20} bold fontSize="3xl" color="#444" px={5}></Text>
 
-      <Input placeholder="Seu e-mail" value={email} isRequired={true} my={2}/>
-      <Input placeholder="Sua senha" my={2}/>
+      <Input placeholder="Seu e-mail" onChangeText={setEmail} my={2}/>
+      <Input placeholder="Sua senha" secureTextEntry onChangeText={setSenha} my={2}/>
 
       <HStack>
         <Checkbox value="test" mt={2}>
