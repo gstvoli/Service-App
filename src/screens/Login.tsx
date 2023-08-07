@@ -25,12 +25,12 @@ export default function Login(){
 
     setIsLoading(true);
     try{
-      const response = await api.post('users', { email, senha });
+      const response = await api.post('login', { email, senha });
 
       localStorage.setItem('userEmail', response.data.name);
       localStorage.setItem('userPass', senha);
 
-      navigation.navigate('Services')
+      navigation.navigate('services')
     } catch (e: any){
       console.log(e.code)
       console.log(e.message)
@@ -40,7 +40,7 @@ export default function Login(){
   }
 
   function openRegister(){
-    navigation.navigate('SignIn')
+    navigation.navigate('signin')
   }
 
   return (

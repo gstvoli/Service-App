@@ -13,11 +13,11 @@ export default function Login() {
   const navigation = useNavigation();
 
   function openRegister(){
-    navigation.navigate('SignIn')   
+    navigation.navigate('signin')   
   }
 
   function openApp(){
-    navigation.navigate('Login')
+    navigation.navigate('login')
   }
 
   return (
