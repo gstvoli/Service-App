@@ -4,13 +4,18 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: true }));
+
 app.use(express.json());
 app.use(routes);
 
 //Starting server
 app.listen(3000);
 
-app.get('/', (req, res) => {
+app.get('/api/', (req, res) => {
   res.send('Hello there!');
+});
+
+app.post('/api/login', async (request, response) => {
+  console.log('test');
 });

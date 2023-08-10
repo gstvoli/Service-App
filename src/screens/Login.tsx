@@ -25,7 +25,7 @@ export default function Login(){
 
     setIsLoading(true);
     try{
-      const response = await api.post('login', { email, senha });
+      const response = await api.post('/login', { body: email, senha });
 
       localStorage.setItem('userEmail', response.data.name);
       localStorage.setItem('userPass', senha);
@@ -34,7 +34,9 @@ export default function Login(){
     } catch (e: any){
       console.log(e.code)
       console.log(e.message)
-      console.log(e.name)
+      console.log(e.data);
+      console.log(e.status);
+      console.log(e.headers);
       alert('Falha no login! Tente novamente!')
     }
   }
@@ -54,7 +56,7 @@ export default function Login(){
 
       <Text mb={20} bold fontSize="3xl" color="#444" px={5}></Text>
 
-      <Input placeholder="Seu e-mail" onChangeText={setEmail} my={2}/>
+      <Input placeholder="Seu e-mail" onChangeText={setEmail} keyboardType={"email-address"} my={2}/>
       <Input placeholder="Sua senha" secureTextEntry onChangeText={setSenha} my={2}/>
 
       <HStack>

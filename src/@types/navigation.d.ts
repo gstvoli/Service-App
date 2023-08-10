@@ -4,7 +4,7 @@ export declare global {
       home: undefined;
       signin: undefined;
       login: undefined;
-      signsnserms: undefined;
+      signinterms: undefined;
       signincard: undefined;
       signinfinish: undefined;
       services: undefined;
