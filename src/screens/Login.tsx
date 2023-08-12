@@ -25,10 +25,16 @@ export default function Login(){
 
     setIsLoading(true);
     try{
-      const response = await api.post('/login', { body: email, senha });
+      const response = await api.post('/login', { email: email, senha: senha }, {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+    }).then(response => {
+        console.log(response.data)
+    }).catch(err => console.log("api Error: ", err.message));
 
-      localStorage.setItem('userEmail', response.data.name);
-      localStorage.setItem('userPass', senha);
+      // localStorage.setItem('userEmail', email);
+      // localStorage.setItem('userPass', senha);
 
       navigation.navigate('services')
     } catch (e: any){

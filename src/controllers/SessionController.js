@@ -2,8 +2,8 @@ const connection = require('../database/connection');
 
 module.exports = {
   async create(request, response) {
-    const { email } = request.body;
-    const { senha } = request.body;
+    const { email, senha } = request.body;
+    console.log(request.body);
 
     const user = await connection('usuario')
       .where('email', email)
