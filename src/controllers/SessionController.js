@@ -1,9 +1,14 @@
 const connection = require('../database/connection');
+const bcrypt = require('bcrypt');
 
 module.exports = {
   async create(request, response) {
-    const { email, senha } = request.body;
+    const salt = bcrypt.genSaltSync(10);
+    const userPass = await connection('usuario');
+    const { email, senhaH = bcrypt.hashSync(senha, salt) } = request.body;
     console.log(request.body);
+
+    console.log(senha);
 
     const user = await connection('usuario')
       .where('email', email)
@@ -13,14 +18,11 @@ module.exports = {
 
     if (!user) {
       return response
-        .status(400)
-        .json({ error: 'No User found with this email' });
-    }
-    if (!email) {
-      return response.status(400).json({ error: 'Wrong email! ' });
+        .status(401)
+        .json({ error: 'Não foi encontrado usuário com esse email!' });
     }
     if (!senha) {
-      return response.status(400).json({ error: 'Wrong password.' });
+      return response.status(402).json({ error: 'Senha incorreta!' });
     }
     return response.json(user);
   }

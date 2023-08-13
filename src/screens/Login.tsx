@@ -15,35 +15,35 @@ export default function Login(){
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const navigation = useNavigation();
 
-  async function handleLogin() {
+  const handleLogin = async () => {
     if (!email || !senha){
       return Alert.alert('Entrar', 'Informe o e-mail e senha!');
     }
 
     setIsLoading(true);
     try{
-      const response = await api.post('/login', { email: email, senha: senha }, {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-        }
-    }).then(response => {
-        console.log(response.data)
-    }).catch(err => console.log("api Error: ", err.message));
+      const response = await api.post('/login', { email, senha });
 
       // localStorage.setItem('userEmail', email);
       // localStorage.setItem('userPass', senha);
-
+      console.log('Resposta do servidor:', response.data);
+      setErrorMessage('');
       navigation.navigate('services')
-    } catch (e: any){
-      console.log(e.code)
-      console.log(e.message)
-      console.log(e.data);
-      console.log(e.status);
-      console.log(e.headers);
-      alert('Falha no login! Tente novamente!')
+    } catch (error : any){
+      if (error.response){
+        console.log('Resposta do servidor:', error.response.data);    
+        setErrorMessage(error.response.data.error);    
+        Alert.alert('Entrar', errorMessage);
+        // setErrorMessage('Credenciais inválidas. Por favor, tente novamente.');
+      } else {
+        console.error('Erro na requisição:', error.message);
+        setErrorMessage('Ocorreu um erro ao realizar o login. Por favor, tente novamente mais tarde.');       
+      }
+      // alert('Falha no login! Tente novamente!')
     }
   }
 
@@ -62,8 +62,8 @@ export default function Login(){
 
       <Text mb={20} bold fontSize="3xl" color="#444" px={5}></Text>
 
-      <Input placeholder="Seu e-mail" onChangeText={setEmail} keyboardType={"email-address"} my={2}/>
-      <Input placeholder="Sua senha" secureTextEntry onChangeText={setSenha} my={2}/>
+      <Input placeholder="Seu e-mail" value={email} onChangeText={text => setEmail(text)} keyboardType={"email-address"} my={2}/>
+      <Input placeholder="Sua senha" value={senha} onChangeText={text => setSenha(text)} secureTextEntry my={2}/>
 
       <HStack>
         <Checkbox value="test" mt={2}>
