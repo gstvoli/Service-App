@@ -4,26 +4,29 @@ const bcrypt = require('bcrypt');
 module.exports = {
   async create(request, response) {
     const salt = bcrypt.genSaltSync(10);
-    const userPass = await connection('usuario');
-    const { email, senhaH = bcrypt.hashSync(senha, salt) } = request.body;
+    const { email } = request.body;
+    const { senha } = request.body;
     console.log(request.body);
 
-    console.log(senha);
+    function validarUsuario(hash) {
+      bcrypt.compareSync(senha, hash);
+    }
 
     const user = await connection('usuario')
       .where('email', email)
-      .andWhere('senha', senha)
       .select('*')
       .first();
 
-    if (!user) {
+    if (!email) {
       return response
         .status(401)
         .json({ error: 'Não foi encontrado usuário com esse email!' });
+    } else {
+      const senhaHash = bcrypt.hashSync(senha, salt);
+      console.log(senhaHash);
+      validarUsuario(senhaHash);
     }
-    if (!senha) {
-      return response.status(402).json({ error: 'Senha incorreta!' });
-    }
+
     return response.json(user);
   }
 };

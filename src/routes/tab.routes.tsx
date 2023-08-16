@@ -14,8 +14,8 @@ import Profile from '../screens/Profile';
 
 export function TabRoutes() {
   return (
-    <Navigator screenOptions={{ headerShown: false}}>
-        <Screen name="home" component={Home} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
+    <Navigator screenOptions={{ headerShown: false  }}>
+        <Screen name="home" component={Home} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}} />
         <Screen name="signin" component={SignIn} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="signinterms" component={SignInTerms} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="signincard" component={SignInCard} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>

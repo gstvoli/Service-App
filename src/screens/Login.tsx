@@ -24,26 +24,31 @@ export default function Login(){
       return Alert.alert('Entrar', 'Informe o e-mail e senha!');
     }
 
-    setIsLoading(true);
     try{
+      setIsLoading(true);
+      
       const response = await api.post('/login', { email, senha });
 
       // localStorage.setItem('userEmail', email);
       // localStorage.setItem('userPass', senha);
       console.log('Resposta do servidor:', response.data);
+
       setErrorMessage('');
+      setIsLoading(false);
+
       navigation.navigate('services')
+    
     } catch (error : any){
       if (error.response){
+        setIsLoading(false);
         console.log('Resposta do servidor:', error.response.data);    
         setErrorMessage(error.response.data.error);    
         Alert.alert('Entrar', errorMessage);
-        // setErrorMessage('Credenciais inválidas. Por favor, tente novamente.');
+  
       } else {
         console.error('Erro na requisição:', error.message);
         setErrorMessage('Ocorreu um erro ao realizar o login. Por favor, tente novamente mais tarde.');       
       }
-      // alert('Falha no login! Tente novamente!')
     }
   }
 
