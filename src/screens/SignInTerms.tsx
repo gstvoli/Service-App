@@ -14,7 +14,7 @@ export default function SignIn(){
   const navigation = useNavigation();
 
   function openScreen(){
-    navigation.navigate('SignInCard');
+    navigation.navigate('signincard');
   }
   
   return (

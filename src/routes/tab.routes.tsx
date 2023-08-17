@@ -4,6 +4,7 @@ const { Screen, Navigator} = createBottomTabNavigator();
 
 import Home from '../screens/Home';
 import SignIn from '../screens/SignIn';
+import SignInStart from '../screens/SignInStart';
 import SignInTerms from '../screens/SignInTerms';
 import SignInCard from '../screens/SignInCard';
 import SignInFinish from '../screens/SignInFinish';
@@ -17,6 +18,7 @@ export function TabRoutes() {
     <Navigator screenOptions={{ headerShown: false  }}>
         <Screen name="home" component={Home} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}} />
         <Screen name="signin" component={SignIn} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
+        <Screen name="signinstart" component={SignInStart} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="signinterms" component={SignInTerms} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="signincard" component={SignInCard} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="signinfinish" component={SignInFinish} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>

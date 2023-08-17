@@ -13,7 +13,7 @@ export default function Login() {
   const navigation = useNavigation();
 
   function openRegister(){
-    navigation.navigate('signin')   
+    navigation.navigate('signinstart')   
   }
 
   function openApp(){
