@@ -67,7 +67,7 @@ export default function Login(){
 
       <Text mb={20} bold fontSize="3xl" color="#444" px={5}></Text>
 
-      <Input placeholder="Seu e-mail" value={email} onChangeText={text => setEmail(text)} keyboardType={"email-address"} my={2}/>
+      <Input placeholder="Seu e-mail" value={email} onChangeText={text => setEmail(text)} keyboardType="email-address" my={2}/>
       <Input placeholder="Sua senha" value={senha} onChangeText={text => setSenha(text)} secureTextEntry my={2}/>
 
       <HStack>
