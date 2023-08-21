@@ -12,7 +12,6 @@ import Login from '../screens/Login';
 import Services from '../screens/Services';
 import Profile from '../screens/Profile';
 
-
 export function TabRoutes() {
   return (
     <Navigator screenOptions={{ headerShown: false  }}>

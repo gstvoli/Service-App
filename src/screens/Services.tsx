@@ -255,6 +255,7 @@ const styles = StyleSheet.create({
   container : {
     justifyContent : 'center',
     alignItems : 'center',
+    marginLeft: 8
   },
   box : {
     width: 95,

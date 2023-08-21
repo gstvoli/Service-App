@@ -18,7 +18,7 @@ export default function SignInFinish(){
   const navigation = useNavigation();
 
   function openScreen(){
-    navigation.navigate('Login');
+    navigation.navigate('login');
   }
 
   return (

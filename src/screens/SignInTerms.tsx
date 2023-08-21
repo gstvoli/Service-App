@@ -2,14 +2,14 @@ import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { VStack, Text, HStack, Button, ScrollView, Checkbox } from "native-base";
 import { SafeAreaView as View} from "react-native-safe-area-context";
+import { useNavigation } from '@react-navigation/native'
+
 
 import Stage2 from '../imgs/register2.svg';
 import Terms from '../imgs/terms.svg'
 import ArrowRight from '../imgs/arrowRight.svg'
 
-import { useNavigation } from '@react-navigation/native'
-
-export default function SignIn(){
+export default function SignInTerms(){
   const [value, setValue] = useState("");
   const navigation = useNavigation();
 
