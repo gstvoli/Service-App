@@ -167,74 +167,76 @@ export default function Services(){
         <Heading textAlign='center' fontSize="lg">Disponíveis no momento</Heading>
 
         <ScrollView showsVerticalScrollIndicator={false}>
-          <VStack style={styles.hCard}>
-            <HStack alignItems='center'>
-              <VStack>
-              <BigUser />
+          <VStack alignItems='center'>          
+            <VStack style={styles.hCard}>
+              <HStack alignItems='center'>
+                <VStack>
+                <BigUser />
 
-              </VStack>
-              <VStack paddingX={5}>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Progamador Mobile/Web</Text>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
-                
-                <HStack paddingY={2}>
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
+                </VStack>
+                <VStack paddingX={5}>
+                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
+                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Progamador Mobile/Web</Text>
+                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
                   
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-                  <Star />
-                </HStack>
-              
-                <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
-              </VStack>
-            </HStack>
-          </VStack>
-
-          <VStack style={styles.hCard}>
-            <HStack alignItems='center'>
-              <VStack>
-              <BigUser />
-
-              </VStack>
-              <VStack paddingX={5}>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Progamador Mobile/Web</Text>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
+                  <HStack paddingY={2}>
+                    <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
+                    
+                    <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
+                    <Star />
+                  </HStack>
                 
-                <HStack paddingY={2}>
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
+                  <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
+                </VStack>
+              </HStack>
+            </VStack>
+
+            <VStack style={styles.hCard}>
+              <HStack alignItems='center'>
+                <VStack>
+                <BigUser />
+
+                </VStack>
+                <VStack paddingX={5}>
+                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
+                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Progamador Mobile/Web</Text>
+                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
                   
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-                  <Star />
-                </HStack>
-              
-                <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
-              </VStack>
-            </HStack>
-          </VStack>
-
-          <VStack style={styles.hCard}>
-            <HStack alignItems='center'>
-              <VStack>
-              <BigUser />
-
-              </VStack>
-              <VStack paddingX={5}>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Progamador Mobile/Web</Text>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
+                  <HStack paddingY={2}>
+                    <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
+                    
+                    <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
+                    <Star />
+                  </HStack>
                 
-                <HStack paddingY={2}>
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
+                  <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
+                </VStack>
+              </HStack>
+            </VStack>
+
+            <VStack style={styles.hCard}>
+              <HStack alignItems='center'>
+                <VStack>
+                <BigUser />
+
+                </VStack>
+                <VStack paddingX={5}>
+                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
+                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Progamador Mobile/Web</Text>
+                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
                   
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-                  <Star />
-                </HStack>
-              
-                <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
-              </VStack>
-            </HStack>
-          </VStack>
+                  <HStack paddingY={2}>
+                    <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
+                    
+                    <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
+                    <Star />
+                  </HStack>
+                
+                  <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
+                </VStack>
+              </HStack>
+            </VStack>
+          </VStack>            
         </ScrollView>
 
         <Link mt={6} justifyContent='center' alignItems='center'>
@@ -254,8 +256,7 @@ export default function Services(){
 const styles = StyleSheet.create({
   container : {
     justifyContent : 'center',
-    alignItems : 'center',
-    marginLeft: 8
+    alignItems : 'center'
   },
   box : {
     width: 95,

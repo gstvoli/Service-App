@@ -1,25 +1,41 @@
 import { useState } from "react";
-import { StyleSheet, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, KeyboardAvoidingView, Alert } from "react-native";
 import { VStack, Text, HStack, Button } from "native-base";
 import { SafeAreaView as View} from "react-native-safe-area-context";
 import { useNavigation } from '@react-navigation/native'; 
 
 import { Input } from "../components/Input";
+import { CadastroData } from "../@types/Tipos";
 
 import Stage1 from '../imgs/register1.svg';
 import UserLarge from '../imgs/user-large-solid.svg'
 import ArrowRight from '../imgs/arrowRight.svg'
 
-export default function SignIn(){
-  const [nome, setNome] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [email, setEmail] = useState('');
-  const [telefone, setTelefone] = useState('');
-  const [senha, setSenha] = useState('');
+interface Etapa1Props {
+  data: CadastroData;
+  handleChange: (key: keyof CadastroData, value: string) => void;
+}
+
+export default function SignIn({ data, handleChange}: Etapa1Props){
+  const { nome, cpf, email, telefone, senha } = data;
   const [senhaConf, setSenhaConf] = useState('');
   
   const navigation = useNavigation();
 
+  const handleGoBack = () => {
+    navigation.goBack();
+  }
+
+  function handleNextPage(){
+    // if (!(nome || cpf || email || telefone || senha)){
+    //   Alert.alert('Cadastro', 'Preencha todos os campos!');
+    // } else {
+    //   if ((senha != senhaConf) && (senhaConf != '')){
+    //     Alert.alert('Cadastro', 'As senhas não coincidem!');
+    //   }
+    // }
+    navigation.navigate('signinterms')
+  }
 
   return (
     <KeyboardAvoidingView contentContainerStyle={styles.container} behavior="position" enabled>
@@ -36,20 +52,20 @@ export default function SignIn(){
 
 
         <Text color="#000" fontSize="md" bold my={3}>Informe os dados abaixo</Text>
-        <Input placeholder="Seu nome completo" value={nome} onChangeText={nome => setNome(nome)} w="full" my={1} />
+        <Input placeholder="Seu nome completo" value={nome} onChangeText={nome => handleChange('nome', nome)} w="full" my={1} />
 
         <HStack alignItems="center" maxW="full" mt={0.5}>
-          <Input placeholder="Seu nº de celular" value={telefone} onChangeText={telefone => setTelefone(telefone)} w="50%" mr={2} keyboardType="numeric" my={1} />
+          <Input placeholder="Seu nº de celular" value={telefone} onChangeText={telefone => handleChange('telefone', telefone)} w="50%" mr={2} keyboardType="numeric" my={1} />
 
-          <Input placeholder="Seu CPF" value={cpf} onChangeText={cpf => setCpf(cpf)} keyboardType="numeric" w="47%" my={1} />
+          <Input placeholder="Seu CPF" value={cpf} onChangeText={cpf => handleChange('cpf', cpf)} keyboardType="numeric" w="47%" my={1} />
         </HStack>
 
 
-        <Input placeholder="Seu e-mail" value={email} onChangeText={email => setEmail(email)} keyboardType="email-address" w="full" mt={2} mb={1} />
+        <Input placeholder="Seu e-mail" value={email} onChangeText={email => handleChange('email', email)}keyboardType="email-address" w="full" mt={2} mb={1} />
         
-        <Input placeholder="Sua senha" value={senha} onChangeText={senha => setSenha(senha)} secureTextEntry my={1} />
+        <Input placeholder="Sua senha" value={senha} onChangeText={senha => handleChange('senha', senha)} secureTextEntry my={1} />
 
-        <Input id="testea" placeholder="Confirme sua senha" onChangeText={text => setSenhaConf(text)} secureTextEntry my={1} />
+        <Input placeholder="Confirme sua senha" onChangeText={senhaConf => setSenhaConf(senhaConf)} secureTextEntry my={1} />
 
         {((senha != senhaConf) && (senhaConf != ''))? <Text color="error.700">As senhas não coincidem!</Text> : null}
 
@@ -64,7 +80,7 @@ export default function SignIn(){
         <Input placeholder="Cidade" value={cidade} onChangeText={text => setCidade(text)} w="75%" mr={2}/>
         <Input placeholder="UF" value={uf} onChangeText={text => setUf(text)} maxLength={2} w="23%"/>
       </HStack> */}
-      <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10}>
+      <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10} onPress={handleNextPage} >
         <ArrowRight />
       </Button>
 
