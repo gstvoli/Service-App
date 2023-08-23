@@ -16,10 +16,10 @@ interface Etapa1Props {
   handleChange: (key: keyof CadastroData, value: string) => void;
 }
 
-export default function SignIn({ data, handleChange}: Etapa1Props){
-  const { nome, cpf, email, telefone, senha } = data;
+export default function SignIn({data, handleChange} : Etapa1Props){
+
+
   const [senhaConf, setSenhaConf] = useState('');
-  
   const navigation = useNavigation();
 
   const handleGoBack = () => {
@@ -52,22 +52,22 @@ export default function SignIn({ data, handleChange}: Etapa1Props){
 
 
         <Text color="#000" fontSize="md" bold my={3}>Informe os dados abaixo</Text>
-        <Input placeholder="Seu nome completo" value={nome} onChangeText={nome => handleChange('nome', nome)} w="full" my={1} />
+        <Input placeholder="Seu nome completo" value={data.nome} onChangeText={nome => handleChange('nome', nome)} w="full" my={1} />
 
         <HStack alignItems="center" maxW="full" mt={0.5}>
-          <Input placeholder="Seu nº de celular" value={telefone} onChangeText={telefone => handleChange('telefone', telefone)} w="50%" mr={2} keyboardType="numeric" my={1} />
+          <Input placeholder="Seu nº de celular" value={data.telefone} onChangeText={telefone => handleChange('telefone', telefone)} w="50%" mr={2} keyboardType="numeric" my={1} />
 
-          <Input placeholder="Seu CPF" value={cpf} onChangeText={cpf => handleChange('cpf', cpf)} keyboardType="numeric" w="47%" my={1} />
+          <Input placeholder="Seu CPF" value={data.cpf} onChangeText={cpf => handleChange('cpf', cpf)} keyboardType="numeric" w="47%" my={1} />
         </HStack>
 
 
-        <Input placeholder="Seu e-mail" value={email} onChangeText={email => handleChange('email', email)}keyboardType="email-address" w="full" mt={2} mb={1} />
+        <Input placeholder="Seu e-mail" value={data.email} onChangeText={email => handleChange('email', email)}keyboardType="email-address" w="full" mt={2} mb={1} />
         
-        <Input placeholder="Sua senha" value={senha} onChangeText={senha => handleChange('senha', senha)} secureTextEntry my={1} />
+        <Input placeholder="Sua senha" value={data.senha} onChangeText={senha => handleChange('senha', senha)} secureTextEntry my={1} />
 
         <Input placeholder="Confirme sua senha" onChangeText={senhaConf => setSenhaConf(senhaConf)} secureTextEntry my={1} />
 
-        {((senha != senhaConf) && (senhaConf != ''))? <Text color="error.700">As senhas não coincidem!</Text> : null}
+        {((data.senha != senhaConf) && (senhaConf != ''))? <Text color="error.700">As senhas não coincidem!</Text> : null}
 
         {/* <Input placeholder="Seu endereço" value={} onChangeText={text => setEndereco(text)} w="full" my={1} /> */}
 {/*

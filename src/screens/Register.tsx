@@ -14,16 +14,15 @@ import SignInStart from './SignInStart';
 
 export default function Register(){
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState<CadastroData>({
+  const [data, setData] = useState<CadastroData>({
     nome: '',
     cpf: '',
     email: '',
     telefone: '',
     senha: '',
   });
-  
-  const handleFormChange = (key: keyof CadastroData, value: string) => {
-    setFormData(prevData => ({ ...prevData, [key]: value }));
+  const handleChange = (key: keyof CadastroData, value: string) => {
+    setData(prevData => ({...prevData, [key]: value, }));
   };
 
   const goToNextStep = () => {
@@ -31,7 +30,7 @@ export default function Register(){
       setStep(step + 1);
     } else{
       // Aqui vai enviar para o banco
-      console.log('Dados para o banco de dados:', formData);      
+      console.log('Dados para o banco de dados:', data);      
     }
   };
 
@@ -44,7 +43,7 @@ export default function Register(){
   const renderStep = () => {
     switch (step){
       case 1:
-        <SignIn data={formData} handleChange={handleFormChange} />
+        <SignIn data={data} handleChange={handleChange}/>
         break;
       
       case 2:
