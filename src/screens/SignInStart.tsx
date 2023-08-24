@@ -10,7 +10,7 @@ export default function SignInStart(){
   const navigation = useNavigation();
 
   function openRegister(){
-    navigation.navigate('signin')
+    navigation.navigate('register')
   }
 
   return (

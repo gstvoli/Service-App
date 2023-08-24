@@ -80,11 +80,11 @@ export default function SignIn({data, handleChange} : Etapa1Props){
         <Input placeholder="Cidade" value={cidade} onChangeText={text => setCidade(text)} w="75%" mr={2}/>
         <Input placeholder="UF" value={uf} onChangeText={text => setUf(text)} maxLength={2} w="23%"/>
       </HStack> */}
-      <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10} onPress={handleNextPage} >
+      {/* <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10} onPress={handleNextPage} >
         <ArrowRight />
       </Button>
 
-      <Text color="#000" fontSize="lg" bold >Próximo</Text>
+      <Text color="#000" fontSize="lg" bold >Próximo</Text> */}
 
       </VStack>
     </View>
@@ -96,7 +96,7 @@ export default function SignIn({data, handleChange} : Etapa1Props){
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    paddingTop: 40,
+    // paddingTop: 40,
     paddingHorizontal: 30,
     backgroundColor: '#EEEEEE'
   }

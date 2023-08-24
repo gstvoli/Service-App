@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { StyleSheet } from 'react-native';
+import { useEffect, useState } from 'react';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { BackHandler, StyleSheet } from 'react-native';
 import { Heading, VStack, Text,  Button, useSafeArea } from 'native-base';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
@@ -21,6 +21,7 @@ export default function Register(){
     telefone: '',
     senha: '',
   });
+
   const handleChange = (key: keyof CadastroData, value: string) => {
     setData(prevData => ({...prevData, [key]: value, }));
   };
@@ -28,12 +29,15 @@ export default function Register(){
   const goToNextStep = () => {
     if (step < 3){
       setStep(step + 1);
+      console.log('Dados para o banco de dados:', data); 
     } else{
       // Aqui vai enviar para o banco
       console.log('Dados para o banco de dados:', data);      
     }
   };
 
+  
+  
   const goToPreviousStep = () => {
     if (step > 1) {
       setStep(step - 1);
@@ -41,35 +45,32 @@ export default function Register(){
   };
 
   const renderStep = () => {
-    switch (step){
-      case 1:
+    console.log(step);
+    if (step === 1){
+      return (
         <SignIn data={data} handleChange={handleChange}/>
-        break;
-      
-      case 2:
+      )
+    } else 
+    if (step === 2){
+      return (
         <SignInTerms />
-        break;
-
-      case 3:
-        <SignInCard />
-        break;
-
-      default: <SignInStart />
+      )
+    } else {
+      <SignInCard />
     }
   };
   
   return (
     <View style={styles.container}>
       <VStack alignItems="center">
-        <Heading textAlign={'center'} color="#00ADB5" fontSize={'3xl'}>Crie sua conta!</Heading>
-        <Text color="#000" my={10} bold fontSize={'lg'}>Preencha os dados para criar sua conta!</Text>
 
+        {renderStep()}
         
-        <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={8} >
+        <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={8} onPress={goToNextStep} >
           <ArrowRight />
         </Button>
 
-      <Text color="#000" fontSize="lg" bold mb={8}>Próximo</Text>
+      <Text color="#000" fontSize="lg" bold mb={8} >Próximo</Text>
       </VStack>
     </View>
   )

@@ -12,7 +12,7 @@ import SignInFinish from '../screens/SignInFinish';
 import Login from '../screens/Login';
 import Services from '../screens/Services';
 import Profile from '../screens/Profile';
-import { CadastroData } from '../@types/Tipos';
+import Register from '../screens/Register';
 
 export function TabRoutes() {
 
@@ -20,9 +20,10 @@ export function TabRoutes() {
     <Navigator screenOptions={{ headerShown: false  }}>
         <Screen name="home" component={Home} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}} />
         <Screen name="signinstart" component={SignInStart} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
-        <Screen name="signin" component={() => <SignIn data={} handleChange={}/>} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
-        <Screen name="signinterms" component={SignInTerms} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
-        <Screen name="signincard" component={SignInCard} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
+        <Screen name="register" component={Register} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
+        {/* <Screen name="signin" component={() => <SignIn data={} handleChange={}/>} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/> */}
+        {/* <Screen name="signinterms" component={SignInTerms} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
+        <Screen name="signincard" component={SignInCard} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/> */}
         <Screen name="signinfinish" component={SignInFinish} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="login" component={Login} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
         <Screen name="services" component={Services} />
