@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { BackHandler, StyleSheet } from 'react-native';
+import { Alert, BackHandler, StyleSheet } from 'react-native';
 import { Heading, VStack, Text,  Button, useSafeArea } from 'native-base';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
@@ -20,11 +20,37 @@ export default function Register(){
     email: '',
     telefone: '',
     senha: '',
+    accept: false
   });
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {text: 'YES', onPress: () => goToPreviousStep()},
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return;
+  }, []);
 
   const handleChange = (key: keyof CadastroData, value: string) => {
     setData(prevData => ({...prevData, [key]: value, }));
   };
+
+  const handleCheck = (key: keyof CadastroData, value: boolean) => {
+    setData(prevData => ({...prevData, [key]: value, }));
+  }; 
 
   const goToNextStep = () => {
     if (step < 3){
@@ -36,8 +62,6 @@ export default function Register(){
     }
   };
 
-  
-  
   const goToPreviousStep = () => {
     if (step > 1) {
       setStep(step - 1);
@@ -53,7 +77,7 @@ export default function Register(){
     } else 
     if (step === 2){
       return (
-        <SignInTerms />
+        <SignInTerms data={data} handleChange={handleCheck}/>
       )
     } else {
       <SignInCard />

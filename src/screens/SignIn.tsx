@@ -18,7 +18,6 @@ interface Etapa1Props {
 
 export default function SignIn({data, handleChange} : Etapa1Props){
 
-
   const [senhaConf, setSenhaConf] = useState('');
   const navigation = useNavigation();
 

@@ -1,16 +1,25 @@
 import { useState } from "react";
 import { StyleSheet } from "react-native";
-import { VStack, Text, HStack, Button, ScrollView, Checkbox } from "native-base";
+import { VStack, Text, HStack, ScrollView, Checkbox } from "native-base";
 import { SafeAreaView as View} from "react-native-safe-area-context";
-import { useNavigation } from '@react-navigation/native'
-
+import { useNavigation } from '@react-navigation/native';
+import { CadastroData } from "../@types/Tipos";
 
 import Stage2 from '../imgs/register2.svg';
 import Terms from '../imgs/terms.svg'
 import ArrowRight from '../imgs/arrowRight.svg'
 
-export default function SignInTerms(){
-  const [value, setValue] = useState("");
+interface Etapa2Props {
+  data: CadastroData;
+  handleChange: (key: keyof CadastroData, value: boolean) => void;
+}
+
+export default function SignInTerms({data, handleChange} : Etapa2Props){
+  const [checked, setChecked] = useState(false);
+  const handleClick = () => {
+    setChecked(true);
+    console.log(checked);
+  }
   const navigation = useNavigation();
 
   function openScreen(){
@@ -37,15 +46,10 @@ export default function SignInTerms(){
       </ScrollView>
 
       <HStack paddingTop={2}>
-        <Checkbox value="test" mt={2}>
+        <Checkbox mt={2} value={"data"} onChange={handleClick}>
           <Text fontSize="sm" bold>Li e concordo com os termos e condições</Text>
         </Checkbox>
       </HStack>
-
-      <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={8} onPress={openScreen}>
-        <ArrowRight />
-      </Button>
-      <Text color="#000" fontSize="lg" bold mb={8}>Próximo</Text>
 
       </VStack>
     </View>
@@ -56,7 +60,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: 20,
+    // paddingTop: 20,
     paddingHorizontal: 30,
     backgroundColor: '#EEEEEE'
   },

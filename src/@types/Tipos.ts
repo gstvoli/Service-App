@@ -4,4 +4,5 @@ export interface CadastroData {
   email: string;
   telefone: string;
   senha: string;
+  accept?: boolean
 }
