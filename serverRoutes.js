@@ -7,6 +7,6 @@ const SessionController = require('./src/controllers/SessionController');
 routes.post('/api/login', SessionController.create);
 
 routes.get('/api/users', UserController.index);
-routes.post('/api/users', UserController.create);
+routes.post('/api/register', UserController.create);
 
 module.exports = routes;

@@ -11,15 +11,18 @@ import ArrowRight from '../imgs/arrowRight.svg'
 
 interface Etapa2Props {
   data: CadastroData;
-  handleChange: (key: keyof CadastroData, value: boolean) => void;
+  handleClick: (key: keyof CadastroData, value: boolean) => void;
 }
 
-export default function SignInTerms({data, handleChange} : Etapa2Props){
+export default function SignInTerms({data, handleClick} : Etapa2Props){
   const [checked, setChecked] = useState(false);
-  const handleClick = () => {
-    setChecked(true);
-    console.log(checked);
+
+  const handleChange = () => {
+    const newValue = !checked;
+    setChecked(newValue);
+    handleClick('accept', newValue)
   }
+
   const navigation = useNavigation();
 
   function openScreen(){
@@ -46,11 +49,10 @@ export default function SignInTerms({data, handleChange} : Etapa2Props){
       </ScrollView>
 
       <HStack paddingTop={2}>
-        <Checkbox mt={2} value={"data"} onChange={handleClick}>
+        <Checkbox mt={2} value={''} isChecked={checked} onChange={handleChange}>
           <Text fontSize="sm" bold>Li e concordo com os termos e condições</Text>
         </Checkbox>
       </HStack>
-
       </VStack>
     </View>
   )
@@ -58,7 +60,7 @@ export default function SignInTerms({data, handleChange} : Etapa2Props){
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     // paddingTop: 20,
     paddingHorizontal: 30,
@@ -70,6 +72,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 6,
     padding: 15,
-    maxHeight: 400
+    maxHeight: 300
   }
 })

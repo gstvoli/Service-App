@@ -25,6 +25,6 @@ app.post('/api/login', async (request, response) => {
   console.log('test');
 });
 
-app.post('/api/users', async (request, response) => {
+app.post('/api/register', async (request, response) => {
   console.log('Registro de usuario!');
 });

@@ -53,19 +53,18 @@ export default function Login(){
   }
 
   function openRegister(){
-    navigation.navigate('signin')
+    navigation.navigate('register')
   }
 
   return (
     <View style={styles.container}>
     {/*  <View colors={['#00ADB5', '#FFF']} locations={[0 , 0.41]} style={styles.container}> */}
-      {/* <TitleEllipse title="Entrar"/> */}
-      <VStack>
-          <Ellipse />
-          <Heading pt={2} mt={-20} color='#FFF' textAlign='center' fontSize={28}>Faça seu login!</Heading>
-        </VStack>
+      <VStack mb={20}>
+        <Ellipse />
+        <Heading pt={2} mt={-20} color='#FFF' textAlign='center' fontSize={28}>Faça seu login!</Heading>
+      </VStack>
 
-      <Text mb={20} bold fontSize="3xl" color="#444" px={5}></Text>
+      {/* <Text mb={20} bold fontSize="3xl" color="#444" px={5}>a</Text> */}
 
       <Input placeholder="Seu e-mail" value={email} onChangeText={text => setEmail(text)} keyboardType="email-address" my={2}/>
       <Input placeholder="Sua senha" value={senha} onChangeText={text => setSenha(text)} secureTextEntry my={2}/>

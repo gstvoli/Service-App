@@ -1,5 +1,5 @@
-
-import { StyleSheet } from "react-native";
+import { useEffect } from 'react';
+import { BackHandler, StyleSheet } from "react-native";
 import { VStack, Text, HStack, Link } from "native-base";
 import { SafeAreaView as View} from "react-native-safe-area-context";
 
@@ -8,7 +8,6 @@ import PartyPL from '../imgs/ptrumpl.svg'
 import UsersIcon from '../imgs/users-solid.svg'
 import RightToBracket from '../imgs/right-to-bracket.svg'
 
-import { Input } from "../components/Input";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { useNavigation } from '@react-navigation/native'
@@ -20,6 +19,18 @@ export default function SignInFinish(){
   function openScreen(){
     navigation.navigate('login');
   }
+
+  useEffect(() => {
+    const backAction = () => {
+      navigation.navigate('home');
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+    return () => backHandler.remove();
+  }, []);
+
 
   return (
       <LinearGradient
@@ -37,10 +48,8 @@ export default function SignInFinish(){
           <Text style={styles.boldFont} mb={6}>Ficamos felizes por fazer parte de nossa comunidade!</Text>
           <UsersIcon />
           <Text color="#fff" bold fontSize="2xl" mt={8} mb={1}>Faça seu login para</Text>
-          
-          <Link>
-            <Text color="#fff" bold fontSize="2xl" borderBottomWidth={4} borderBottomColor='#fff' w={200} pb={1.5} textAlign="center">acessar o app!</Text>
-          </Link>
+          <Text color="#fff" bold fontSize="2xl" borderBottomWidth={4} borderBottomColor='#fff' w={200} pb={1.5} textAlign="center">acessar o app!</Text>
+
         </VStack>
 
         <HStack my={4}>

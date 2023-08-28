@@ -5,8 +5,7 @@ import { SafeAreaView as View }from "react-native-safe-area-context";
 
 import { Input } from '../components/Input';
 
-import Stage3 from '../imgs/register3.svg'
-import ArrowRight from '../imgs/arrowRight.svg'
+import Stage3 from '../imgs/register3.svg';
 import CreditCard from '../imgs/creditcard.svg';
 import CCVisa from '../imgs/cc-visa.svg';
 
@@ -18,10 +17,6 @@ export default function SignInCard(){
 
   function openScreen(){
     navigation.navigate('signinfinish');
-  }
-
-  function handleCheck(){
-
   }
 
   return (
@@ -60,23 +55,17 @@ export default function SignInCard(){
       { !checked ?  
         <VStack>
           <Input placeholder="Endereço de Cobrança" my={2}/>
-          <HStack alignItems="center" maxW="full" mt={1} mb={1.5}>
+          <HStack alignItems="center" mt={1} mb={1.5}>
             <Input placeholder="Nº da casa/apto" w="40%" mr={2} />
             <Input placeholder="Bairro" w="58%" />
           </HStack>
-          <HStack alignItems="center" maxW="full" mt={1}>
+          <HStack alignItems="center" mt={1}>
             <Input placeholder="Cidade" w="75%" mr={2}/>
             <Input placeholder="UF" w="23%"/>
           </HStack>
-          {console.log(checked)}
         </VStack>  
-        : console.log(checked)
+        : null
       }
-
-      <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={10} onPress={openScreen}>
-        <ArrowRight />
-      </Button>
-      <Text color="#000" fontSize="lg" bold >Próximo</Text>
 
       </VStack>
     </View>
@@ -85,9 +74,10 @@ export default function SignInCard(){
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
-    paddingTop: 40,
+    // paddingTop: 40,
+    paddingBottom: 10,
     paddingHorizontal: 30,
     backgroundColor: '#EEEEEE'
   }
