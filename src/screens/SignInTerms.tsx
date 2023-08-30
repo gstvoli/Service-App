@@ -9,12 +9,12 @@ import Stage2 from '../imgs/register2.svg';
 import Terms from '../imgs/terms.svg'
 import ArrowRight from '../imgs/arrowRight.svg'
 
-interface Etapa2Props {
+interface Etapa3Props {
   data: CadastroData;
   handleClick: (key: keyof CadastroData, value: boolean) => void;
 }
 
-export default function SignInTerms({data, handleClick} : Etapa2Props){
+export default function SignInTerms({data, handleClick} : Etapa3Props){
   const [checked, setChecked] = useState(false);
 
   const handleChange = () => {
@@ -23,16 +23,10 @@ export default function SignInTerms({data, handleClick} : Etapa2Props){
     handleClick('accept', newValue)
   }
 
-  const navigation = useNavigation();
-
-  function openScreen(){
-    navigation.navigate('signincard');
-  }
-  
   return (
     <View style={styles.container}>
       <VStack alignItems="center">
-        <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 2/3</Text>
+        <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 3/4</Text>
         <Stage2 />
 
         <HStack alignItems="center" mt={4}>

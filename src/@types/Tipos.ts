@@ -4,5 +4,12 @@ export interface CadastroData {
   email: string;
   telefone: string;
   senha: string;
+  endereco: string;
+  numero: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+  cep: string;
+  aniversario: string;
   accept: boolean
 }

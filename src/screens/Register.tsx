@@ -5,6 +5,7 @@ import { VStack, Text,  Button, ScrollView } from 'native-base';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
 import SignIn from './SignIn';
+import SignInData from './SignInData';
 import SignInTerms from './SignInTerms';
 import SignInCard from './SignInCard';
 import { CadastroData } from '../@types/Tipos';
@@ -23,12 +24,23 @@ export default function Register(){
     email: '',
     telefone: '',
     senha: '',
+    endereco: '',
+    numero: '',
+    bairro: '',
+    cidade: '',
+    uf: '',
+    cep: '',
+    aniversario: '',
     accept: false
   });
 
   const handleChange = (key: keyof CadastroData, value: string) => {
     setData(prevData => ({...prevData, [key]: value, }));
-  };
+  }; 
+
+  // const handleChangeN = (key: keyof CadastroData, value: number) => {
+  //   setData(prevData => ({...prevData, [key]: value, }));
+  // };
 
   const handleClick = (key: keyof CadastroData, value: boolean) => {
     setData(prevData => ({...prevData, [key]: value, }));
@@ -74,7 +86,7 @@ export default function Register(){
   }, [step]);
 
   const goToNextStep = () => {
-    if (step < 3){
+    if (step < 4){
       setStep(step + 1);
       console.log('Dados:', data); 
     }
@@ -89,10 +101,15 @@ export default function Register(){
     } 
     else if (step === 2){
       return (
-        <SignInTerms data={data} handleClick={handleClick}/>
+        <SignInData data={data} handleChange={handleChange} />
       )
     }
     else if (step === 3){
+      return (
+        <SignInTerms data={data} handleClick={handleClick}/>
+      )
+    }
+    else if (step === 4){
       return (
         <SignInCard />
       )

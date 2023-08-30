@@ -16,14 +16,13 @@ module.exports = {
       cpf,
       email,
       telefone,
-      // endereco,
-      // numero,
-      // bairro,
-      // cidade,
-      // uf,
-      // cep,
-      // idade,
-      // aniversario,
+      endereco,
+      numero,
+      bairro,
+      cidade,
+      uf,
+      cep,
+      aniversario,
       senhaToHash
     } = request.body;
 
