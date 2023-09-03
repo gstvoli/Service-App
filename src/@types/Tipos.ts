@@ -5,11 +5,10 @@ export interface CadastroData {
   telefone: string;
   senha: string;
   endereco: string;
-  numero: string;
+  numero: number;
   bairro: string;
   cidade: string;
   uf: string;
   cep: string;
-  aniversario: string;
-  accept: boolean
+  aniversario: Date;
 }

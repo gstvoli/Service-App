@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Alert, BackHandler, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
-import { VStack, Text,  Button, ScrollView } from 'native-base';
+import { VStack, HStack, Text,  Button, Checkbox, ScrollView } from 'native-base';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
 import SignIn from './SignIn';
@@ -16,6 +16,7 @@ import api from '../services/api';
 export default function Register(){
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [step, setStep] = useState(1);
   const [data, setData] = useState<CadastroData>({
@@ -25,28 +26,29 @@ export default function Register(){
     telefone: '',
     senha: '',
     endereco: '',
-    numero: '',
+    numero: 0,
     bairro: '',
     cidade: '',
     uf: '',
     cep: '',
-    aniversario: '',
-    accept: false
+    aniversario: new Date('1990-01-01')
   });
 
   const handleChange = (key: keyof CadastroData, value: string) => {
-    setData(prevData => ({...prevData, [key]: value, }));
+    setData(prevData => ({...prevData,
+      [key]: key === 'numero' ? parseInt(value) :
+            key === 'aniversario' ? new Date(value):
+            value,
+    }));
   }; 
 
-  // const handleChangeN = (key: keyof CadastroData, value: number) => {
-  //   setData(prevData => ({...prevData, [key]: value, }));
-  // };
-
-  const handleClick = (key: keyof CadastroData, value: boolean) => {
-    setData(prevData => ({...prevData, [key]: value, }));
-  };
+  const handleClick = () => {
+    const newValue = !checked;
+    setChecked(newValue);
+  }
 
   const handleRegister = async () => {
+    console.log(data);
     try {
       setIsLoading(true);
       const response = await api.post('/register', data);
@@ -86,14 +88,25 @@ export default function Register(){
   }, [step]);
 
   const goToNextStep = () => {
+    if (step === 3){
+      {(checked === true) ? setStep(step + 1) : Alert.alert('Confirmação', 'Aceite os termos para prosseguir!')}
+    } else 
     if (step < 4){
       setStep(step + 1);
       console.log('Dados:', data); 
+    } else
+    if (step === 4){
+      try {
+        handleRegister();
+        console.log('foi');
+      } catch (error : any) {
+        console.log('Retorno do cadastro:', error.response.data)        
+        console.log('Retorno do cadastro:', error.message)        
+      }
     }
   };
 
   const renderStep = () => {
-    // console.log(step);
     if (step === 1){
       return (
         <SignIn data={data} handleChange={handleChange}/>
@@ -106,7 +119,14 @@ export default function Register(){
     }
     else if (step === 3){
       return (
-        <SignInTerms data={data} handleClick={handleClick}/>
+        <VStack alignItems={"center"}>  
+        <SignInTerms />
+          <HStack paddingTop={2}>
+          <Checkbox mt={2} value={''} onChange={handleClick}>
+            <Text fontSize="sm" bold>Li e concordo com os termos e condições</Text>
+          </Checkbox>
+        </HStack>
+        </VStack>
       )
     }
     else if (step === 4){

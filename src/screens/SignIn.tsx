@@ -41,7 +41,7 @@ export default function SignIn({data, handleChange} : Etapa1Props){
 
     <View>
       <VStack alignItems="center">
-        <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 1/3</Text>
+        <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 1/4</Text>
         <Stage1 />
 
         <HStack alignItems="center" mt={4}>

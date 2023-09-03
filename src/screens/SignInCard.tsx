@@ -22,7 +22,7 @@ export default function SignInCard(){
   return (
     <View style={styles.container}>
       <VStack alignItems="center">
-      <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 3/3</Text>
+      <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 4/4</Text>
         <Stage3 />
 
       <HStack alignItems="center" mt={4}>

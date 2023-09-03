@@ -16,35 +16,36 @@ module.exports = {
       cpf,
       email,
       telefone,
+      senha: senhaToHash,
       endereco,
       numero,
       bairro,
       cidade,
       uf,
       cep,
-      aniversario,
-      senhaToHash
+      aniversario
     } = request.body;
 
-    const senha = bcrypt.hashSync(senhaToHash, salt);
-    console.log(request.body);
+    console.log(senha);
 
-    await connection('usuario').insert({
+    const senhaCriptografada = bcrypt.hashSync(senhaToHash, salt);
+    // console.log(request.body);
+
+    const user = await connection('usuario').insert({
       nome,
       cpf,
       email,
       telefone,
+      senha: senhaCriptografada,
       endereco,
       numero,
       bairro,
       cidade,
       uf,
       cep,
-      idade,
-      aniversario,
-      senha
+      aniversario
     });
 
-    return response.json({ senha });
+    return response.json(user, { senha: senhaCriptografada });
   }
 };

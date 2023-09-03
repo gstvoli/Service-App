@@ -41,7 +41,7 @@ export default function SignIn({data, handleChange} : Etapa2Props){
 
     <View>
       <VStack alignItems="center">
-        <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 2/3</Text>
+        <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 2/4</Text>
         <Stage1 />
 
         <HStack alignItems="center" mt={4}>
@@ -51,15 +51,15 @@ export default function SignIn({data, handleChange} : Etapa2Props){
 
         <Text color="#000" fontSize="md" bold my={3}>Informe seus dados pessoais abaixo</Text>
 
-        <HStack maxW="full" mt={0.5} mb={1.5}>
-          <Text>Buscar CEP:</Text>
-          <Input placeholder="Seu CEP" inputMode="numeric" value={(data.cep)} onChangeText={cep => handleChange('cep', cep)}  w="50%" my={1} />
+        <HStack justifyContent={"flex-start"} maxW="full" mt={0.5} mb={1.5}>
+          <Text fontSize={"md"} alignSelf={"center"} bold>Buscar CEP:</Text>
+          <Input placeholder="Seu CEP" inputMode="numeric" value={(data.cep)} onChangeText={cep => handleChange('cep', cep)}  w="30%" mx={2} fontSize={"md"}/>
         </HStack>
 
         <Input placeholder="Seu endereço" value={data.endereco} onChangeText={endereco => handleChange('endereco', endereco)} w="full" my={1} />
 
       <HStack alignItems="center" maxW="full" mt={1} mb={1.5}>
-        <Input placeholder="Nº da casa/apto" value={data.numero} onChangeText={numero => handleChange('numero', numero)} w="45%" mr={2} />
+        <Input placeholder="Nº da casa/apto" value={data.numero.toString()} onChangeText={numero => handleChange('numero', numero)} w="45%" mr={2} />
         <Input placeholder="Seu bairro" value={data.bairro} onChangeText={bairro => handleChange('bairro', bairro)} w="53%" />
       </HStack>
 
