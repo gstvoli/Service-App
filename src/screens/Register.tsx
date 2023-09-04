@@ -31,15 +31,18 @@ export default function Register(){
     cidade: '',
     uf: '',
     cep: '',
+    idade: 0,
     aniversario: new Date('1990-01-01')
   });
 
   const handleChange = (key: keyof CadastroData, value: string) => {
     setData(prevData => ({...prevData,
       [key]: key === 'numero' ? parseInt(value) :
-            key === 'aniversario' ? new Date(value):
             value,
     }));
+  }; 
+  const handleDate = (key: keyof CadastroData, value: Date) => {
+    setData(prevData => ({...prevData, [key]: value, }));
   }; 
 
   const handleClick = () => {
@@ -109,7 +112,7 @@ export default function Register(){
   const renderStep = () => {
     if (step === 1){
       return (
-        <SignIn data={data} handleChange={handleChange}/>
+        <SignIn data={data} handleChange={handleChange} handleDate={handleDate}/>
       )
     } 
     else if (step === 2){

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { StyleSheet, KeyboardAvoidingView, Alert } from "react-native";
+import { Alert, Button as RNB, KeyboardAvoidingView, StyleSheet } from "react-native";
+import DatePicker from 'react-native-date-picker'
 import { VStack, Text, HStack, Button } from "native-base";
 import { SafeAreaView as View} from "react-native-safe-area-context";
 import { useNavigation } from '@react-navigation/native'; 
@@ -10,14 +11,16 @@ import { CadastroData } from "../@types/Tipos";
 import Stage1 from '../imgs/register1.svg';
 import UserLarge from '../imgs/user-large-solid.svg'
 import ArrowRight from '../imgs/arrowRight.svg'
+import { onChange } from "react-native-reanimated";
 
 interface Etapa1Props {
   data: CadastroData;
   handleChange: (key: keyof CadastroData, value: string) => void;
+  handleDate: (key: keyof CadastroData, value: Date) => void;
 }
 
-export default function SignIn({data, handleChange} : Etapa1Props){
-
+export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
+  const [open, setOpen] = useState(false);
   const [senhaConf, setSenhaConf] = useState('');
   const navigation = useNavigation();
 
@@ -57,6 +60,25 @@ export default function SignIn({data, handleChange} : Etapa1Props){
           <Input placeholder="Seu nº de celular" value={data.telefone} onChangeText={telefone => handleChange('telefone', telefone)} w="50%" mr={2} keyboardType="numeric" my={1} />
 
           <Input placeholder="Seu CPF" value={data.cpf} onChangeText={cpf => handleChange('cpf', cpf)} keyboardType="numeric" w="47%" my={1} />
+        </HStack>
+
+        <HStack alignItems="center" maxW="full" mt={0.5}>
+          <Input placeholder="Sua idade" value={data.idade.toString()} onChangeText={telefone => handleChange('telefone', telefone)} w="50%" mr={2} keyboardType="numeric" my={1} />
+
+          <RNB title="Open" onPress={() => setOpen(true)} />
+          <DatePicker
+            modal
+            open={open}
+            date={data.aniversario}
+            onConfirm={(date) => {
+              setOpen(false)
+              handleDate('aniversario', date)
+            }}
+            onCancel={() => {
+              setOpen(false)
+            }}
+          />
+          {/* <Input placeholder="Sua data de nascimento" value={data.aniversario} onChangeText={cpf => handleChange('cpf', cpf)} keyboardType={} w="47%" my={1} /> */}
         </HStack>
 
 

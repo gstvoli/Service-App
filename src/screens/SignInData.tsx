@@ -49,7 +49,7 @@ export default function SignIn({data, handleChange} : Etapa2Props){
           <Text color="#00ADB5" fontSize="2xl" bold mt={2} ml={2}>Criar conta</Text>
         </HStack>
 
-        <Text color="#000" fontSize="md" bold my={3}>Informe seus dados pessoais abaixo</Text>
+        <Text color="#000" fontSize="md" bold my={3}>Informe seus dados complementares abaixo</Text>
 
         <HStack justifyContent={"flex-start"} maxW="full" mt={0.5} mb={1.5}>
           <Text fontSize={"md"} alignSelf={"center"} bold>Buscar CEP:</Text>

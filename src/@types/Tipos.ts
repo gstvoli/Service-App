@@ -10,5 +10,6 @@ export interface CadastroData {
   cidade: string;
   uf: string;
   cep: string;
+  idade: number;
   aniversario: Date;
 }
