@@ -26,7 +26,7 @@ module.exports = {
       aniversario
     } = request.body;
 
-    console.log(senha);
+    // console.log(senha);
 
     const senhaCriptografada = bcrypt.hashSync(senhaToHash, salt);
     // console.log(request.body);
@@ -46,6 +46,6 @@ module.exports = {
       aniversario
     });
 
-    return response.json(user, { senha: senhaCriptografada });
+    return response.json(user);
   }
 };

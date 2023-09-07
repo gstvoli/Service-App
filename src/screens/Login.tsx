@@ -53,7 +53,7 @@ export default function Login(){
   }
 
   function openRegister(){
-    navigation.navigate('register')
+    navigation.navigate('signinstart')
   }
 
   return (

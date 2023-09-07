@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Alert, Button as RNB, KeyboardAvoidingView, StyleSheet } from "react-native";
-import DatePicker from 'react-native-date-picker'
-import { VStack, Text, HStack, Button } from "native-base";
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { VStack, Text, HStack } from "native-base";
 import { SafeAreaView as View} from "react-native-safe-area-context";
 import { useNavigation } from '@react-navigation/native'; 
 
@@ -10,8 +10,7 @@ import { CadastroData } from "../@types/Tipos";
 
 import Stage1 from '../imgs/register1.svg';
 import UserLarge from '../imgs/user-large-solid.svg'
-import ArrowRight from '../imgs/arrowRight.svg'
-import { onChange } from "react-native-reanimated";
+import { Button } from "../components/Button";
 
 interface Etapa1Props {
   data: CadastroData;
@@ -20,7 +19,19 @@ interface Etapa1Props {
 }
 
 export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
-  const [open, setOpen] = useState(false);
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [show, setShow] = useState(false);
+
+  const onChange = (event: any, selectedDate: any) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    handleDate('aniversario', currentDate)
+  };
+
+  const showMode = () => {
+    setShow(true)
+  };
+
   const [senhaConf, setSenhaConf] = useState('');
   const navigation = useNavigation();
 
@@ -54,7 +65,7 @@ export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
 
 
         <Text color="#000" fontSize="md" bold my={3}>Informe os dados abaixo</Text>
-        <Input placeholder="Seu nome completo" value={data.nome} onChangeText={nome => handleChange('nome', nome)} w="full" my={1} />
+        <Input autoCorrect={false } placeholder="Seu nome completo" value={data.nome} onChangeText={nome => handleChange('nome', nome)} w="full" my={1} />
 
         <HStack alignItems="center" maxW="full" mt={0.5}>
           <Input placeholder="Seu nº de celular" value={data.telefone} onChangeText={telefone => handleChange('telefone', telefone)} w="50%" mr={2} keyboardType="numeric" my={1} />
@@ -63,26 +74,24 @@ export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
         </HStack>
 
         <HStack alignItems="center" maxW="full" mt={0.5}>
-          <Input placeholder="Sua idade" value={data.idade.toString()} onChangeText={telefone => handleChange('telefone', telefone)} w="50%" mr={2} keyboardType="numeric" my={1} />
 
-          <RNB title="Open" onPress={() => setOpen(true)} />
-          <DatePicker
-            modal
-            open={open}
-            date={data.aniversario}
-            onConfirm={(date) => {
-              setOpen(false)
-              handleDate('aniversario', date)
-            }}
-            onCancel={() => {
-              setOpen(false)
-            }}
+        <Button fs={"md"} backgroundColor={"#00ADB5"} h={10} w={"3/6"} color={"#fff"} title={"Data de nascimento"} onPress={showMode} mt={0} mb={0} />  
+        {/* <RNB onPress={showMode} title="Data do aniversário" /> */}
+        {show && (
+          <DateTimePicker
+          value={data.aniversario}
+          mode="date"
+          is24Hour={true}
+          onChange={onChange}
           />
-          {/* <Input placeholder="Sua data de nascimento" value={data.aniversario} onChangeText={cpf => handleChange('cpf', cpf)} keyboardType={} w="47%" my={1} /> */}
+          )}
+
+        <Input placeholder="Sua data de nascimento" value={data.aniversario.toLocaleDateString()} isReadOnly w="48%" my={1} ml={2}/>
+          {/* <Input placeholder="Sua idade" value={data.idade.toString()} onChangeText={telefone => handleChange('telefone', telefone)} w="50%" mr={2} keyboardType="numeric" my={1} /> */}
+
         </HStack>
 
-
-        <Input placeholder="Seu e-mail" value={data.email} onChangeText={email => handleChange('email', email)}keyboardType="email-address" w="full" mt={2} mb={1} />
+        <Input placeholder="Seu e-mail" value={data.email} onChangeText={email => handleChange('email', email)}keyboardType="email-address" mt={2} mb={1} />
         
         <Input placeholder="Sua senha" value={data.senha} onChangeText={senha => handleChange('senha', senha)} secureTextEntry my={1} />
 

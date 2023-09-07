@@ -8,7 +8,7 @@ import SignInTerms from '../screens/SignInTerms';
 import SignInCard from '../screens/SignInCard';
 import SignInFinish from '../screens/SignInFinish';
 import Login from '../screens/Login';
-import Services from '../screens/Services';
+import Services from '../screens/ServiceList';
 import Profile from '../screens/Profile';
 
 

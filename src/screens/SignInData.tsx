@@ -59,7 +59,7 @@ export default function SignIn({data, handleChange} : Etapa2Props){
         <Input placeholder="Seu endereço" value={data.endereco} onChangeText={endereco => handleChange('endereco', endereco)} w="full" my={1} />
 
       <HStack alignItems="center" maxW="full" mt={1} mb={1.5}>
-        <Input placeholder="Nº da casa/apto" value={data.numero.toString()} onChangeText={numero => handleChange('numero', numero)} w="45%" mr={2} />
+        <Input placeholder="Nº da casa/apto" value={(data.numero.toString() == '0' ? '' : data.numero.toString()) } onChangeText={numero => handleChange('numero', numero)} w="45%" mr={2} />
         <Input placeholder="Seu bairro" value={data.bairro} onChangeText={bairro => handleChange('bairro', bairro)} w="53%" />
       </HStack>
 

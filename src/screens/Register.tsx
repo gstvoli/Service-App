@@ -59,6 +59,8 @@ export default function Register(){
       console.log('Resposta do servidor:', response.data);
       setErrorMessage('');
       setIsLoading(false);
+      setStep(1);
+      handleDefault;
 
       navigation.navigate('signinfinish');
       
@@ -77,8 +79,30 @@ export default function Register(){
     }
   }
 
+  const handleDefault = () => {
+    setData({
+      nome: '',
+      cpf: '',
+      email: '',
+      telefone: '',
+      senha: '',
+      endereco: '',
+      numero: 0,
+      bairro: '',
+      cidade: '',
+      uf: '',
+      idade: 0,
+      cep: '',
+      aniversario: new Date('1990-01-01'),
+    })
+    return;
+  }
+
   useEffect(() => {
     const backAction = () => {
+      if (step === 1){
+        handleDefault;
+      } else
       if (step > 1) {
         setStep(prevStep => prevStep - 1);
         return true;
