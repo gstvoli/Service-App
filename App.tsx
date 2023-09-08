@@ -6,8 +6,8 @@ import 'react-native-gesture-handler';
 export default function App() {
   return (
     <NativeBaseProvider>
-      {/* <Routes /> */}
-      <Service />
+      <Routes />
+      {/* <Service /> */}
     </NativeBaseProvider>
   );
 }

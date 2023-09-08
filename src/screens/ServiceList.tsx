@@ -1,6 +1,7 @@
+import { SafeAreaView as View } from 'react-native-safe-area-context';
 import { HStack, Heading, Link, Text, VStack } from 'native-base';
 import { ScrollView, StyleSheet } from 'react-native';
-import { SafeAreaView as View } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native'
 
 import { Button } from '../components/Button';
 
@@ -25,7 +26,7 @@ export default function Services(){
           <Heading pt={2} mt={-16} mb={12} color='#FFF' textAlign='center'>Bem vindo, Gustavo!</Heading>
         </VStack>
       
-        <Heading color='#393E46' mb={3}>Serviços</Heading>
+        <Heading color='#393E46' mb={2}>Serviços</Heading>
 
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <VStack style={styles.box}>
@@ -57,30 +58,8 @@ export default function Services(){
 
         <Heading color='#393E46' my={4}>Melhores colaboradores</Heading>
 
-        <Heading fontSize="lg" mb={4}>Marcenaria</Heading>
+        <Heading fontSize="lg" mb={2}>Marcenaria</Heading>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <Link>
-            <VStack style={styles.card}>
-              <BigUser />
-              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
-              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
-              <HStack mt={2}>
-                <Star />
-                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
-              </HStack>
-            </VStack>
-          </Link>
-          <Link>
-            <VStack style={styles.card}>
-              <BigUser />
-              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
-              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
-              <HStack mt={2}>
-                <Star />
-                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
-              </HStack>
-            </VStack>
-          </Link>
           <Link>
             <VStack style={styles.card}>
               <BigUser />
@@ -112,28 +91,6 @@ export default function Services(){
         
         <Heading fontSize="lg" mb={4}>Pintores</Heading>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <Link>
-            <VStack style={styles.card}>
-              <BigUser />
-              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
-              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
-              <HStack mt={2}>
-                <Star />
-                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
-              </HStack>
-            </VStack>
-          </Link>
-          <Link>
-            <VStack style={styles.card}>
-              <BigUser />
-              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
-              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
-              <HStack mt={2}>
-                <Star />
-                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
-              </HStack>
-            </VStack>
-          </Link>
           <Link>
             <VStack style={styles.card}>
               <BigUser />
@@ -190,52 +147,6 @@ export default function Services(){
                 </VStack>
               </HStack>
             </VStack>
-
-            <VStack style={styles.hCard}>
-              <HStack alignItems='center'>
-                <VStack>
-                <BigUser />
-
-                </VStack>
-                <VStack paddingX={5}>
-                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
-                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Progamador Mobile/Web</Text>
-                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
-                  
-                  <HStack paddingY={2}>
-                    <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
-                    
-                    <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-                    <Star />
-                  </HStack>
-                
-                  <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
-                </VStack>
-              </HStack>
-            </VStack>
-
-            <VStack style={styles.hCard}>
-              <HStack alignItems='center'>
-                <VStack>
-                <BigUser />
-
-                </VStack>
-                <VStack paddingX={5}>
-                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
-                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Progamador Mobile/Web</Text>
-                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
-                  
-                  <HStack paddingY={2}>
-                    <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
-                    
-                    <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-                    <Star />
-                  </HStack>
-                
-                  <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
-                </VStack>
-              </HStack>
-            </VStack>
           </VStack>            
         </ScrollView>
 
@@ -268,12 +179,12 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOpacity: 0.9,
     elevation: 10,
-    marginVertical: 10,
+    marginVertical: 4,
     marginHorizontal: 5
   },
   card : {
     width: 150,
-    height: 220,
+    height: 200,
     backgroundColor : '#00ADB5',
     justifyContent: 'center',
     alignItems: 'center',

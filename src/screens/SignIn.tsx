@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Button as RNB, KeyboardAvoidingView, StyleSheet } from "react-native";
+import { Button as RNB, KeyboardAvoidingView, StyleSheet } from "react-native";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { VStack, Text, HStack } from "native-base";
 import { SafeAreaView as View} from "react-native-safe-area-context";

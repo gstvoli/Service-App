@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { Feather } from '@expo/vector-icons'
 
 const { Screen, Navigator} = createBottomTabNavigator();
 
@@ -17,17 +18,30 @@ import Register from '../screens/Register';
 export function TabRoutes() {
 
   return (
-    <Navigator screenOptions={{ headerShown: false  }}>
+    <Navigator screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor:"#00ABD5", height: 52, paddingBottom: 2}}}>
         <Screen name="home" component={Home} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}} />
         <Screen name="signinstart" component={SignInStart} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="register" component={Register} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
-        {/* <Screen name="signin" component={() => <SignIn data={} handleChange={}/>} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/> */}
-        {/* <Screen name="signinterms" component={SignInTerms} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
-        <Screen name="signincard" component={SignInCard} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/> */}
         <Screen name="signinfinish" component={SignInFinish} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="login" component={Login} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
-        <Screen name="services" component={Services} />
-        <Screen name="profile" component={Profile}/>
+        <Screen name="services" component={Services} options={{ tabBarLabel: 'Serviços', tabBarLabelStyle : { color: '#fff', fontSize: 14, fontWeight: 'bold'}, 
+        tabBarIcon: ({ focused }) => (
+            <Feather
+              name={'clipboard'}
+              size={25}
+              color={focused ? '#FFC700' : '#fff'}
+            />
+          )
+        }} />
+        <Screen name="profile" component={Profile} options={{ tabBarLabel: 'Perfil', tabBarLabelStyle: {color: '#fff', fontSize: 14, fontWeight: 'bold'} ,
+        tabBarIcon: ({ focused }) => (
+            <Feather
+              name={'user'}
+              size={25}
+              color={focused ? '#FFC700' : '#fff'}
+            />
+          )
+        }}/>
       {/* </Stack.Navigator> */}
     </Navigator>
   );
