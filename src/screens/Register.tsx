@@ -60,7 +60,7 @@ export default function Register(){
       setErrorMessage('');
       setIsLoading(false);
       setStep(1);
-      handleDefault;
+      handleDefault();
 
       navigation.navigate('signinfinish');
       

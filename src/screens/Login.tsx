@@ -4,7 +4,7 @@ import { StyleSheet, Alert } from "react-native";
 import { Checkbox, Text, VStack, HStack, Link, Heading } from "native-base";
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
-import Ellipse from '../imgs/ellipse3.svg';
+import Ellipse from '../imgs/ellipse.svg';
 
 import { Input } from "../components/Input";
 import { Button as CButton } from "../components/Button";
