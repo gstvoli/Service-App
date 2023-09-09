@@ -16,7 +16,6 @@ export default function Login(){
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
   const navigation = useNavigation();
 
   const handleLogin = async () => {
@@ -24,8 +23,8 @@ export default function Login(){
       return Alert.alert('Entrar', 'Informe o e-mail e senha!');
     }
 
+    setIsLoading(true);
     try{
-      setIsLoading(true);
       
       const response = await api.post('/login', { email, senha });
 
@@ -36,7 +35,7 @@ export default function Login(){
       setErrorMessage('');
       setIsLoading(false);
 
-      navigation.navigate('services')
+      navigation.navigate('services', { userId: response.data.id})
     
     } catch (error : any){
       if (error.response){
@@ -46,8 +45,10 @@ export default function Login(){
         Alert.alert('Entrar', errorMessage);
   
       } else {
+        setIsLoading(false);
         console.error('Erro na requisição:', error.message);
-        setErrorMessage('Ocorreu um erro ao realizar o login. Por favor, tente novamente mais tarde.');       
+        setErrorMessage('Ocorreu um erro ao realizar o login. Por favor, tente novamente mais tarde.');   
+        Alert.alert('Erro', errorMessage.toString());
       }
     }
   }

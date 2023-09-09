@@ -1,7 +1,7 @@
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 import { HStack, Heading, Link, Text, VStack } from 'native-base';
 import { ScrollView, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native'
+import { useRoute } from '@react-navigation/native'
 
 import { Button } from '../components/Button';
 
@@ -15,7 +15,15 @@ import UserGroup from '../imgs/user-group.svg';
 import Ellipse from '../imgs/ellipse.svg';
 import Star from '../imgs/star.svg';
 
+type ParamsProps = {
+  userId: number;
+}
+
 export default function Services(){
+const route = useRoute();
+const  { userId } = route.params as ParamsProps;
+console.log(userId);
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -23,7 +31,7 @@ export default function Services(){
 
         <VStack mt={-12}>
           <Ellipse />
-          <Heading pt={2} mt={-16} mb={12} color='#FFF' textAlign='center'>Bem vindo, Gustavo!</Heading>
+          <Heading pt={2} mt={-16} mb={12} color='#FFF' textAlign='center'>Bem vindo, {userId}!</Heading>
         </VStack>
       
         <Heading color='#393E46' mb={2}>Serviços</Heading>

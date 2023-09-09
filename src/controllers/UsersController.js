@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
   async index(request, response) {
-    const user = await connection('usuario').select('*');
+    const id = request.body;
+    const user = await connection('usuario').where('id', id).select('*');
 
     return response.json(user);
   },
