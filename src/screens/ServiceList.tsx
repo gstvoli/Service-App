@@ -1,7 +1,10 @@
-import { SafeAreaView as View } from 'react-native-safe-area-context';
-import { HStack, Heading, Link, Text, VStack } from 'native-base';
+import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import { HStack, Heading, Link, Text, VStack } from 'native-base';
+import { SafeAreaView as View } from 'react-native-safe-area-context';
 import { useRoute } from '@react-navigation/native'
+
+import api from '../services/api';
 
 import { Button } from '../components/Button';
 
@@ -21,8 +24,18 @@ type ParamsProps = {
 
 export default function Services(){
 const route = useRoute();
-const  { userId } = route.params as ParamsProps;
-console.log(userId);
+const { userId } = route.params as ParamsProps;
+
+useEffect(() => {
+  async function getUserData(){
+    try {
+      const response = await api.get(`/users/${userId}`);
+      const dados = response.data;
+    } catch (error) {
+      console.error('Erro ao buscar dados do usuário:', error);
+    }
+  }
+}, [])
 
   return (
     <View style={styles.container}>
@@ -31,7 +44,7 @@ console.log(userId);
 
         <VStack mt={-12}>
           <Ellipse />
-          <Heading pt={2} mt={-16} mb={12} color='#FFF' textAlign='center'>Bem vindo, {userId}!</Heading>
+          <Heading pt={2} mt={-16} mb={12} color='#FFF' textAlign='center'>Bem vindo,!</Heading>
         </VStack>
       
         <Heading color='#393E46' mb={2}>Serviços</Heading>
