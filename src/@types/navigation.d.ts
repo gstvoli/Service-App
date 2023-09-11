@@ -12,7 +12,9 @@ export declare global {
       services: { 
         userId : number
       };
-      profile: undefined;
+      profile: {
+        userId : number
+      };
     }
   }
 }

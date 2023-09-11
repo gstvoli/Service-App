@@ -5,6 +5,7 @@ import { SafeAreaView as View } from 'react-native-safe-area-context';
 import { useRoute } from '@react-navigation/native'
 
 import api from '../services/api';
+import { CadastroData } from '../@types/Tipos';
 
 import { Button } from '../components/Button';
 
@@ -24,27 +25,33 @@ type ParamsProps = {
 
 export default function Services(){
 const route = useRoute();
-const { userId } = route.params as ParamsProps;
+const [ userData, setUserData ] = useState<CadastroData | null>(null);
 
 useEffect(() => {
   async function getUserData(){
     try {
+      const { userId } = route.params as ParamsProps;
       const response = await api.get(`/users/${userId}`);
-      const dados = response.data;
+      const dados = response.data[0];
+      console.log(dados);
+      setUserData(dados);
     } catch (error) {
       console.error('Erro ao buscar dados do usuário:', error);
     }
   }
+
+  getUserData();
 }, [])
 
   return (
     <View style={styles.container}>
+      { userData !== null ? 
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack alignItems='center'>
 
         <VStack mt={-12}>
           <Ellipse />
-          <Heading pt={2} mt={-16} mb={12} color='#FFF' textAlign='center'>Bem vindo,!</Heading>
+          <Heading pt={2} mt={-16} mb={12} color='#FFF' textAlign='center'>Bem vindo, {userData.nome}!</Heading>
         </VStack>
       
         <Heading color='#393E46' mb={2}>Serviços</Heading>
@@ -179,8 +186,8 @@ useEffect(() => {
         <VStack alignItems={'center'}>
           <Button mt={5} mb={0} color="#000" bgColor={'#FFC700'} pbgColor={'#FFF100'} title={'Crie uma solicitação'} w={260} />
         </VStack>
-        
       </ScrollView>
+      : <Heading>Carregando dados do usuário...</Heading>}
     </View>
   )
 }
@@ -188,7 +195,8 @@ useEffect(() => {
 const styles = StyleSheet.create({
   container : {
     justifyContent : 'center',
-    alignItems : 'center'
+    alignItems : 'center',
+    paddingBottom: 10
   },
   box : {
     width: 95,
@@ -224,3 +232,4 @@ const styles = StyleSheet.create({
     borderRadius: 10
   }
 })
+

@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import { StyleSheet } from "react-native"
 import { Heading, VStack, HStack, Text, Link } from 'native-base';
+import { useRoute } from '@react-navigation/native'
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
 import Ellipse from '../imgs/ellipse2.svg';
@@ -12,7 +14,19 @@ import SMBCake from '../imgs/bcake-sm.svg';
 import SMHandshake from '../imgs/handshake-sm.svg';
 import SMEditPen from '../imgs/edit-pen-sm.svg';
 
+import api from "../services/api";
+import { CadastroData } from '../@types/Tipos';
+
+type ParamsProps = {
+  userId: number;
+}
+
 export default function Profile(){
+const route = useRoute();
+const [ userData, setUserData ] = useState<CadastroData | null>(null);
+
+
+
   return (
     <View style={styles.container}>
         <VStack>
