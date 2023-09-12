@@ -4,6 +4,9 @@ import { Heading, VStack, HStack, Text, Link } from 'native-base';
 import { useRoute } from '@react-navigation/native'
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
+import api from "../services/api";
+import { CadastroData } from '../@types/Tipos';
+
 import Ellipse from '../imgs/ellipse2.svg';
 import BigUser from '../imgs/bg-user-solid.svg';
 import SMAdCard from '../imgs/ad-card-sm.svg';
@@ -14,9 +17,6 @@ import SMBCake from '../imgs/bcake-sm.svg';
 import SMHandshake from '../imgs/handshake-sm.svg';
 import SMEditPen from '../imgs/edit-pen-sm.svg';
 
-import api from "../services/api";
-import { CadastroData } from '../@types/Tipos';
-
 type ParamsProps = {
   userId: number;
 }
@@ -25,13 +25,29 @@ export default function Profile(){
 const route = useRoute();
 const [ userData, setUserData ] = useState<CadastroData | null>(null);
 
+useEffect(() => {
+  async function getUserData(){
+    try {
+      const { userId } = route.params as ParamsProps;
+      const response = await api.get(`/users/${userId}`);
+      const dados = response.data[0];
+      setUserData(dados);
+    } catch (error) {
+      console.error('Error ao buscar dados do usuário:', error);
+    }
+  }
+
+  getUserData();
+}, [])
 
 
   return (
     <View style={styles.container}>
+      { userData !== null ? 
+      <VStack>
         <VStack>
           <Ellipse />
-          <Heading pt={2} mt={"-3.5rem"} fontSize="3xl" color='#FFF' textAlign='center'>Gustavo Oliveira Souza</Heading>
+          <Heading pt={2} mt={"-3.5rem"} fontSize="3xl" color='#FFF' textAlign='center'></Heading>
         </VStack>
 
         <VStack backgroundColor="#777" w={180} h={180} borderRadius={'full'} justifyItems="center"alignItems="center" mt={6}>
@@ -81,6 +97,8 @@ const [ userData, setUserData ] = useState<CadastroData | null>(null);
             </Link>
           </HStack>
         </VStack>
+      </VStack>
+      : <Heading>Carregando dados do usuário...</Heading> }
     </View>
 
   )

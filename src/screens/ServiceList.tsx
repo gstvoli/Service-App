@@ -33,7 +33,6 @@ useEffect(() => {
       const { userId } = route.params as ParamsProps;
       const response = await api.get(`/users/${userId}`);
       const dados = response.data[0];
-      console.log(dados);
       setUserData(dados);
     } catch (error) {
       console.error('Erro ao buscar dados do usuário:', error);

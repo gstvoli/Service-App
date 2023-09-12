@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleSheet, Alert } from "react-native";
 import { Checkbox, Text, VStack, HStack, Link, Heading } from "native-base";
 import { SafeAreaView as View } from 'react-native-safe-area-context';
@@ -30,6 +31,8 @@ export default function Login(){
 
       // localStorage.setItem('userEmail', email);
       // localStorage.setItem('userPass', senha);
+      AsyncStorage.setItem('userId', response.data.id.toString());
+      console.log(AsyncStorage.getItem('userId'));
       console.log('Resposta do servidor:', response.data);
 
       setErrorMessage('');

@@ -1,14 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-import { Feather } from '@expo/vector-icons'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Feather } from '@expo/vector-icons';
 
 const { Screen, Navigator} = createBottomTabNavigator();
 
 import Home from '../screens/Home';
-import SignIn from '../screens/SignIn';
 import SignInStart from '../screens/SignInStart';
-import SignInTerms from '../screens/SignInTerms';
-import SignInCard from '../screens/SignInCard';
 import SignInFinish from '../screens/SignInFinish';
 import Login from '../screens/Login';
 import Services from '../screens/ServiceList';
@@ -16,7 +13,8 @@ import Profile from '../screens/Profile';
 import Register from '../screens/Register';
 
 export function TabRoutes() {
-
+  const userId = AsyncStorage.getItem('userId');
+  const id = JSON.parse(userId);
   return (
     <Navigator screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor:"#00ABD5", height: 52, paddingBottom: 2}}}>
         <Screen name="home" component={Home} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}} />
@@ -33,7 +31,7 @@ export function TabRoutes() {
             />
           )
         }} />
-        <Screen name="profile" component={Profile} options={{ tabBarLabel: 'Perfil', tabBarLabelStyle: {color: '#fff', fontSize: 14, fontWeight: 'bold'} ,
+        <Screen name="profile" component={Profile} initialParams={parseInt(userId)} options={{ tabBarLabel: 'Perfil', tabBarLabelStyle: {color: '#fff', fontSize: 14, fontWeight: 'bold'} ,
         tabBarIcon: ({ focused }) => (
             <Feather
               name={'user'}
