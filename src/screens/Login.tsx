@@ -32,7 +32,6 @@ export default function Login(){
       // localStorage.setItem('userEmail', email);
       // localStorage.setItem('userPass', senha);
       AsyncStorage.setItem('userId', response.data.id.toString());
-      console.log(AsyncStorage.getItem('userId'));
       console.log('Resposta do servidor:', response.data);
 
       setErrorMessage('');

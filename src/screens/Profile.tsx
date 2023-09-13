@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet } from "react-native"
 import { Heading, VStack, HStack, Text, Link } from 'native-base';
 import { useRoute } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
 import api from "../services/api";
@@ -22,24 +23,29 @@ type ParamsProps = {
 }
 
 export default function Profile(){
-const route = useRoute();
 const [ userData, setUserData ] = useState<CadastroData | null>(null);
 
 useEffect(() => {
-  async function getUserData(){
-    try {
-      const { userId } = route.params as ParamsProps;
-      const response = await api.get(`/users/${userId}`);
-      const dados = response.data[0];
-      setUserData(dados);
-    } catch (error) {
-      console.error('Error ao buscar dados do usuário:', error);
+    async function getUserData(){
+      try {
+        const userId = await AsyncStorage.getItem('userId');
+
+        if (userId !== null){
+
+          const id = parseInt(userId);
+          const response = await api.get(`/users/${id}`);
+          const dados = response.data[0];
+          console.log(userId);
+          console.log(dados);
+          setUserData(dados);
+        }
+      } catch (error) {
+        console.error('Error ao buscar dados do usuário:', error);
+      }
     }
-  }
 
   getUserData();
-}, [])
-
+}, []);
 
   return (
     <View style={styles.container}>
@@ -57,32 +63,32 @@ useEffect(() => {
         </VStack>
 
         <VStack mt={6} width="80%" >
-          <Heading textAlign='center'>22 anos</Heading>
-          <Heading textAlign='center' fontSize='xl' pb={4} mb={4} borderBottomWidth={3} borderBottomColor="#000">Muriaé - MG</Heading>
+          <Heading textAlign='center'>{userData.idade}</Heading>
+          <Heading textAlign='center' fontSize='xl' pb={4} mb={4} borderBottomWidth={3} borderBottomColor="#000">{userData.cidade} - {userData.uf}</Heading>
           
           <HStack my={2} alignItems="center">
             <SMAdCard />
-            <Text ml={2} fontSize='lg' color="#000" bold>123.456.789-10</Text>
+            <Text ml={2} fontSize='lg' color="#000" bold>{userData.cpf}</Text>
           </HStack>
 
           <HStack my={2} alignItems="center">
             <SMLocateDot />
-            <Text ml={2} fontSize='lg' color="#000" bold>Lorem ipsum dolor sit amet</Text>
+            <Text ml={2} fontSize='lg' color="#000" bold>{userData.endereco}</Text>
           </HStack>
 
           <HStack my={2} alignItems="center">
             <SMWhatsapp />
-            <Text ml={2} fontSize='lg' color="#000" bold>(32)98709-9174</Text>
+            <Text ml={2} fontSize='lg' color="#000" bold>{userData.telefone}</Text>
           </HStack>
 
           <HStack my={2} alignItems="center">
             <SMEnvelope />
-            <Text ml={2} fontSize='lg' color="#000" bold>guga.oli.1357@gmail.com</Text>
+            <Text ml={2} fontSize='lg' color="#000" bold>{userData.email}</Text>
           </HStack>
 
           <HStack my={2} alignItems="center">
             <SMBCake />
-            <Text ml={2} fontSize='lg' color="#000" bold>06 de Dezembro de 2000</Text>
+            <Text ml={2} fontSize='lg' color="#000" bold>{userData.aniversario.toLocaleDateString()}</Text>
           </HStack>
 
           <HStack my={2} alignItems="center">
