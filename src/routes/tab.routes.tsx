@@ -14,7 +14,7 @@ import Register from '../screens/Register';
 export function TabRoutes() {
 
   return (
-    <Navigator screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor:"#00ABD5", height: 52, paddingBottom: 2}}}>
+    <Navigator screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor:"#00ADB5", height: 52, paddingBottom: 2}}}>
         <Screen name="home" component={Home} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}} />
         <Screen name="signinstart" component={SignInStart} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="register" component={Register} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>

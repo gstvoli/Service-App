@@ -43,7 +43,7 @@ useEffect(() => {
 }, [])
 
   return (
-    <View style={styles.container}>
+    <View >
       { userData !== null ? 
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack alignItems='center'>
