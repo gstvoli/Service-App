@@ -27,10 +27,7 @@ module.exports = {
       aniversario
     } = request.body;
 
-    // console.log(senha);
-
     const senhaCriptografada = bcrypt.hashSync(senhaToHash, salt);
-    // console.log(request.body);
 
     const user = await connection('usuario').insert({
       nome,
