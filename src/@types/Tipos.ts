@@ -12,4 +12,14 @@ export interface CadastroData {
   cep: string;
   idade: number;
   aniversario: Date;
+};
+
+export interface ServiceData {
+  id: number;
+  titulo: string;
+  descricao: string;
+  preco: number;
+  duracao: number;
+  avaliacaoMed: number;
+  imagem: string;
 }

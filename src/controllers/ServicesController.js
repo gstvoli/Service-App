@@ -8,6 +8,12 @@ module.exports = {
     return response.json(service);
   },
 
+  async list(request, response) {
+    const services = await connection('servico').select('*');
+
+    return response.json(services);
+  },
+
   async create(request, response) {
     const { titulo, descricao, preco, duracao, avaliacao_media, imagem } =
       request.body;

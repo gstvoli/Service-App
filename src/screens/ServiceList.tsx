@@ -5,7 +5,7 @@ import { SafeAreaView as View } from 'react-native-safe-area-context';
 import { useRoute } from '@react-navigation/native'
 
 import api from '../services/api';
-import { CadastroData } from '../@types/Tipos';
+import { CadastroData, ServiceData } from '../@types/Tipos';
 
 import { Button } from '../components/Button';
 
@@ -26,6 +26,7 @@ type ParamsProps = {
 export default function Services(){
 const route = useRoute();
 const [ userData, setUserData ] = useState<CadastroData | null>(null);
+const [ serviceData, setServiceData ] = useState<ServiceData[]>([]);
 
 useEffect(() => {
   async function getUserData(){
@@ -39,7 +40,19 @@ useEffect(() => {
     }
   }
 
+  async function getServicesData() {
+    try {
+      const response = await api.get('/services');
+      const dados = response.data;
+      setServiceData(dados);
+      console.log(serviceData);
+    } catch (error) {
+      console.log('Erro ao buscar dados dos servios:', error);
+    }
+  }
+
   getUserData();
+  getServicesData();
 }, [])
 
   return (
@@ -56,26 +69,16 @@ useEffect(() => {
         <Heading color='#393E46' mb={2}>Serviços</Heading>
 
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <VStack style={styles.box}>
-            <Painter />
-            <Text color='#FFF' bold fontSize="md">Pintor</Text>
-          </VStack>
-          <VStack style={styles.box}>
-            <Trowel />
-            <Text color='#FFF' bold fontSize="md">Pedreiro</Text>
-          </VStack>
-          <VStack style={styles.box}>
-            <Hammer />
-            <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
-          </VStack>
-          <VStack style={styles.box}>
-            <Wrench />
-            <Text color='#FFF' bold fontSize="md">Mecânico</Text>
-          </VStack>
-          <VStack style={styles.box}>
-            <Painter />
-            <Text color='#FFF' bold fontSize="md">Pintor</Text>
-          </VStack>
+            {serviceData.map(service => { 
+              return (
+                  <VStack style={styles.box}>
+                    <Painter />
+                    <Text color='#FFF' bold fontSize="md">{service.titulo}</Text>
+                  </VStack>
+                )
+              })
+            }
+
         </ScrollView> 
 
         <Link mt={3}>

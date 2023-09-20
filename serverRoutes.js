@@ -10,7 +10,8 @@ routes.post('/api/login', SessionController.create);
 routes.get('/api/users/:id', UserController.index);
 routes.post('/api/register', UserController.create);
 
-routes.get('/api/services/:id', ServicesController.index);
+routes.get('/api/service/:id', ServicesController.index);
+routes.get('/api/services', ServicesController.list);
 routes.post('/api/newservice', ServicesController.create);
 
 module.exports = routes;
