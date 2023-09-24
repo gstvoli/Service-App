@@ -8,6 +8,7 @@ import api from '../services/api';
 import { CadastroData, ServiceData } from '../@types/Tipos';
 
 import { Button } from '../components/Button';
+import { Service } from '../components/ServiceBox';
 
 import Painter from '../imgs/pintor.svg';
 import Wrench from '../imgs/wrench.svg';
@@ -45,7 +46,7 @@ useEffect(() => {
       const response = await api.get('/services');
       const dados = response.data;
       setServiceData(dados);
-      console.log(serviceData);
+      console.log('Dados', dados);
     } catch (error) {
       console.log('Erro ao buscar dados dos servios:', error);
     }
@@ -57,6 +58,7 @@ useEffect(() => {
 
   return (
     <View >
+      
       { userData !== null ? 
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack alignItems='center'>
@@ -71,10 +73,7 @@ useEffect(() => {
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {serviceData.map(service => { 
               return (
-                  <VStack style={styles.box}>
-                    <Painter />
-                    <Text color='#FFF' bold fontSize="md">{service.titulo}</Text>
-                  </VStack>
+                  <Service key={service.id} title={service.titulo} path={service.imagem}/>
                 )
               })
             }
