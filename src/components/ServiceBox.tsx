@@ -10,11 +10,11 @@ export function Service({title, path, ...rest} : Props){
 
   return(
     <VStack style={styles.box}>
-      <VStack style={{width: 40, height: 40, backgroundColor: 'red'}}>
-        {/* <Image source={{ uri:`../imgs/Vector.png`}} alt='Ícone do Serviço' /> */}
-        <Image source={require('../imgs/Vector.png')} alt='Ícone do Serviço' />
+      <VStack style={{width: 45, height: 45}}>
+        <Image source={require('../imgs/Vector.png')} alt='Ícone do Serviço' style={{height: '100%', width: '100%', resizeMode: 'contain'}}/>
+        {/* <Image source={`../imgs/${path}`} alt='Ícone do Serviço' /> */}
       </VStack>
-      <Text color='#FFF' bold fontSize="md">{title}</Text>
+      <Text color='#FFF' bold fontSize="md" mt={1}>{title}</Text>
     </VStack>
   )
 }

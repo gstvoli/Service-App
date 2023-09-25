@@ -9,12 +9,13 @@ export declare global {
       signinterms: undefined;
       signincard: undefined;
       signinfinish: undefined;
+      serviceslist: { 
+        userId : number
+      };
       services: { 
-        userId : number
+        serviceId : number
       };
-      profile: {
-        userId : number
-      };
+      profile: undefined;
     }
   }
 }

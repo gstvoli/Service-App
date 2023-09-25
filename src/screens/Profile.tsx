@@ -34,7 +34,8 @@ export default function Profile(){
             console.log('Response' , response.data[0])
             setUserData(response.data[0])
             const rawDate = userData?.aniversario;
-    
+            console.log(userData?.aniversario);
+
             if (rawDate){
               const date = new Date(rawDate);
               setFormatDate(date.toLocaleDateString('pt-BR'))
@@ -45,9 +46,11 @@ export default function Profile(){
             console.log(err)
           })
         }
+
+        //setIsLoading(false);
       } catch (error) {
         console.error('Error ao buscar dados do usuário:', error);
-      }
+      } 
     }
 
   getUserData();
@@ -55,7 +58,7 @@ export default function Profile(){
 
   return (
     <View style={styles.container}>
-      { userData !== null ? 
+      { (userData) !== null ? 
       <VStack>
         <VStack alignItems="center">
 

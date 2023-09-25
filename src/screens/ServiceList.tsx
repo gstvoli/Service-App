@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useRoute, useNavigation } from '@react-navigation/native'
 import { ScrollView, StyleSheet } from 'react-native';
-import { HStack, Heading, Link, Text, VStack } from 'native-base';
+import { HStack, Heading, Link, Text, VStack, useNativeBase } from 'native-base';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
-import { useRoute } from '@react-navigation/native'
 
 import api from '../services/api';
 import { CadastroData, ServiceData } from '../@types/Tipos';
@@ -24,10 +24,16 @@ type ParamsProps = {
   userId: number;
 }
 
-export default function Services(){
+export default function ServicesList(){
 const route = useRoute();
+const navigation = useNavigation();
 const [ userData, setUserData ] = useState<CadastroData | null>(null);
 const [ serviceData, setServiceData ] = useState<ServiceData[]>([]);
+
+const openCategory = (id : number) => {
+    console.log('Abriu serviço nº:', id);
+    navigation.navigate('services', {serviceId: id});
+};
 
 useEffect(() => {
   async function getUserData(){
@@ -71,9 +77,12 @@ useEffect(() => {
         <Heading color='#393E46' mb={2}>Serviços</Heading>
 
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          
             {serviceData.map(service => { 
               return (
+                <Link onPress={() => {openCategory(service.id)}}>
                   <Service key={service.id} title={service.titulo} path={service.imagem}/>
+                </Link>
                 )
               })
             }
