@@ -65,7 +65,7 @@ export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
 
 
         <Text color="#000" fontSize="md" bold my={3}>Informe os dados abaixo</Text>
-        <Input autoCorrect={false } placeholder="Seu nome completo" value={data.nome} onChangeText={nome => handleChange('nome', nome)} w="full" my={1} />
+        <Input autoCorrect={false} autoCapitalize="sentences" placeholder="Seu nome completo" value={data.nome} onChangeText={nome => handleChange('nome', nome)} w="full" my={1} />
 
         <HStack alignItems="center" maxW="full" mt={0.5}>
           <Input placeholder="Seu nº de celular" value={data.telefone} onChangeText={telefone => handleChange('telefone', telefone)} w="50%" mr={2} keyboardType="numeric" my={1} />
@@ -76,7 +76,6 @@ export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
         <HStack alignItems="center" maxW="full" mt={0.5}>
 
         <Button fs={"md"} backgroundColor={"#00ADB5"} h={10} w={"3/6"} color={"#fff"} title={"Data de nascimento"} onPress={showMode} mt={0} mb={0} />  
-        {/* <RNB onPress={showMode} title="Data do aniversário" /> */}
         {show && (
           <DateTimePicker
           value={data.aniversario}

@@ -13,7 +13,7 @@ export function Input({placeholder, align, my, type, ...rest}: Props ){
       placeholder={placeholder}
       my={my}
       fontSize="md"
-      bold
+      fontWeight="bold"
       borderRadius="2xl"
       borderColor="rgb(68,68,68)"
       color="rgb(144,134,134)"

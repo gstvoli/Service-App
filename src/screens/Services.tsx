@@ -23,10 +23,10 @@ export default function Services(){
     async function getServicesData() {
       try {
         const { serviceId } = route.params as ParamsProps;
-        const response = await api.get(`/services/${serviceId}`);
-        const dados = response.data;
+        const response = await api.get(`/service/${serviceId}`);
+        const dados = response.data[0];
         setServiceData(dados);
-        console.log('Dados', dados);
+        console.log('Dados', serviceData);
       } catch (error) {
         console.log('Erro ao buscar dados dos servios:', error);
       }
@@ -36,15 +36,15 @@ export default function Services(){
   }, [])
 
   return(
-    <View style={styles.container}>
+    <View >
       { serviceData !== null ?
-      <VStack>
+      <VStack style={styles.container}>
         <VStack mb={10}>
           <Ellipse />
-          <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>Job Name</Heading>
+          <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>{serviceData.titulo}</Heading>
         </VStack>
 
-        <Heading paddingY={2} color="#000">Workers</Heading>
+        <Heading paddingY={2} color="#000">Trabalhadores</Heading>
 
         <ScrollView showsVerticalScrollIndicator={false}>
           <Link>
