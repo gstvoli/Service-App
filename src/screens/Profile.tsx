@@ -34,8 +34,6 @@ export default function Profile(){
             console.log('Response' , response.data[0])
             setUserData(response.data[0])
             const rawDate = userData?.aniversario;
-            console.log(userData?.aniversario);
-
             if (rawDate){
               const date = new Date(rawDate);
               setFormatDate(date.toLocaleDateString('pt-BR'))

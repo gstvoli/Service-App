@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleSheet, Alert } from "react-native";
@@ -14,10 +14,24 @@ import api from "../services/api";
 
 export default function Login(){
   const [isLoading, setIsLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigation = useNavigation();
+
+  useEffect(() => { 
+    async function getStorage(){
+      try {
+        const uEmail = await AsyncStorage.getItem('userEmail');
+        const uPass  = await AsyncStorage.getItem('userPass');
+      } catch (error) {
+        console.log('Não existem dados salvos!');
+      }
+    }
+    
+    getStorage();
+    },[])
 
   const handleLogin = async () => {
     if (!email || !senha){
@@ -29,8 +43,11 @@ export default function Login(){
       
       const response = await api.post('/login', { email, senha });
 
-      // localStorage.setItem('userEmail', email);
-      // localStorage.setItem('userPass', senha);
+      if (checked == true) {
+        AsyncStorage.setItem('userEmail', email);
+        AsyncStorage.setItem('userPass', senha);  
+      }
+      
       AsyncStorage.setItem('userId', response.data.id.toString());
       console.log('Resposta do servidor:', response.data);
 
@@ -55,6 +72,11 @@ export default function Login(){
     }
   }
 
+  function handleClick(){
+    const newValue = !checked;
+    setChecked(newValue);
+  }
+
   function openRegister(){
     navigation.navigate('signinstart')
   }
@@ -70,10 +92,10 @@ export default function Login(){
       {/* <Text mb={20} bold fontSize="3xl" color="#444" px={5}>a</Text> */}
 
       <Input placeholder="Seu e-mail" value={email} onChangeText={text => setEmail(text)} keyboardType="email-address" my={2}/>
-      <Input placeholder="Sua senha" value={senha} onChangeText={text => setSenha(text)} secureTextEntry my={2}/>
+      <Input placeholder="Sua senha" value={senha} onChangeText={text => setSenha(text)} secureTextEntry={true} my={2}/>
 
       <HStack>
-        <Checkbox value="test" mt={2}>
+        <Checkbox value="login" mt={2} onChange={handleClick}>
           <Text bold>Lembrar Login</Text>  
 
           <Link ml={12}>

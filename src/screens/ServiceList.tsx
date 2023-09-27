@@ -80,8 +80,8 @@ useEffect(() => {
           
             {serviceData.map(service => { 
               return (
-                <Link onPress={() => {openCategory(service.id)}}>
-                  <Service key={service.id} title={service.titulo} path={service.imagem}/>
+                <Link onPress={() => {openCategory(service.id)}} key={service.id}>
+                  <Service title={service.titulo} path={service.imagem}/>
                 </Link>
                 )
               })
