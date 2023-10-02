@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native'
 import { ScrollView, StyleSheet } from 'react-native';
-import { HStack, Heading, Link, Text, VStack, useNativeBase } from 'native-base';
+import { HStack, Heading, Link, Text, VStack, Modal } from 'native-base';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
 import api from '../services/api';
@@ -9,6 +9,7 @@ import { CadastroData, ServiceData } from '../@types/Tipos';
 
 import { Button } from '../components/Button';
 import { Service } from '../components/ServiceBox';
+import { WorkerModal } from '../components/WorkerModal';
 
 import Painter from '../imgs/pintor.svg';
 import Wrench from '../imgs/wrench.svg';
@@ -33,6 +34,13 @@ const [ serviceData, setServiceData ] = useState<ServiceData[]>([]);
 const openCategory = (id : number) => {
     console.log('Abriu serviço nº:', id);
     navigation.navigate('services', {serviceId: id});
+};
+
+function openWorkerModal(){
+  console.log('aq');
+  return (
+    <WorkerModal opened={true}/>
+  )
 };
 
 useEffect(() => {
@@ -98,7 +106,7 @@ useEffect(() => {
 
         <Heading fontSize="lg" mb={2}>Marcenaria</Heading>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <Link>
+          <Link onPress={openWorkerModal}>
             <VStack style={styles.card}>
               <BigUser />
               <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
