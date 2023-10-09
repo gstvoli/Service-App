@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native'
-import { ScrollView, StyleSheet } from 'react-native';
-import { HStack, Heading, Link, Text, VStack, Modal } from 'native-base';
+import { Modal, ScrollView, StyleSheet } from 'react-native';
+import { Center, HStack, Heading, Link, Text, VStack } from 'native-base';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
 import api from '../services/api';
@@ -9,7 +9,6 @@ import { CadastroData, ServiceData } from '../@types/Tipos';
 
 import { Button } from '../components/Button';
 import { Service } from '../components/ServiceBox';
-import { WorkerModal } from '../components/WorkerModal';
 
 import Painter from '../imgs/pintor.svg';
 import Wrench from '../imgs/wrench.svg';
@@ -30,6 +29,7 @@ const route = useRoute();
 const navigation = useNavigation();
 const [ userData, setUserData ] = useState<CadastroData | null>(null);
 const [ serviceData, setServiceData ] = useState<ServiceData[]>([]);
+const [ showModal, setShowModal ] = useState(false);
 
 const openCategory = (id : number) => {
     console.log('Abriu serviço nº:', id);
@@ -38,9 +38,7 @@ const openCategory = (id : number) => {
 
 function openWorkerModal(){
   console.log('aq');
-  return (
-    <WorkerModal opened={true}/>
-  )
+  setShowModal(true);
 };
 
 useEffect(() => {
@@ -63,6 +61,14 @@ useEffect(() => {
       console.log('Dados', dados);
     } catch (error) {
       console.log('Erro ao buscar dados dos servios:', error);
+    }
+  }
+
+  async function getWorkerData() {
+    try {
+
+    } catch (error) {
+      console.log('Erro ao buscar dados do colaborador:', error)
     }
   }
 
@@ -106,7 +112,7 @@ useEffect(() => {
 
         <Heading fontSize="lg" mb={2}>Marcenaria</Heading>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <Link onPress={openWorkerModal}>
+          <Link onPress={() => {setShowModal(true); console.log(showModal)}}>
             <VStack style={styles.card}>
               <BigUser />
               <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
@@ -117,17 +123,37 @@ useEffect(() => {
               </HStack>
             </VStack>
           </Link>
-          <Link>
-            <VStack style={styles.card}>
-              <BigUser />
-              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
-              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
-              <HStack mt={2}>
-                <Star />
-                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
-              </HStack>
+            
+          <Modal animationType='slide' transparent={true} visible={showModal} onRequestClose={() => {setShowModal(!showModal)}} >
+            <VStack style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <VStack style={styles.modalView}>
+                <VStack alignItems='center'>
+                  <VStack paddingY={4}>
+                  <BigUser />
+
+                  </VStack>
+                  <VStack paddingX={5}>
+                    <Text style={styles.dataText}>Gustavo Oliveira Souza</Text>
+                    <Text style={styles.dataText}>Progamador Mobile/Web</Text>
+                    <Text style={styles.dataText}>Muriaé - MG</Text>
+                    
+                    <HStack paddingY={2}>
+                      <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
+                      
+                      <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
+                      <Star />
+                    </HStack>
+                  
+                    <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
+                  </VStack>
+                </VStack>
+                <HStack display= 'flex' justifyContent='flex-end'>
+                  <Button color={'#000'} mt={1} mb={0} title={'X'} bg={'#12AD'} onPress={() => {setShowModal(!showModal)}}/>
+                </HStack>                
+              </VStack>
             </VStack>
-          </Link>
+          </Modal>
+
         </ScrollView>
 
         <Link mt={6}>
@@ -178,9 +204,9 @@ useEffect(() => {
 
                 </VStack>
                 <VStack paddingX={5}>
-                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
-                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Progamador Mobile/Web</Text>
-                  <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
+                  <Text style={styles.dataText}>Gustavo Oliveira Souza</Text>
+                  <Text style={styles.dataText}>Progamador Mobile/Web</Text>
+                  <Text style={styles.dataText}>Muriaé - MG</Text>
                   
                   <HStack paddingY={2}>
                     <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
@@ -248,6 +274,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 15,
     borderRadius: 10
+  },
+  modalView : {
+    backgroundColor: '#00ABD5',
+    borderRadius: 20,
+    padding: 30,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  dataText : {
+    fontSize : 14,
+    color: '#FFF',
+    fontWeight: 'bold',
+    textAlign: 'center'
   }
 })
 
