@@ -15,7 +15,7 @@ routes.get('/api/service/:id', ServicesController.index);
 routes.get('/api/services', ServicesController.list);
 routes.post('/api/newservice', ServicesController.create);
 
-routes.pget('/api/worker/:id', WorkerController.index);
-routes.pget('/api/workers', WorkerController.list);
+routes.get('/api/worker/:id', WorkerController.index);
+routes.get('/api/workers', WorkerController.list);
 
 module.exports = routes;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native'
 import { Modal, ScrollView, StyleSheet } from 'react-native';
-import { Center, HStack, Heading, Link, Text, VStack } from 'native-base';
+import { Button as NBButton, Center, HStack, Heading, Link, Text, VStack } from 'native-base';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
 import api from '../services/api';
@@ -66,7 +66,7 @@ useEffect(() => {
 
   async function getWorkerData() {
     try {
-
+      const response = await api.get('/')
     } catch (error) {
       console.log('Erro ao buscar dados do colaborador:', error)
     }
@@ -147,8 +147,10 @@ useEffect(() => {
                     <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
                   </VStack>
                 </VStack>
-                <HStack display= 'flex' justifyContent='flex-end'>
-                  <Button color={'#000'} mt={1} mb={0} title={'X'} bg={'#12AD'} onPress={() => {setShowModal(!showModal)}}/>
+                <HStack display= 'flex' justifyContent='center' mx={12} alignItems={'center'}>
+                  <NBButton  onPress={() => { setShowModal(!showModal); } } style={{backgroundColor: '#FFD', marginTop: 10, padding: 4, height: 40, width: 40, borderRadius: 100 }}>
+                  <Text textAlign={'center'} style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>X</Text>
+                </NBButton>
                 </HStack>                
               </VStack>
             </VStack>
@@ -287,7 +289,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5,
+    elevation: 5
   },
   dataText : {
     fontSize : 14,
