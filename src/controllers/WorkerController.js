@@ -13,7 +13,7 @@ module.exports = {
   async list(request, response) {
     const colaboradores = await connection('colaborador').select('*');
 
-    return response.json(services);
+    return response.json(colaboradores);
   },
 
   async create(request, response) {

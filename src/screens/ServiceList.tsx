@@ -5,7 +5,7 @@ import { Button as NBButton, Center, HStack, Heading, Link, Text, VStack } from 
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
 import api from '../services/api';
-import { CadastroData, ServiceData } from '../@types/Tipos';
+import { CadastroData, WorkerData, ServiceData } from '../@types/Tipos';
 
 import { Button } from '../components/Button';
 import { Service } from '../components/ServiceBox';
@@ -28,6 +28,7 @@ export default function ServicesList(){
 const route = useRoute();
 const navigation = useNavigation();
 const [ userData, setUserData ] = useState<CadastroData | null>(null);
+const [ workerData, setWorkerData ] = useState<WorkerData | null>(null);
 const [ serviceData, setServiceData ] = useState<ServiceData[]>([]);
 const [ showModal, setShowModal ] = useState(false);
 
@@ -66,7 +67,10 @@ useEffect(() => {
 
   async function getWorkerData() {
     try {
-      const response = await api.get('/')
+      const response = await api.get('/workers');
+      const dados = response.data;
+      setWorkerData(dados);
+      console.log(workerData);
     } catch (error) {
       console.log('Erro ao buscar dados do colaborador:', error)
     }
@@ -74,6 +78,7 @@ useEffect(() => {
 
   getUserData();
   getServicesData();
+  getWorkerData();
 }, [])
 
   return (
@@ -129,24 +134,26 @@ useEffect(() => {
               <VStack style={styles.modalView}>
                 <VStack alignItems='center'>
                   <VStack paddingY={4}>
-                  <BigUser />
-
+                    <BigUser />
                   </VStack>
-                  <VStack paddingX={5}>
-                    <Text style={styles.dataText}>Gustavo Oliveira Souza</Text>
-                    <Text style={styles.dataText}>Progamador Mobile/Web</Text>
-                    <Text style={styles.dataText}>Muriaé - MG</Text>
+                  
+                  <VStack paddingX={6}>
+                    <Text style={styles.dataText}>{workerData?.nome}</Text>
+                    <Text style={styles.dataText}>{workerData?.profissao}</Text>
+                    <Text style={styles.dataText}>{workerData?.cidade} - {workerData?.uf}</Text>
                     
                     <HStack paddingY={2}>
-                      <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
-                      
-                      <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
+                      <Text fontSize='md' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: </Text>
+                      <Text fontSize='md' color='#FFF' fontWeight='medium' mr={1}>Avaliação: </Text>
                       <Star />
                     </HStack>
-                  
-                    <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
+
+                    <VStack alignItems={"center"}>
+                      <Button mt={0} mb={1} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
+                    </VStack>
                   </VStack>
                 </VStack>
+
                 <HStack display= 'flex' justifyContent='center' mx={12} alignItems={'center'}>
                   <NBButton  onPress={() => { setShowModal(!showModal); } } style={{backgroundColor: '#FFD', marginTop: 10, padding: 4, height: 40, width: 40, borderRadius: 100 }}>
                   <Text textAlign={'center'} style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>X</Text>
@@ -280,7 +287,8 @@ const styles = StyleSheet.create({
   modalView : {
     backgroundColor: '#00ABD5',
     borderRadius: 20,
-    padding: 30,
+    paddingVertical: 20,
+    paddingHorizontal: 14,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -292,7 +300,7 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   dataText : {
-    fontSize : 14,
+    fontSize : 16,
     color: '#FFF',
     fontWeight: 'bold',
     textAlign: 'center'
