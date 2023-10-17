@@ -25,6 +25,7 @@ export interface ServiceData {
 }
 
 export interface WorkerData {
+  id: number;
   nome: string;
   cpf: string;
   email: string;

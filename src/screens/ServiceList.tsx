@@ -9,6 +9,7 @@ import { CadastroData, WorkerData, ServiceData } from '../@types/Tipos';
 
 import { Button } from '../components/Button';
 import { Service } from '../components/ServiceBox';
+import { Worker } from '../components/WorkerBox';
 
 import Painter from '../imgs/pintor.svg';
 import Wrench from '../imgs/wrench.svg';
@@ -28,7 +29,7 @@ export default function ServicesList(){
 const route = useRoute();
 const navigation = useNavigation();
 const [ userData, setUserData ] = useState<CadastroData | null>(null);
-const [ workerData, setWorkerData ] = useState<WorkerData | null>(null);
+const [ workerData, setWorkerData ] = useState<WorkerData[]>([]);
 const [ serviceData, setServiceData ] = useState<ServiceData[]>([]);
 const [ showModal, setShowModal ] = useState(false);
 
@@ -61,7 +62,7 @@ useEffect(() => {
       setServiceData(dados);
       console.log('Dados', dados);
     } catch (error) {
-      console.log('Erro ao buscar dados dos servios:', error);
+      console.log('Erro ao buscar dados dos servicos:', error);
     }
   }
 
@@ -70,7 +71,7 @@ useEffect(() => {
       const response = await api.get('/workers');
       const dados = response.data;
       setWorkerData(dados);
-      console.log(workerData);
+      console.log('Trabalhadores: ', workerData);
     } catch (error) {
       console.log('Erro ao buscar dados do colaborador:', error)
     }
@@ -84,7 +85,7 @@ useEffect(() => {
   return (
     <View >
       
-      { userData !== null ? 
+      { (userData !== null) && (workerData !== null) ? 
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack alignItems='center'>
 
@@ -118,15 +119,17 @@ useEffect(() => {
         <Heading fontSize="lg" mb={2}>Marcenaria</Heading>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <Link onPress={() => {setShowModal(true); console.log(showModal)}}>
-            <VStack style={styles.card}>
-              <BigUser />
-              <Text color='#FFF' bold fontSize="md" textAlign='center' my={1}>Gustavo Oliveira Souza</Text>
-              <Text color='#FFF' bold fontSize="md">Marceneiro</Text>
-              <HStack mt={2}>
-                <Star />
-                <Text color="#FFF" fontSize='md' bold mt={-0.5} ml={1}>5.0</Text>
-              </HStack>
-            </VStack>
+          {workerData.length > 0 ? workerData.map(worker => { 
+              return (
+                <Link onPress={() => {setShowModal(true); console.log(showModal)}} key={worker.id}>
+                  <Worker name={worker.nome} job={worker.profissao} jobCount={0} city={worker.cidade} uf={worker.uf} rating={0} />
+                </Link>
+                )
+              })
+            : 
+              <Text>Não existem trabalhadores no momento! </Text>
+          }
+
           </Link>
             
           <Modal animationType='slide' transparent={true} visible={showModal} onRequestClose={() => {setShowModal(!showModal)}} >
@@ -138,20 +141,20 @@ useEffect(() => {
                   </VStack>
                   
                   <VStack paddingX={6}>
-                    <Text style={styles.dataText}>{workerData?.nome}</Text>
+                    {/* <Text style={styles.dataText}>{workerData?.nome}</Text>
                     <Text style={styles.dataText}>{workerData?.profissao}</Text>
-                    <Text style={styles.dataText}>{workerData?.cidade} - {workerData?.uf}</Text>
+                    <Text style={styles.dataText}>{workerData?.cidade} - {workerData?.uf}</Text> */}
                     
                     <HStack paddingY={2}>
                       <Text fontSize='md' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: </Text>
                       <Text fontSize='md' color='#FFF' fontWeight='medium' mr={1}>Avaliação: </Text>
                       <Star />
                     </HStack>
+                  </VStack>
 
                     <VStack alignItems={"center"}>
                       <Button mt={0} mb={1} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
                     </VStack>
-                  </VStack>
                 </VStack>
 
                 <HStack display= 'flex' justifyContent='center' mx={12} alignItems={'center'}>

@@ -15,7 +15,7 @@ type Props = ITextProps & {
 import BigUser from '../imgs/bigUser.svg';
 import Star from '../imgs/star.svg';
 
-export function Input({name, job, jobCount, city, uf, rating} : Props){
+export function Worker({name, job, jobCount, city, uf, rating} : Props){
   return(
     <VStack alignItems='center'>
       <VStack paddingY={4}>
@@ -32,10 +32,6 @@ export function Input({name, job, jobCount, city, uf, rating} : Props){
           <Text fontSize='md' color='#FFF' fontWeight='medium' mr={1}>Avaliação: {rating}</Text>
           <Star />
         </HStack>
-
-        <VStack alignItems={"center"}>
-          <Button mt={0} mb={1} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
-        </VStack>
       </VStack>
     </VStack>
   )
