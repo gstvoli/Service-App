@@ -30,6 +30,7 @@ const route = useRoute();
 const navigation = useNavigation();
 const [ userData, setUserData ] = useState<CadastroData | null>(null);
 const [ workerData, setWorkerData ] = useState<WorkerData[]>([]);
+const [ workerModalData, setWorkerModalData ] = useState<WorkerData>();
 const [ serviceData, setServiceData ] = useState<ServiceData[]>([]);
 const [ showModal, setShowModal ] = useState(false);
 
@@ -38,9 +39,23 @@ const openCategory = (id : number) => {
     navigation.navigate('services', {serviceId: id});
 };
 
-function openWorkerModal(){
-  console.log('aq');
-  setShowModal(true);
+async function getWorker(id : number){
+  try {
+    const response = await api.get(`/worker/${id}`);
+    const dados = response.data[0];
+    setWorkerModalData(dados);
+  } catch (error) {
+    console.error('Erro ao buscar dados do trabalhador selecionado:', error);
+  }
+};
+
+function openWorkerModal(id : number){
+  try {
+    getWorker(id);
+    setShowModal(true);
+  } catch (error) {
+    console.error('Erro ao abrir modal:', error);
+  }
 };
 
 useEffect(() => {
@@ -115,23 +130,19 @@ useEffect(() => {
         </Link>
 
         <Heading color='#393E46' my={4}>Melhores colaboradores</Heading>
-
-        <Heading fontSize="lg" mb={2}>Marcenaria</Heading>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <Link onPress={() => {setShowModal(true); console.log(showModal)}}>
+
           {workerData.length > 0 ? workerData.map(worker => { 
               return (
-                <Link onPress={() => {setShowModal(true); console.log(showModal)}} key={worker.id}>
+                <Link onPress={() => {openWorkerModal(worker.id)}} key={worker.id}>
                   <Worker name={worker.nome} job={worker.profissao} jobCount={0} city={worker.cidade} uf={worker.uf} rating={0} />
                 </Link>
                 )
               })
             : 
-              <Text>Não existem trabalhadores no momento! </Text>
+              <Text>Não existem trabalhadores para exibir no momento! </Text>
           }
 
-          </Link>
-            
           <Modal animationType='slide' transparent={true} visible={showModal} onRequestClose={() => {setShowModal(!showModal)}} >
             <VStack style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <VStack style={styles.modalView}>
@@ -141,9 +152,9 @@ useEffect(() => {
                   </VStack>
                   
                   <VStack paddingX={6}>
-                    {/* <Text style={styles.dataText}>{workerData?.nome}</Text>
-                    <Text style={styles.dataText}>{workerData?.profissao}</Text>
-                    <Text style={styles.dataText}>{workerData?.cidade} - {workerData?.uf}</Text> */}
+                    <Text style={styles.dataText}>{workerModalData?.nome}</Text>
+                    <Text style={styles.dataText}>{workerModalData?.profissao}</Text>
+                    <Text style={styles.dataText}>{workerModalData?.cidade} - {workerModalData?.uf}</Text>
                     
                     <HStack paddingY={2}>
                       <Text fontSize='md' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: </Text>

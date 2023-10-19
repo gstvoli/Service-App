@@ -40,4 +40,5 @@ export interface WorkerData {
   idade: number;
   aniversario: Date;
   profissao : string;
+  pedidos : number;
 }

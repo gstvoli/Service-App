@@ -15,20 +15,19 @@ type Props = ITextProps & {
 import BigUser from '../imgs/bigUser.svg';
 import Star from '../imgs/star.svg';
 
-export function Worker({name, job, jobCount, city, uf, rating} : Props){
+export function Worker({name, job, jobCount, city, uf, rating, ...rest} : Props){
   return(
-    <VStack alignItems='center'>
-      <VStack paddingY={4}>
+    <VStack style={styles.card}>
+      <VStack paddingY={3}>
         <BigUser />
       </VStack>
       
-      <VStack paddingX={6}>
+      <VStack>
         <Text style={styles.dataText}>{name}</Text>
         <Text style={styles.dataText}>{job}</Text>
         <Text style={styles.dataText}>{city} - {uf}</Text>
         
-        <HStack paddingY={2}>
-          <Text fontSize='md' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: {jobCount}</Text>
+        <HStack alignItems="center" alignSelf="center">
           <Text fontSize='md' color='#FFF' fontWeight='medium' mr={1}>Avaliação: {rating}</Text>
           <Star />
         </HStack>
@@ -39,16 +38,17 @@ export function Worker({name, job, jobCount, city, uf, rating} : Props){
 
 const styles = StyleSheet.create({
   card: {
-    width: 150,
-    height: 200,
+    paddingHorizontal: 22,
+    paddingVertical: 8,
     backgroundColor : '#00ADB5',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 18,
-    marginHorizontal: 5
+    marginHorizontal: 5,
+    alignContent: 'center'
   },
   dataText : {
-    fontSize : 16,
+    fontSize : 14,
     color: '#FFF',
     fontWeight: 'bold',
     textAlign: 'center'
