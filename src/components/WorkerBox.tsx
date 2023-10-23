@@ -28,7 +28,7 @@ export function Worker({name, job, jobCount, city, uf, rating, ...rest} : Props)
         <Text style={styles.dataText}>{city} - {uf}</Text>
         
         <HStack alignItems="center" alignSelf="center">
-          <Text fontSize='md' color='#FFF' fontWeight='medium' mr={1}>Avaliação: {rating}</Text>
+          <Text fontSize='md' color='#FFF' fontWeight='medium' mr={1}>{rating}</Text>
           <Star />
         </HStack>
       </VStack>

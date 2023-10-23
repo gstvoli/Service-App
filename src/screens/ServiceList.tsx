@@ -99,7 +99,6 @@ useEffect(() => {
 
   return (
     <View >
-      
       { (userData !== null) && (workerData !== null) ? 
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack alignItems='center'>
@@ -180,7 +179,7 @@ useEffect(() => {
         </ScrollView>
 
         <Link mt={6}>
-          <Text color='#1A82E2' fontSize='lg' bold mr={1} mt={-2} mb={3}>Lista de Marceneiros(as)</Text>
+          <Text color='#1A82E2' fontSize='lg' bold mr={1} mt={-2} mb={3}>Lista de colaboradores</Text>
           <CircleRight />
         </Link>
         
@@ -250,8 +249,8 @@ useEffect(() => {
           <UserGroup />
         </Link>
 
-        <VStack alignItems={'center'}>
-          <Button mt={5} mb={0} color="#000" bgColor={'#FFC700'} pbgColor={'#FFF100'} title={'Crie uma solicitação'} w={260} />
+        <VStack alignItems={'center'} paddingBottom={2}>
+          <Button mt={2} mb={0} color="#000" bgColor={'#FFC700'} pbgColor={'#FFF100'} title={'Crie uma solicitação'} w={260} />
         </VStack>
       </ScrollView>
       : <Heading>Carregando dados do usuário...</Heading>}

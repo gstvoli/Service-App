@@ -5,6 +5,7 @@ const UserController = require('./src/controllers/UsersController');
 const SessionController = require('./src/controllers/SessionController');
 const ServicesController = require('./src/controllers/ServicesController');
 const WorkerController = require('./src/controllers/WorkerController');
+const OrdersController = require('./src/controllers/OrdersController');
 
 routes.post('/api/login', SessionController.create);
 
@@ -17,5 +18,9 @@ routes.post('/api/newservice', ServicesController.create);
 
 routes.get('/api/worker/:id', WorkerController.index);
 routes.get('/api/workers', WorkerController.list);
+
+routes.get('/api/order/:id', OrdersController.index);
+routes.get('/api/orders/:userId', OrdersController.list);
+routes.post('/api/neworder', OrdersController.create);
 
 module.exports = routes;
