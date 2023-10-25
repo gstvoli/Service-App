@@ -16,8 +16,8 @@ routes.get('/api/service/:id', ServicesController.index);
 routes.get('/api/services', ServicesController.list);
 routes.post('/api/newservice', ServicesController.create);
 
-routes.get('/api/worker/:id', WorkerController.index);
 routes.get('/api/workers', WorkerController.list);
+routes.get('/api/worker/:id', WorkerController.index);
 
 routes.get('/api/order/:id', OrdersController.index);
 routes.get('/api/orders/:userId', OrdersController.list);

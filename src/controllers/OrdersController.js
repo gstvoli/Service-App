@@ -20,6 +20,8 @@ module.exports = {
     const newOrder = await connection('pedido').insert({
       dataAbertura: dataAbertura,
       tipo: tipo,
+      cidade_servico: cidade,
+      uf_servico: uf,
       categoria: categoria,
       codcliente: codcliente,
       codcolaborador: codcolaborador,
@@ -36,7 +38,7 @@ module.exports = {
   async list(request, response) {
     const { userId } = request.params;
     const order = await connection('pedido')
-      .where('cod_cliente', userId)
+      .where('cod_usuario', userId)
       .select('*');
 
     return response.json(order);

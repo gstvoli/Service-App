@@ -10,6 +10,7 @@ import { CadastroData, WorkerData, ServiceData } from '../@types/Tipos';
 import { Button } from '../components/Button';
 import { Service } from '../components/ServiceBox';
 import { Worker } from '../components/WorkerBox';
+import { OnlineWorkerBox } from '../components/OnlineWorkerBox';
 
 import Painter from '../imgs/pintor.svg';
 import Wrench from '../imgs/wrench.svg';
@@ -218,30 +219,9 @@ useEffect(() => {
         <Heading textAlign='center' fontSize="lg">Disponíveis no momento</Heading>
 
         <ScrollView showsVerticalScrollIndicator={false}>
-          <VStack alignItems='center'>          
-            <VStack style={styles.hCard}>
-              <HStack alignItems='center'>
-                <VStack>
-                <BigUser />
-
-                </VStack>
-                <VStack paddingX={5}>
-                  <Text style={styles.dataText}>Gustavo Oliveira Souza</Text>
-                  <Text style={styles.dataText}>Progamador Mobile/Web</Text>
-                  <Text style={styles.dataText}>Muriaé - MG</Text>
-                  
-                  <HStack paddingY={2}>
-                    <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
-                    
-                    <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-                    <Star />
-                  </HStack>
-                
-                  <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
-                </VStack>
-              </HStack>
-            </VStack>
-          </VStack>            
+          { workerData.filter(worker => worker.disponivel).map(worker => (
+              <OnlineWorkerBox name={worker.nome} job={worker.profissao} jobCount={worker.pedidos} city={worker.cidade} uf={worker.uf} rating={worker.avaliacao} />            
+          )) }
         </ScrollView>
 
         <Link mt={6} justifyContent='center' alignItems='center'>
