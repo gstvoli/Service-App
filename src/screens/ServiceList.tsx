@@ -70,33 +70,38 @@ useEffect(() => {
       console.error('Erro ao buscar dados do usuário:', error);
     }
   }
+  
+  getUserData();
+}, [userData])
+
+useEffect(() => {
 
   async function getServicesData() {
     try {
       const response = await api.get('/services');
       const dados = response.data;
       setServiceData(dados);
-      console.log('Dados', dados);
     } catch (error) {
       console.log('Erro ao buscar dados dos servicos:', error);
     }
   }
+
+  getServicesData();
+}, [serviceData])
+
+useEffect(() => {
 
   async function getWorkerData() {
     try {
       const response = await api.get('/workers');
       const dados = response.data;
       setWorkerData(dados);
-      console.log('Trabalhadores: ', workerData);
     } catch (error) {
       console.log('Erro ao buscar dados do colaborador:', error)
     }
   }
-
-  getUserData();
-  getServicesData();
   getWorkerData();
-}, [])
+}, [workerData])
 
   return (
     <View >
@@ -156,9 +161,9 @@ useEffect(() => {
                     <Text style={styles.dataText}>{workerModalData?.profissao}</Text>
                     <Text style={styles.dataText}>{workerModalData?.cidade} - {workerModalData?.uf}</Text>
                     
-                    <HStack paddingY={2}>
-                      <Text fontSize='md' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: </Text>
-                      <Text fontSize='md' color='#FFF' fontWeight='medium' mr={1}>Avaliação: </Text>
+                    <HStack paddingY={2} alignContent="center">
+                      <Text fontSize='md' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: {workerModalData?.pedidos_realizados}</Text>
+                      <Text fontSize='md' color='#FFF' fontWeight='medium' mr={1}>Avaliação: {workerModalData?.avaliacao}</Text>
                       <Star />
                     </HStack>
                   </VStack>
@@ -219,9 +224,9 @@ useEffect(() => {
         <Heading textAlign='center' fontSize="lg">Disponíveis no momento</Heading>
 
         <ScrollView showsVerticalScrollIndicator={false}>
-          { workerData.filter(worker => worker.disponivel).map(worker => (
+          {/* { workerData.filter(worker => worker.disponivel).map(worker => (
               <OnlineWorkerBox name={worker.nome} job={worker.profissao} jobCount={worker.pedidos} city={worker.cidade} uf={worker.uf} rating={worker.avaliacao} />            
-          )) }
+          )) } */}
         </ScrollView>
 
         <Link mt={6} justifyContent='center' alignItems='center'>

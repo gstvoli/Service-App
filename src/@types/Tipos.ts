@@ -43,4 +43,5 @@ export interface WorkerData {
   pedidos : number;
   disponivel : boolean;
   avaliacao : number;
+  pedidos_realizados : number;
 }

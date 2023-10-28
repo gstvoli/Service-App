@@ -4,14 +4,21 @@ module.exports = {
   async index(request, response) {
     const { id } = request.params;
     const colaborador = await connection('colaborador')
-      .where('id', id)
-      .select('*');
+      .where('colaborador.id', id)
+      .select('colaborador.*')
+      .count('pedido.id as pedidos_realizados')
+      .leftJoin('pedido', 'colaborador.id', 'pedido.id_colaborador')
+      .groupBy('colaborador.id');
 
     return response.json(colaborador);
   },
 
   async list(request, response) {
-    const colaboradores = await connection('colaborador').select('*');
+    const colaboradores = await connection('colaborador')
+      .select('colaborador.*')
+      .count('pedido.id as pedidos_realizados')
+      .leftJoin('pedido', 'colaborador.id', 'pedido.id_colaborador')
+      .groupBy('colaborador.id');
 
     return response.json(colaboradores);
   },
