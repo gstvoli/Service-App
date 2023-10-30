@@ -21,7 +21,7 @@ import SignInTerms from '../screens/SignInTerms';
 import SignInCard from '../screens/SignInCard';
 import SignInFinish from '../screens/SignInFinish';
 import Login from '../screens/Login';
-import Services from '../screens/ServiceList';
+import Services from '../screens/Main';
 import Profile from '../screens/Profile';
 
 

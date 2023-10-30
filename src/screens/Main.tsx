@@ -21,12 +21,13 @@ import BigUser from '../imgs/bigUser.svg';
 import UserGroup from '../imgs/user-group.svg';
 import Ellipse from '../imgs/ellipse.svg';
 import Star from '../imgs/star.svg';
+import routes from '../../serverRoutes';
 
 type ParamsProps = {
   userId: number;
 }
 
-export default function ServicesList(){
+export default function Main(){
 const route = useRoute();
 const navigation = useNavigation();
 const [ userData, setUserData ] = useState<CadastroData | null>(null);
@@ -34,10 +35,11 @@ const [ workerData, setWorkerData ] = useState<WorkerData[]>([]);
 const [ workerModalData, setWorkerModalData ] = useState<WorkerData>();
 const [ serviceData, setServiceData ] = useState<ServiceData[]>([]);
 const [ showModal, setShowModal ] = useState(false);
+const [ isLoading, setIsLoading ] = useState(false);
 
 const openCategory = (id : number) => {
     console.log('Abriu serviço nº:', id);
-    navigation.navigate('services', {serviceId: id});
+    navigation.navigate('service', {serviceId: id});
 };
 
 async function getWorker(id : number){
@@ -129,7 +131,7 @@ useEffect(() => {
 
         </ScrollView> 
 
-        <Link mt={3}>
+        <Link onPress={() => {navigation.navigate('servicesList')}} mt={3}>
           <Text color='#1A82E2' fontSize='lg' fontWeight='bold' mr={1} mt={-2}>Todos os serviços</Text>
           <CircleRight />
         </Link>
@@ -224,9 +226,11 @@ useEffect(() => {
         <Heading textAlign='center' fontSize="lg">Disponíveis no momento</Heading>
 
         <ScrollView showsVerticalScrollIndicator={false}>
-          {/* { workerData.filter(worker => worker.disponivel).map(worker => (
+          { workerData.filter(worker => worker.disponivel).map(worker => (
+            <Link onPress={() => {openWorkerModal(worker.id)}} key={worker.id}>
               <OnlineWorkerBox name={worker.nome} job={worker.profissao} jobCount={worker.pedidos} city={worker.cidade} uf={worker.uf} rating={worker.avaliacao} />            
-          )) } */}
+            </Link>
+          )) }
         </ScrollView>
 
         <Link mt={6} justifyContent='center' alignItems='center'>

@@ -1,7 +1,7 @@
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
-      home: undefined;
+      main: undefined;
       signin: undefined;
       login: undefined;
       register: undefined;
@@ -9,12 +9,13 @@ export declare global {
       signinterms: undefined;
       signincard: undefined;
       signinfinish: undefined;
-      serviceslist: { 
+      main: { 
         userId : number
       };
-      services: { 
+      service: { 
         serviceId : number
       };
+      servicesList: undefined,
       profile: undefined;
     }
   }

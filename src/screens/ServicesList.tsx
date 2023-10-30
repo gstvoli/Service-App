@@ -28,12 +28,12 @@ export default function Services(){
         setServiceData(dados);
         console.log('Dados', serviceData);
       } catch (error) {
-        console.log('Erro ao buscar dados dos servios:', error);
+        console.log('Erro ao buscar dados dos serviços:', error);
       }
     }
 
     getServicesData();
-  }, [])
+  }, [serviceData])
 
   return(
     <View >

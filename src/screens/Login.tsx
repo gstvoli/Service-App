@@ -54,7 +54,7 @@ export default function Login(){
       setErrorMessage('');
       setIsLoading(false);
 
-      navigation.navigate('serviceslist', { userId: response.data.id})
+      navigation.navigate('main', { userId: response.data.id})
     
     } catch (error : any){
       if (error.response){

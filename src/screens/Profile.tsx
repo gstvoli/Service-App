@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet } from "react-native"
-import { Heading, VStack, HStack, Text, Link } from 'native-base';
+import { ScrollView, Heading, VStack, HStack, Text, Link } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
@@ -18,6 +18,7 @@ import SMHandshake from '../imgs/handshake-sm.svg';
 import SMEditPen from '../imgs/edit-pen-sm.svg';
 
 export default function Profile(){
+  const [ isLoading, setIsLoading ] = useState(true);
   const [ userData, setUserData ] = useState<CadastroData | null>(null);
   const [ formatDate, setFormatDate ] = useState('');
 
@@ -31,13 +32,11 @@ export default function Profile(){
           const id = parseInt(teste, 10);
 
           await api.get(`/users/${id}`).then(response => {
-            console.log('Response' , response.data[0])
             setUserData(response.data[0])
             const rawDate = userData?.aniversario;
             if (rawDate){
               const date = new Date(rawDate);
               setFormatDate(date.toLocaleDateString('pt-BR'))
-              console.log(formatDate)
             }
 
           }).catch(err => {
@@ -45,19 +44,19 @@ export default function Profile(){
           })
         }
 
-        //setIsLoading(false);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error ao buscar dados do usuário:', error);
       } 
     }
 
   getUserData();
-}, []);
+}, [userData]);
 
   return (
     <View style={styles.container}>
-      { (userData) !== null ? 
-      <VStack>
+      { ((userData) !== null) && !(isLoading)? 
+      <ScrollView showsVerticalScrollIndicator={false}>
         <VStack alignItems="center">
 
           <VStack>
@@ -110,7 +109,7 @@ export default function Profile(){
               <Text ml={2} fontSize='lg' color="#000" bold>0 solicitações feitas</Text>
             </HStack>
           
-            <HStack justifyContent="center" mt={5}>
+            <HStack justifyContent="center" mt={5} mb={4}>
               <Link>
                 <SMEditPen />
                 <Text ml={2} fontSize='lg' color="#00ADB5" bold>Editar Perfil</Text>
@@ -118,7 +117,7 @@ export default function Profile(){
             </HStack>
           </VStack>
         </VStack>
-      </VStack>
+      </ScrollView>
       : <Heading>Carregando dados do usuário...</Heading> }
     </View>
 
@@ -127,7 +126,7 @@ export default function Profile(){
 
 const styles = StyleSheet.create({
   container : {
-    justifyContent : 'center',
-    alignItems : 'center',
+    // justifyContent : 'center',
+    alignItems : 'center'
   }
 })

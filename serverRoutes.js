@@ -18,6 +18,8 @@ routes.post('/api/newservice', ServicesController.create);
 
 routes.get('/api/workers', WorkerController.list);
 routes.get('/api/worker/:id', WorkerController.index);
+routes.get('/api/worker/service/:id', WorkerController.serviceIndex);
+routes.get('/api/newworker', WorkerController.create);
 
 routes.get('/api/order/:id', OrdersController.index);
 routes.get('/api/orders/:userId', OrdersController.list);

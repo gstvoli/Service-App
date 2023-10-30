@@ -7,8 +7,9 @@ import Home from '../screens/Home';
 import SignInStart from '../screens/SignInStart';
 import SignInFinish from '../screens/SignInFinish';
 import Login from '../screens/Login';
-import Services from '../screens/Services';
-import ServicesList from '../screens/ServiceList';
+import ServicesList from '../screens/ServicesList';
+import Service from '../screens/Service';
+import Main from '../screens/Main';
 import Profile from '../screens/Profile';
 import Register from '../screens/Register';
 
@@ -21,8 +22,9 @@ export function TabRoutes() {
         <Screen name="register" component={Register} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="signinfinish" component={SignInFinish} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="login" component={Login} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
-        <Screen name="services" component={Services} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
-        <Screen name="serviceslist" component={ServicesList} options={{ tabBarLabel: 'Serviços', tabBarLabelStyle : { color: '#fff', fontSize: 14, fontWeight: 'bold'},
+        <Screen name="servicesList" component={ServicesList} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
+        <Screen name="service" component={Service} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
+        <Screen name="main" component={Main} options={{ tabBarLabel: 'Serviços', tabBarLabelStyle : { color: '#fff', fontSize: 14, fontWeight: 'bold'},
         tabBarIcon: ({ focused }) => (
             <Feather
               name={'clipboard'}
