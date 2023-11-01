@@ -45,7 +45,7 @@ const openCategory = (id : number) => {
 async function getWorker(id : number){
   try {
     const response = await api.get(`/worker/${id}`);
-    const dados = response.data[0];
+    const dados = response.data;
     setWorkerModalData(dados);
   } catch (error) {
     console.error('Erro ao buscar dados do trabalhador selecionado:', error);
@@ -60,6 +60,11 @@ function openWorkerModal(id : number){
     console.error('Erro ao abrir modal:', error);
   }
 };
+
+function gotoNewOrder(id: number){
+  setShowModal(false);
+  navigation.navigate('order', {workerId: id});  
+}
 
 useEffect(() => {
   async function getUserData(){
@@ -96,7 +101,7 @@ useEffect(() => {
   async function getWorkerData() {
     try {
       const response = await api.get('/workers');
-      const dados = response.data;
+      const dados = response.data[0];
       setWorkerData(dados);
     } catch (error) {
       console.log('Erro ao buscar dados do colaborador:', error)
@@ -107,7 +112,7 @@ useEffect(() => {
 
   return (
     <View >
-      { (userData !== null) && (workerData !== null) ? 
+      { (userData !== null) && (workerData !== null) && (workerModalData !== null) ? 
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack alignItems='center'>
 
@@ -171,7 +176,7 @@ useEffect(() => {
                   </VStack>
 
                     <VStack alignItems={"center"}>
-                      <Button mt={0} mb={1} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
+                      <Button mt={0} mb={1} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100' onPress={() => {gotoNewOrder(workerModalData?.id)}}/>
                     </VStack>
                 </VStack>
 

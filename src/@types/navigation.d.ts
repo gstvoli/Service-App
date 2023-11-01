@@ -10,12 +10,15 @@ export declare global {
       signincard: undefined;
       signinfinish: undefined;
       main: { 
-        userId : number
+        userId: number
       };
       service: { 
-        serviceId : number
+        serviceId: number
       };
       servicesList: undefined,
+      order: {
+        workerId: number
+      };
       profile: undefined;
     }
   }

@@ -12,11 +12,12 @@ import Service from '../screens/Service';
 import Main from '../screens/Main';
 import Profile from '../screens/Profile';
 import Register from '../screens/Register';
+import Order from '../screens/Order';
 
 export function TabRoutes() {
 
   return (
-    <Navigator screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor:"#00ADB5", height: 52, paddingBottom: 2}}}>
+    <Navigator screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor:"#00ADB5", height: 52, paddingBottom: 2}}} backBehavior='history'>
         <Screen name="home" component={Home} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}} />
         <Screen name="signinstart" component={SignInStart} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="register" component={Register} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
@@ -24,6 +25,7 @@ export function TabRoutes() {
         <Screen name="login" component={Login} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
         <Screen name="servicesList" component={ServicesList} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
         <Screen name="service" component={Service} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
+        <Screen name="order" component={Order} options={{ tabBarButton: props => null}}/> 
         <Screen name="main" component={Main} options={{ tabBarLabel: 'Serviços', tabBarLabelStyle : { color: '#fff', fontSize: 14, fontWeight: 'bold'},
         tabBarIcon: ({ focused }) => (
             <Feather
