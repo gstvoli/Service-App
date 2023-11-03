@@ -39,9 +39,10 @@ export interface WorkerData {
   cep: string;
   idade: number;
   aniversario: Date;
+  cod_servico: number;
   profissao : string;
-  pedidos : number;
   disponivel : boolean;
   avaliacao : number;
   pedidos_realizados : number;
+
 }

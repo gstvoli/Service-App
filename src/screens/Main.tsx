@@ -32,7 +32,7 @@ const route = useRoute();
 const navigation = useNavigation();
 const [ userData, setUserData ] = useState<CadastroData | null>(null);
 const [ workerData, setWorkerData ] = useState<WorkerData[]>([]);
-const [ workerModalData, setWorkerModalData ] = useState<WorkerData>();
+const [ workerModalData, setWorkerModalData ] = useState<WorkerData | null>(null);
 const [ serviceData, setServiceData ] = useState<ServiceData[]>([]);
 const [ showModal, setShowModal ] = useState(false);
 const [ isLoading, setIsLoading ] = useState(false);
@@ -45,7 +45,7 @@ const openCategory = (id : number) => {
 async function getWorker(id : number){
   try {
     const response = await api.get(`/worker/${id}`);
-    const dados = response.data;
+    const dados = response.data[0];
     setWorkerModalData(dados);
   } catch (error) {
     console.error('Erro ao buscar dados do trabalhador selecionado:', error);
@@ -63,6 +63,7 @@ function openWorkerModal(id : number){
 
 function gotoNewOrder(id: number){
   setShowModal(false);
+  console.log(id);
   navigation.navigate('order', {workerId: id});  
 }
 
@@ -101,7 +102,7 @@ useEffect(() => {
   async function getWorkerData() {
     try {
       const response = await api.get('/workers');
-      const dados = response.data[0];
+      const dados = response.data;
       setWorkerData(dados);
     } catch (error) {
       console.log('Erro ao buscar dados do colaborador:', error)
@@ -112,7 +113,7 @@ useEffect(() => {
 
   return (
     <View >
-      { (userData !== null) && (workerData !== null) && (workerModalData !== null) ? 
+      { (userData !== null) && (workerData !== null) ? 
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack alignItems='center'>
 
@@ -176,7 +177,7 @@ useEffect(() => {
                   </VStack>
 
                     <VStack alignItems={"center"}>
-                      <Button mt={0} mb={1} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100' onPress={() => {gotoNewOrder(workerModalData?.id)}}/>
+                      <Button mt={0} mb={1} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100' onPress={() => {workerModalData?.id != null ? gotoNewOrder(workerModalData.id) : console.log('Erro!')}}/>
                     </VStack>
                 </VStack>
 
@@ -233,7 +234,7 @@ useEffect(() => {
         <ScrollView showsVerticalScrollIndicator={false}>
           { workerData.filter(worker => worker.disponivel).map(worker => (
             <Link onPress={() => {openWorkerModal(worker.id)}} key={worker.id}>
-              <OnlineWorkerBox name={worker.nome} job={worker.profissao} jobCount={worker.pedidos} city={worker.cidade} uf={worker.uf} rating={worker.avaliacao} />            
+              <OnlineWorkerBox name={worker.nome} job={worker.profissao} jobCount={worker.pedidos_realizados} city={worker.cidade} uf={worker.uf} rating={worker.avaliacao} />            
             </Link>
           )) }
         </ScrollView>

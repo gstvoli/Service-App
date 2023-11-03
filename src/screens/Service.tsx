@@ -23,17 +23,6 @@ export default function Services(){
   const [serviceData, setServiceData] = useState<ServiceData | null>(null);
   const [workerData, setWorkerData] = useState<WorkerData[]>([]);
 
-  // useEffect(() => {
-  //   const backAction = () => {
-  //     navigation.navigate('main');
-  //     return true;
-  //   };
-
-  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-
-  //   return () => backHandler.remove();
-  // }, []);  
-
   useEffect(() => { 
     async function getServicesData() {
       try {
