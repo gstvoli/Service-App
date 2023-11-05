@@ -22,7 +22,7 @@ export default function SignInFinish(){
 
   useEffect(() => {
     const backAction = () => {
-      navigation.navigate('home');
+      navigation.navigate('main');
       return true;
     };
 

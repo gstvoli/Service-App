@@ -21,10 +21,6 @@ export default function SignIn({data, handleChange} : Etapa2Props){
 
   const navigation = useNavigation();
 
-  const handleGoBack = () => {
-    navigation.goBack();
-  }
-
   function handleNextPage(){
     // if (!(nome || cpf || email || telefone || senha)){
     //   Alert.alert('Cadastro', 'Preencha todos os campos!');

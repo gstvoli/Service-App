@@ -63,8 +63,9 @@ function openWorkerModal(id : number){
 
 function gotoNewOrder(id: number){
   setShowModal(false);
-  console.log(id);
-  navigation.navigate('order', {workerId: id});  
+  const workerId = id;
+  console.log(workerId);
+  navigation.navigate('order', {workerId: workerId});  
 }
 
 useEffect(() => {

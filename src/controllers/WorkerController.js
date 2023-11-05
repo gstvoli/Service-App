@@ -23,15 +23,14 @@ module.exports = {
     return response.json(colaboradores);
   },
 
-  async serviceIndex(request, response) {
-    const { id } = request.params;
-    const workers = await connection('colaborador')
-      .where('cod_servico', id)
-      .select('*')
-      .orderBy('cod_servico');
+  // async serviceIndex(request, response) {
+  //   const { id } = request.params;
+  //   const workers = await connection('colaborador')
+  //     .where('cod_servico', id)
+  //     .select('*');
 
-    return response.json(workers);
-  },
+  //   return response.json(workers);
+  // },
 
   async create(request, response) {
     const {} = request.body;

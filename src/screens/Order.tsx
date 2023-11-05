@@ -11,7 +11,7 @@ import { ServiceData, WorkerData } from '../@types/Tipos';
 import { BackHandler } from 'react-native';
 
 type ParamsProps = {
-  serviceId: number;
+  workerId: number;
 }
 
 export default function Order(){
@@ -39,33 +39,39 @@ export default function Order(){
 useEffect(() => { 
   async function getData() {
     try {
-      const { serviceId } = route.params as ParamsProps;
-      const responseW = await api.get(`/worker/service/${serviceId}`);
+      const { workerId } = route.params as ParamsProps;
+      const responseW = await api.get(`/worker/${workerId}`);
       const dataW = responseW.data[0];
       setWorkerData(dataW);
 
-      const responseS = await api.get(`/service/${serviceId}`)
-      const dataS = responseS.data[0];
-      setServiceData(dataS);
+      if (workerData?.cod_servico != null){
+        const serviceId = workerData.cod_servico;
+        const responseS = await api.get(`/service/${serviceId}`)
+        const dataS = responseS.data[0];
+        setServiceData(dataS);
+      }
     } catch (error) {
       console.log('Erro ao buscar dados dos serviços:', error);
     }
   }
 
   getData();
-}, [])
+}, [workerData])
 
     return(
     <View >
-      <VStack>
-        <VStack mb={10}>
-          <Ellipse />
-          <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>Novo Pedido</Heading>
+      {(workerData != null) && (serviceData != null) ? 
+        <VStack>
+          <VStack mb={10}>
+            <Ellipse />
+            <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>Novo Pedido</Heading>
+          </VStack>
+
+          <Heading paddingY={2} textAlign="center" color="#000">{serviceData.descricao}</Heading>
+          <Heading paddingY={2} textAlign="center" color="#000">{workerData.nome}</Heading>
+
         </VStack>
-
-        <Heading paddingY={2} color="#000">{serviceData?.descricao}</Heading>
-
-      </VStack>
+      : <Text>Carregando </Text> }
     </View>
   )
 }
