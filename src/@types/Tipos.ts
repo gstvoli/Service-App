@@ -44,5 +44,21 @@ export interface WorkerData {
   disponivel : boolean;
   avaliacao : number;
   pedidos_realizados : number;
+}
 
+export interface OrderData {
+  id: number;
+  data_abertura: Date;
+  data_encerramento: Date;
+  servico: string;
+  observacao: string;
+  avaliacao: number;
+  status: number;
+  valor: number;
+  acrescimo: number;
+  desconto: number;
+  cidade_servico: string;
+  uf_servico: string;
+  id_cliente: number;
+  id_colaborador: number;
 }

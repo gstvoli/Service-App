@@ -19,7 +19,6 @@ interface Etapa1Props {
 }
 
 export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
-  const [date, setDate] = useState(new Date(1598051730000));
   const [show, setShow] = useState(false);
 
   const onChange = (event: any, selectedDate: any) => {
@@ -34,10 +33,6 @@ export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
 
   const [senhaConf, setSenhaConf] = useState('');
   const navigation = useNavigation();
-
-  const handleGoBack = () => {
-    navigation.goBack();
-  }
 
   function handleNextPage(){
     // if (!(nome || cpf || email || telefone || senha)){
@@ -80,7 +75,6 @@ export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
           <DateTimePicker
           value={data.aniversario}
           mode="date"
-          is24Hour={true}
           onChange={onChange}
           />
           )}
