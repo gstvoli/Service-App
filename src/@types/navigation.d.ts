@@ -16,7 +16,8 @@ export declare global {
       };
       servicesList: undefined,
       order: {
-        workerId: number
+        workerId: number,
+        serviceId: number,
       };
       profile: undefined;
     }

@@ -84,7 +84,7 @@ export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
 
         </HStack>
 
-        <Input placeholder="Seu e-mail" value={data.email} onChangeText={email => handleChange('email', email)}keyboardType="email-address" mt={2} mb={1} />
+        <Input placeholder="Seu e-mail" value={data.email} onChangeText={email => handleChange('email', email)} keyboardType="email-address" mt={2} mb={1} />
         
         <Input placeholder="Sua senha" value={data.senha} onChangeText={senha => handleChange('senha', senha)} secureTextEntry my={1} />
 

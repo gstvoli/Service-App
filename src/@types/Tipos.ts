@@ -15,7 +15,6 @@ export interface CadastroData {
 };
 
 export interface ServiceData {
-  id: number;
   titulo: string;
   descricao: string;
   preco: number;
@@ -25,7 +24,6 @@ export interface ServiceData {
 }
 
 export interface WorkerData {
-  id: number;
   nome: string;
   cpf: string;
   email: string;
@@ -47,7 +45,6 @@ export interface WorkerData {
 }
 
 export interface OrderData {
-  id: number;
   data_abertura: Date;
   data_encerramento: Date;
   servico: string;
@@ -57,6 +54,10 @@ export interface OrderData {
   valor: number;
   acrescimo: number;
   desconto: number;
+  rua_servico: string;
+  bairro_servico: string;
+  numcasa_servico: string;
+  complemento_servico: string;
   cidade_servico: string;
   uf_servico: string;
   id_cliente: number;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { Alert, StyleSheet } from 'react-native';
 import { useRoute } from '@react-navigation/native'
 import { SafeAreaView as View } from 'react-native-safe-area-context';
-import { VStack, HStack, Heading, Text, ScrollView, Link } from 'native-base';
+import { VStack, HStack, Heading, Text, ScrollView, Checkbox } from 'native-base';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import Ellipse from '../imgs/ellipse3.svg';
@@ -22,17 +22,39 @@ import { Input } from '../components/Input';
 
 type ParamsProps = {
   workerId: number;
+  serviceId: number;
 }
 
 export default function Order(){
 
   const route = useRoute();
+  const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [date, setDate] = useState(new Date());
-
+  const [checked, setChecked] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [serviceData, setServiceData] = useState<ServiceData | null>(null);
   const [workerData, setWorkerData] = useState<WorkerData | null>(null);
   const [orderData, setOrderData] = useState<OrderData | null>(null);
+  const [data, setData] = useState<OrderData>({
+    data_abertura: new Date('1990-01-01'),
+    data_encerramento: new Date(''),
+    servico: '',
+    observacao: '',
+    avaliacao: 0,
+    status: 0,
+    valor: 0,
+    acrescimo: 0,
+    desconto: 0,
+    rua_servico: '',
+    bairro_servico: '',
+    numcasa_servico: '',
+    complemento_servico: '',
+    cidade_servico: '',
+    uf_servico: '',
+    id_cliente: 0,
+    id_colaborador: 0
+  });
 
   const onChange = (event: any, selectedDate: any) => {
     const currentDate = selectedDate;
@@ -44,6 +66,27 @@ export default function Order(){
     setShow(true);
     console.log(date);    
   };
+
+  const handleNewOrder = async () => {
+    try {
+      setIsLoading(true);
+      const response = await api.post('/neworder', data);
+
+      console.log('Response do novo pedido:', response.data);
+      setErrorMessage('');
+      setIsLoading(false);
+    } catch (error : any) {
+      if (error.response){
+        setIsLoading(false);
+        console.log('Responsta do servidor:', error.response.data);
+        setErrorMessage(error.response.data.error);
+        Alert.alert('Novo pedido', errorMessage)
+      } else {
+        console.log('Erro na requisiçao:', error.message);
+        setErrorMessage('Ocorreu um erro ao solicitar o pedido. Por favor revise os dados e tente novamente.')
+      }
+    }
+  }
 
 // useEffect(() => { 
 //   async function getServicesData() {
@@ -67,13 +110,14 @@ useEffect(() => {
       const responseW = await api.get(`/worker/${workerId}`);
       const dataW = responseW.data[0];
       setWorkerData(dataW);
+      console.log(workerData);
 
-      if (workerData?.cod_servico != null){
-        const serviceId = workerData.cod_servico;
-        const responseS = await api.get(`/service/${serviceId}`)
-        const dataS = responseS.data[0];
-        setServiceData(dataS);
-      }
+      const { serviceId } = route.params as ParamsProps;
+      const responseS = await api.get(`/service/${serviceId}`)
+      const dataS = responseS.data[0];
+      setServiceData(dataS);
+      console.log(serviceData);
+
     } catch (error) {
       console.log('Erro ao buscar dados dos serviços:', error);
     }
@@ -83,16 +127,16 @@ useEffect(() => {
 }, [])
 
     return(
-    <View >
+    <View>
       {(workerData != null) && (serviceData != null) ? 
       <ScrollView showsVerticalScrollIndicator={false}>
-        <VStack alignItems='center'>
+        <VStack alignItems='center' maxW={'full'} w={'full'}>
           <VStack mb={10}>
             <Ellipse />
             <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>{serviceData.descricao}</Heading>
           </VStack>
 
-          <Heading paddingY={2} textAlign="center" color="#000">{workerData.nome}</Heading>
+          <Heading textAlign="center" color="#000">{workerData.nome}</Heading>
 
           <VStack style={styles.hCard}>
             <HStack alignItems="center">
@@ -111,11 +155,11 @@ useEffect(() => {
             </HStack>
           </VStack>
 
-          <VStack>
+          <VStack maxWidth={'full'} mx={4} >
             <Heading size={'md'} mb={3} textAlign={"center"}>Informe os dados sobre seu pedido</Heading>
 
-            <HStack>
-              <Button fs="lg" backgroundColor={"#00ADB5"} color={'#fff'} mt={0} mb={0} title={'Data do Pedido'} onPress={showMode} />
+            <HStack h={12}>
+              <Button fs="lg" backgroundColor={"#00ADB5"} color={'#fff'} mt={0} mb={0} h={12} title={'Data do Pedido'} onPress={showMode} w={'1/2'}/>
               {show && (
                 <DateTimePicker 
                 value={new Date()}
@@ -124,11 +168,37 @@ useEffect(() => {
                 // minimumDate={new Date(2023, 1, 1)}
                 /> 
               )}
-              <Input placeholder={'Data do pedido'} value={date.toLocaleDateString()} isReadOnly ml={3} w={'1/3'} />
+              <Input placeholder={'Data do pedido'} value={date.toLocaleDateString()} isReadOnly w={'1/2'}/>
             </HStack>
             
-            <Input placeholder={'Local do serviço'} />
+            <VStack my={4} mx={2} >
+              <Checkbox value="sameAddress" isChecked={checked} onChange={setChecked}>
+                <Text fontSize="sm" bold>O serviço é no meu próprio endereço</Text>
+              </Checkbox>
+            </VStack>
+            
+            { !checked ?
+            <VStack>
+              <Input placeholder={'Endereço do serviço'} value={orderData?.rua_servico}/>
+
+              <HStack my={2} h={12}>
+                <Input placeholder={'Bairro'} value={orderData?.bairro_servico} w={'3/4'} mr={2}/>
+                <Input placeholder={'Nº'} value={orderData?.numcasa_servico} w={'20'}/>
+              </HStack>
+              
+              <HStack mb={2} h={12}>
+                <Input placeholder={'Cidade'} value={orderData?.cidade_servico} w={'3/4'} mr={2}/>
+                <Input placeholder={'UF'} value={orderData?.uf_servico} w={'20'} maxLength={2}/>
+              </HStack>
+            </VStack>
+            : null 
+          }
           </VStack>
+
+          <VStack >
+            <Button fs="lg" backgroundColor={"#FFC700"} color={"#000"} mt={0} mb={0} h={12} title={'Confirmar Pedido'} onPress={handleNewOrder}/>
+          </VStack>
+
         </VStack>
       </ScrollView>
     : <Text> Carregando </Text> }
@@ -157,7 +227,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     marginBottom: 18,
     paddingHorizontal: 24,
-    paddingVertical: 12,
+    paddingVertical: 10,
     borderRadius: 10,
     borderBottomWidth: 3,
     borderColor: '#00ADB5' 

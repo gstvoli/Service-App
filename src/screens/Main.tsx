@@ -61,11 +61,13 @@ function openWorkerModal(id : number){
   }
 };
 
-function gotoNewOrder(id: number){
+function gotoNewOrder(id: number, code: number){
   setShowModal(false);
   const workerId = id;
+  const serviceId = code;
   console.log(workerId);
-  navigation.navigate('order', {workerId: workerId});  
+  console.log(serviceId);
+  navigation.navigate('order', {workerId: workerId, serviceId: serviceId});  
 }
 
 useEffect(() => {
@@ -178,7 +180,7 @@ useEffect(() => {
                   </VStack>
 
                     <VStack alignItems={"center"}>
-                      <Button mt={0} mb={1} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100' onPress={() => {workerModalData?.id != null ? gotoNewOrder(workerModalData.id) : console.log('Erro!')}}/>
+                      <Button mt={0} mb={1} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100' onPress={() => {workerModalData?.id != null ? gotoNewOrder(workerModalData.id, workerModalData.cod_servico) : console.log('Erro!')}}/>
                     </VStack>
                 </VStack>
 
