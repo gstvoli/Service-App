@@ -10,17 +10,12 @@ import BigUser from '../imgs/bigUser.svg'
 import Star from '../imgs/star.svg';
 
 import api from '../services/api';
-import { ServiceData, WorkerData, OrderData } from '../@types/Tipos';
+import { CadastroData, ServiceData, WorkerData, OrderData } from '../@types/Tipos';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 
-
-// interface OrderProps {
-//   data : OrderData;
-//   handleDate: (key: keyof OrderData, value: Date) => void;
-// }
-
 type ParamsProps = {
+  userId: number;
   workerId: number;
   serviceId: number;
 }
@@ -28,6 +23,7 @@ type ParamsProps = {
 export default function Order(){
 
   const route = useRoute();
+  const { userId } = route.params as ParamsProps;
   const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [date, setDate] = useState(new Date());
@@ -35,41 +31,51 @@ export default function Order(){
   const [errorMessage, setErrorMessage] = useState('');
   const [serviceData, setServiceData] = useState<ServiceData | null>(null);
   const [workerData, setWorkerData] = useState<WorkerData | null>(null);
-  const [orderData, setOrderData] = useState<OrderData | null>(null);
+  const [userData, setUserData] = useState<CadastroData | null>(null);
   const [data, setData] = useState<OrderData>({
     data_abertura: new Date('1990-01-01'),
     data_encerramento: new Date(''),
-    servico: '',
+    servico: serviceData?.descricao ? serviceData.descricao : '',
     observacao: '',
     avaliacao: 0,
     status: 0,
-    valor: 0,
+    valor: serviceData?.preco ? serviceData.preco : 0,
     acrescimo: 0,
     desconto: 0,
     rua_servico: '',
     bairro_servico: '',
-    numcasa_servico: '',
+    numcasa_servico: 0,
     complemento_servico: '',
     cidade_servico: '',
     uf_servico: '',
-    id_cliente: 0,
-    id_colaborador: 0
-  });
+    id_cliente: userId,
+    id_colaborador: workerData?.id ? workerData?.id : 0
+  })
 
   const onChange = (event: any, selectedDate: any) => {
     const currentDate = selectedDate;
-    console.log(currentDate);
     setShow(false);
     setDate(currentDate);
   };
   const showMode = () => {
-    setShow(true);
-    console.log(date);    
-  };
+    setShow(true); 
+  }
+
+  const checkAddress = () => {
+    if (checked && userData != null) {
+      data.rua_servico = userData.endereco;
+      data.bairro_servico = userData.bairro;
+      data.numcasa_servico = userData.numero;
+      data.cidade_servico = userData.cidade;
+      data.uf_servico = userData.uf;
+      // data.complemento_servico = userData.complemento;
+    }
+  }
 
   const handleNewOrder = async () => {
     try {
       setIsLoading(true);
+      checkAddress();
       const response = await api.post('/neworder', data);
 
       console.log('Response do novo pedido:', response.data);
@@ -88,21 +94,6 @@ export default function Order(){
     }
   }
 
-// useEffect(() => { 
-//   async function getServicesData() {
-//     try {
-//       const { serviceId } = route.params as ParamsProps;
-//       const response = await api.get(`/service/${serviceId}`);
-//       const dados = response.data[0];
-//       setServiceData(dados);
-//     } catch (error) {
-//       console.log('Erro ao buscar dados dos serviços:', error);
-//     }
-//   }
-
-//   getServicesData();
-// }, [serviceData])
-
 useEffect(() => { 
   async function getData() {
     try {
@@ -110,15 +101,17 @@ useEffect(() => {
       const responseW = await api.get(`/worker/${workerId}`);
       const dataW = responseW.data[0];
       setWorkerData(dataW);
-      console.log(workerData);
 
       const { serviceId } = route.params as ParamsProps;
-      const responseS = await api.get(`/service/${serviceId}`)
+      const responseS = await api.get(`/service/${serviceId}`);
       const dataS = responseS.data[0];
       setServiceData(dataS);
-      console.log(serviceData);
 
-    } catch (error) {
+      const responseU = await api.get(`/users/${userId}`);
+      const dataU = responseU.data;
+      setUserData(dataU);
+
+    } catch (error : any) {
       console.log('Erro ao buscar dados dos serviços:', error);
     }
   }
@@ -128,7 +121,7 @@ useEffect(() => {
 
     return(
     <View>
-      {(workerData != null) && (serviceData != null) ? 
+      {(workerData != null) && (serviceData != null) && (userData != null) ? 
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack alignItems='center' maxW={'full'} w={'full'}>
           <VStack mb={10}>
@@ -144,13 +137,14 @@ useEffect(() => {
                 <BigUser />
               </VStack>
 
-              <VStack paddingX={5}>
-                <Text style={styles.textData}>{workerData.cidade} - {workerData.uf}</Text>
-                <Text style={styles.textData}>Serviços realizados: {workerData.pedidos_realizados}</Text>
-                <HStack>
+              <VStack paddingX={4}>
+                <Text style={styles.textData} mb={1}>{workerData.cidade} - {workerData.uf}</Text>
+                <Text style={styles.textData} mb={1}>Serviços realizados: {workerData.pedidos_realizados}</Text>
+                <HStack mb={1}>
                   <Text style={styles.textData} mr={2}>Avaliação: {workerData.avaliacao}</Text>
                   <Star />
                 </HStack>
+                <Text style={styles.textData}>Valor: R$ {serviceData.preco}</Text>
               </VStack>
             </HStack>
           </VStack>
@@ -165,7 +159,6 @@ useEffect(() => {
                 value={new Date()}
                 mode="date" 
                 onChange={onChange}
-                // minimumDate={new Date(2023, 1, 1)}
                 /> 
               )}
               <Input placeholder={'Data do pedido'} value={date.toLocaleDateString()} isReadOnly w={'1/2'}/>
@@ -179,23 +172,27 @@ useEffect(() => {
             
             { !checked ?
             <VStack>
-              <Input placeholder={'Endereço do serviço'} value={orderData?.rua_servico}/>
+              <Input placeholder={'Endereço do serviço'} value={data.rua_servico}/>
 
               <HStack my={2} h={12}>
-                <Input placeholder={'Bairro'} value={orderData?.bairro_servico} w={'3/4'} mr={2}/>
-                <Input placeholder={'Nº'} value={orderData?.numcasa_servico} w={'20'}/>
+                <Input placeholder={'Bairro'} value={data.bairro_servico} w={'3/4'} mr={2}/>
+                <Input placeholder={'Nº'} value={data.numcasa_servico.toString()} w={'20'}/>
               </HStack>
               
               <HStack mb={2} h={12}>
-                <Input placeholder={'Cidade'} value={orderData?.cidade_servico} w={'3/4'} mr={2}/>
-                <Input placeholder={'UF'} value={orderData?.uf_servico} w={'20'} maxLength={2}/>
+                <Input placeholder={'Cidade'} value={data.cidade_servico} w={'3/4'} mr={2}/>
+                <Input placeholder={'UF'} value={data.uf_servico} w={'20'} maxLength={2}/>
               </HStack>
+
+              <Input placeholder={'Complemento'} value={data.complemento_servico} mb={2}/>
             </VStack>
             : null 
           }
+          
+            <Input placeholder={'Observação'} value={data.observacao} mb={2} />                                       
           </VStack>
 
-          <VStack >
+          <VStack>
             <Button fs="lg" backgroundColor={"#FFC700"} color={"#000"} mt={0} mb={0} h={12} title={'Confirmar Pedido'} onPress={handleNewOrder}/>
           </VStack>
 

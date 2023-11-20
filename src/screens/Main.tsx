@@ -63,11 +63,11 @@ function openWorkerModal(id : number){
 
 function gotoNewOrder(id: number, code: number){
   setShowModal(false);
+  const { userId } = route.params as ParamsProps;
   const workerId = id;
   const serviceId = code;
-  console.log(workerId);
-  console.log(serviceId);
-  navigation.navigate('order', {workerId: workerId, serviceId: serviceId});  
+
+  navigation.navigate('order', {workerId: workerId, serviceId: serviceId, userId: userId});  
 }
 
 useEffect(() => {
@@ -116,7 +116,7 @@ useEffect(() => {
 
   return (
     <View >
-      { (userData !== null) && (workerData !== null) ? 
+      { (userData !== null) && (workerData !== null) && (serviceData !== null) ? 
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack alignItems='center'>
 

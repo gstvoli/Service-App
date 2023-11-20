@@ -12,9 +12,11 @@ export interface CadastroData {
   cep: string;
   idade: number;
   aniversario: Date;
+  // complemento : string;
 };
 
 export interface ServiceData {
+  id: number;
   titulo: string;
   descricao: string;
   preco: number;
@@ -24,6 +26,7 @@ export interface ServiceData {
 }
 
 export interface WorkerData {
+  id: number;
   nome: string;
   cpf: string;
   email: string;
@@ -56,7 +59,7 @@ export interface OrderData {
   desconto: number;
   rua_servico: string;
   bairro_servico: string;
-  numcasa_servico: string;
+  numcasa_servico: number;
   complemento_servico: string;
   cidade_servico: string;
   uf_servico: string;
