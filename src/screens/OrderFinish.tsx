@@ -3,8 +3,6 @@ import { BackHandler, StyleSheet } from "react-native";
 import { VStack, Text, HStack, Link } from "native-base";
 import { SafeAreaView as View} from "react-native-safe-area-context";
 
-import PartyPR from '../imgs/ptrumpr.svg'
-import PartyPL from '../imgs/ptrumpl.svg'
 import UsersIcon from '../imgs/users-solid.svg'
 import RightToBracket from '../imgs/right-to-bracket.svg'
 
@@ -12,7 +10,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import { useNavigation } from '@react-navigation/native'
 
-export default function SignInFinish(){
+export default function OrderFinish(){
 
   const navigation = useNavigation();
 
@@ -38,16 +36,14 @@ export default function SignInFinish(){
         style={styles.container}
       >
         <HStack alignItems='center'>
-          <PartyPR />
-          <Text fontSize="3xl" bold color="#FFF" mx={3}>Parabéns!</Text>  
-          <PartyPL />
+          <Text fontSize="3xl" bold color="#FFF" mx={3}>Pedido Registrado!</Text> 
         </HStack>
 
         <VStack alignItems="center" my={3}>
-          <Text style={styles.boldFont} my={2}>Seu cadastro foi concluído com sucesso!</Text>
-          <Text style={styles.boldFont} mb={6}>Ficamos felizes por fazer parte de nossa comunidade!</Text>
+          <Text style={styles.boldFont} my={2}>Seu pedido foi enviado para aceitação!</Text>
+          <Text style={styles.boldFont} mb={12}>Aguarde o responsável aceitá-lo, ou entre em contato com o mesmo!</Text>
           <UsersIcon />
-          <Text color="#fff" bold fontSize="2xl" mt={8} mb={1}>Faça seu login para</Text>
+          <Text color="#fff" bold fontSize="2xl" mt={12} mb={1}>Faça seu login para</Text>
           <Text color="#fff" bold fontSize="2xl" borderBottomWidth={4} borderBottomColor='#fff' w={200} pb={1.5} textAlign="center">acessar o app!</Text>
 
         </VStack>
