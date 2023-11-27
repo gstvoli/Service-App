@@ -20,6 +20,7 @@ export declare global {
         workerId: number,
         serviceId: number,
       };
+      orderlist: undefined;
       orderfinish: undefined;
       profile: undefined;
     }

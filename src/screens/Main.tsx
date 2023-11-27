@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native'
 import { Modal, ScrollView, StyleSheet } from 'react-native';
-import { Button as NBButton, Center, HStack, Heading, Link, Text, VStack } from 'native-base';
+import { Button as NBButton, HStack, Heading, Link, Text, VStack } from 'native-base';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
 import api from '../services/api';
@@ -21,7 +21,7 @@ import BigUser from '../imgs/bigUser.svg';
 import UserGroup from '../imgs/user-group.svg';
 import Ellipse from '../imgs/ellipse.svg';
 import Star from '../imgs/star.svg';
-import routes from '../../serverRoutes';
+import { Loading } from '../components/Loading';
 
 type ParamsProps = {
   userId: number;
@@ -116,7 +116,7 @@ useEffect(() => {
 
   return (
     <View >
-      { (userData !== null) && (workerData !== null) && (serviceData !== null) ? 
+      { (userData !== null) && (workerData !== null) && (serviceData !== null) ?  
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack alignItems='center'>
 
@@ -251,7 +251,10 @@ useEffect(() => {
           <Button mt={2} mb={0} color="#000" bgColor={'#FFC700'} pbgColor={'#FFF100'} title={'Crie uma solicitação'} w={260} />
         </VStack>
       </ScrollView>
-      : <Heading>Carregando dados do usuário...</Heading>}
+      : <VStack>
+          <Loading />
+        </VStack>
+      }
     </View>
   )
 }

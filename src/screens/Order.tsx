@@ -13,6 +13,7 @@ import api from '../services/api';
 import { CadastroData, ServiceData, WorkerData, OrderData } from '../@types/Tipos';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
+import { Loading } from '../components/Loading';
 
 type ParamsProps = {
   userId: number;
@@ -218,7 +219,10 @@ useEffect(() => {
 
           </VStack>
         </ScrollView>
-      : <Text> Carregando </Text> }
+      : <VStack>
+          <Loading />
+        </VStack>
+      }
 
       </View>
 </KeyboardAvoidingView>

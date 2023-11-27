@@ -14,6 +14,7 @@ import Profile from '../screens/Profile';
 import Register from '../screens/Register';
 import Order from '../screens/Order';
 import OrderFinish from '../screens/OrderFinish';
+import OrderList from '../screens/OrderList';
 
 export function TabRoutes() {
 
@@ -32,6 +33,15 @@ export function TabRoutes() {
         tabBarIcon: ({ focused }) => (
             <Feather
               name={'clipboard'}
+              size={25}
+              color={focused ? '#FFC700' : '#fff'}
+            />
+          )
+        }} />
+        <Screen name="orderlist" component={OrderList} options={{ tabBarLabel: 'Pedidos', tabBarLabelStyle : { color: '#fff', fontSize: 14, fontWeight: 'bold'},
+        tabBarIcon: ({ focused }) => (
+            <Feather
+              name={'book'}
               size={25}
               color={focused ? '#FFC700' : '#fff'}
             />

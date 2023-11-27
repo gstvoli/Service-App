@@ -48,6 +48,7 @@ export interface WorkerData {
 }
 
 export interface OrderData {
+  id?: number;
   data_abertura: Date;
   data_encerramento: Date;
   servico: string;
