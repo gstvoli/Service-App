@@ -15,6 +15,7 @@ import Register from '../screens/Register';
 import Order from '../screens/Order';
 import OrderFinish from '../screens/OrderFinish';
 import OrderList from '../screens/OrderList';
+import OrderDetails from '../screens/OrderDetails';
 
 export function TabRoutes() {
 
@@ -29,6 +30,7 @@ export function TabRoutes() {
         <Screen name="service" component={Service} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
         <Screen name="order" component={Order} options={{ tabBarButton: props => null}}/> 
         <Screen name="orderfinish" component={OrderFinish} options={{ tabBarButton: props => null}}/> 
+        <Screen name="orderdetails" component={OrderDetails} options={{ tabBarButton: props => null}}/> 
         <Screen name="main" component={Main} options={{ tabBarLabel: 'Serviços', tabBarLabelStyle : { color: '#fff', fontSize: 14, fontWeight: 'bold'},
         tabBarIcon: ({ focused }) => (
             <Feather

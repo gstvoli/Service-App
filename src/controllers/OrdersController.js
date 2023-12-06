@@ -47,7 +47,7 @@ module.exports = {
     const { userId } = request.params;
     const order = await connection('pedido')
       .where('pedido.id_cliente', userId)
-      .select('pedido.*')
+      .select('pedido.*', 'colaborador.nome as colaborador')
       .leftJoin('colaborador', 'colaborador.id', 'pedido.id_colaborador');
 
     return response.json(order);

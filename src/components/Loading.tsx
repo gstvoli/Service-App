@@ -1,9 +1,12 @@
-import { Center, Spinner} from 'native-base';
+import { HStack, Heading, Spinner } from 'native-base';
 
 export function Loading(){
   return (
-      <Center flex={1} alignContent="center">
-        <Spinner color="#00ABD5" size={'lg'}/>
-      </Center>
+      <HStack space={2} justifyContent="center" alignItems={"center"}>
+        <Spinner color="cyan.500" size={'lg'} />
+        <Heading color="primary.500" fontSize="md">
+          Carregando
+        </Heading>
+      </HStack>
     )
 }

@@ -115,7 +115,7 @@ useEffect(() => {
 }, [workerData])
 
   return (
-    <View >
+    <View style={styles.container}>
       { (userData !== null) && (workerData !== null) && (serviceData !== null) ?  
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack alignItems='center'>
@@ -140,7 +140,7 @@ useEffect(() => {
 
         </ScrollView> 
 
-        <Link onPress={() => {navigation.navigate('servicesList')}} mt={3}>
+        <Link onPress={() => {navigation.navigate('serviceslist')}} mt={3}>
           <Text color='#1A82E2' fontSize='lg' fontWeight='bold' mr={1} mt={-2}>Todos os serviços</Text>
           <CircleRight />
         </Link>
@@ -251,8 +251,8 @@ useEffect(() => {
           <Button mt={2} mb={0} color="#000" bgColor={'#FFC700'} pbgColor={'#FFF100'} title={'Crie uma solicitação'} w={260} />
         </VStack>
       </ScrollView>
-      : <VStack>
-          <Loading />
+      : <VStack alignItems={"center"} justifyContent={"center"}>
+          <Loading />  
         </VStack>
       }
     </View>

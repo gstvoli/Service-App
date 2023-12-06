@@ -11,6 +11,7 @@ import Star from '../imgs/star.svg';
 
 import api from '../services/api';
 import { CadastroData, OrderData, WorkerData } from '../@types/Tipos';
+import { Loading } from '../components/Loading';
 
 type ParamsProps = {
   userId: number;
@@ -19,9 +20,17 @@ type ParamsProps = {
 export default function OrderList(){
 
   const route = useRoute();
+  const navigation = useNavigation();
+  const [fDateInit, setfDateInit] = useState([]);
+  const [fDateEnd, setDateEnd] = useState([]);
   const [userData, setUserData] = useState<CadastroData | null>(null);
-  const [workerData, setWorkerData] = useState<WorkerData | null>(null);
   const [orderData, setOrderData] = useState<OrderData[]>([]);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+  function openDetails(id : number){
+    navigation.navigate('orderdetails', {orderId : id})
+  }
 
   useEffect(() => {
     async function getUserData(){
@@ -59,45 +68,48 @@ export default function OrderList(){
       <VStack style={styles.container}>
         <VStack mb={10}>
           <Ellipse />
-          <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>{userData.nome}</Heading>
+          <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>Meus pedidos</Heading>
         </VStack>
-
-        <Heading paddingY={2} color="#000">Trabalhadores</Heading>
 
         <ScrollView showsVerticalScrollIndicator={false}>
           {orderData.map(order => { 
               return (
-                <Link key={order.id}>
-          <VStack style={styles.hCard}>
-            <HStack alignItems='center'>
-              <VStack>
-                <BigUser />
-              </VStack>
-              <VStack paddingX={3}>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>{}</Text>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
-                
-                <HStack paddingY={2}>
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
-                  
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-                  <Star />
-                </HStack>
-              </VStack>
-              <VStack backgroundColor="red.100" borderRadius="full" padding={1}>
-                <Link>
-                  <ArrowForwardIcon color="#000"/>
-                </Link>
-              </VStack>
-            </HStack>
-          </VStack>
+                <Link mx={2} key={order.id} onPress={() => {order.id ? openDetails(order.id) : null}}>
+                  <VStack style={styles.hCard}>
+                    <HStack alignItems='center'>
+                      <VStack px={4}>
+                        <BigUser />
+                      </VStack>
+                      <VStack paddingX={3}>
+                        <Text fontSize='md' color='#003DD6' fontWeight='bold'>Ordem Nº:{order.id}</Text>
+                        <Text fontSize='md' color='#00ABD5' fontWeight='medium'>Responsável: {order.colaborador}</Text>
+                        <Text fontSize='sm' color='#00ABD5' fontWeight='medium' mr={2}>Data: {order.servico}</Text>
+                        <Text bold color='#000' fontSize={'md'}>
+                          Staus                          
+                        {order.status == 0 ? 
+                          <Text style={{backgroundColor: '#5600D6', padding: 4, borderRadius: 14 }} fontSize='sm' color="#00ABD5" fontWeight='medium' mr={1}>Em andamento</Text> 
+                          :
+                          <Text style={{backgroundColor: '#5600D6', padding: 4, borderRadius: 14}}  fontSize='sm' color="#00ABD5" backgroundColor={'#00D6B8'} fontWeight='medium' mr={1}>Concluído</Text>
+                        }
+                        </Text>
+
+                      </VStack>
+                      <VStack backgroundColor="red.100" borderRadius="full" padding={2} ml={4}>
+                        <Link>
+                          <ArrowForwardIcon color="#000"/>
+                        </Link>
+                      </VStack>
+                    </HStack>
+                  </VStack>
                 </Link>
                 )
               })
             }
         </ScrollView>
       </VStack>
-        : <Heading>Carregando dados do usuário...</Heading>
+        : <VStack style={styles.container}>
+            <Loading />
+          </VStack>
       }
     </View>
   )
@@ -119,12 +131,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 5
   },
   hCard : {
-    backgroundColor: '#00ABD5',
-    justifyContent: 'center',
-    alignContent: 'center',
+    backgroundColor: '#56DDFF',
     marginVertical: 6,
-    paddingHorizontal: 24,
+    paddingHorizontal: 12,
     paddingVertical: 8,
-    borderRadius: 10
+    borderRadius: 10,
+    width: '100%'
   }
 })

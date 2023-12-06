@@ -14,12 +14,15 @@ export declare global {
       service: { 
         serviceId: number
       };
-      servicesList: undefined,
+      serviceslist: undefined,
       order: {
         userId : number,
         workerId: number,
         serviceId: number,
       };
+      orderdetails : {
+        orderId : number;
+      }
       orderlist: undefined;
       orderfinish: undefined;
       profile: undefined;
