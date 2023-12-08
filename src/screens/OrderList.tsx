@@ -13,10 +13,6 @@ import api from '../services/api';
 import { CadastroData, OrderData, WorkerData } from '../@types/Tipos';
 import { Loading } from '../components/Loading';
 
-type ParamsProps = {
-  userId: number;
-}
-
 export default function OrderList(){
 
   const route = useRoute();
@@ -81,22 +77,22 @@ export default function OrderList(){
                         <BigUser />
                       </VStack>
                       <VStack paddingX={3}>
-                        <Text fontSize='md' color='#003DD6' fontWeight='bold'>Ordem Nº:{order.id}</Text>
-                        <Text fontSize='md' color='#00ABD5' fontWeight='medium'>Responsável: {order.colaborador}</Text>
-                        <Text fontSize='sm' color='#00ABD5' fontWeight='medium' mr={2}>Data: {order.servico}</Text>
-                        <Text bold color='#000' fontSize={'md'}>
-                          Staus                          
+                        <Text fontSize='md' color='#00ADB5' bold>Ordem Nº:{order.id}</Text>
+                        <Text fontSize='md' color='#333' fontWeight='medium'>Responsável: {order.colaborador}</Text>
+                        <Text fontSize='sm' color='#333' fontWeight='medium' mr={2}>Data: {order.servico}</Text>
+                        <Text bold color='#222' fontSize={'md'}>
+                          Status:                      
                         {order.status == 0 ? 
-                          <Text style={{backgroundColor: '#5600D6', padding: 4, borderRadius: 14 }} fontSize='sm' color="#00ABD5" fontWeight='medium' mr={1}>Em andamento</Text> 
+                          <Text style={{backgroundColor: '#00D672', padding: 4, borderRadius: 14 }} fontSize='sm' color="#333" fontWeight='medium'>Em andamento</Text> 
                           :
-                          <Text style={{backgroundColor: '#5600D6', padding: 4, borderRadius: 14}}  fontSize='sm' color="#00ABD5" backgroundColor={'#00D6B8'} fontWeight='medium' mr={1}>Concluído</Text>
+                          <Text style={{backgroundColor: '#FBA94C', padding: 4, borderRadius: 14}}  fontSize='sm' color="#333" backgroundColor={'#00D6B8'} fontWeight='medium'>Concluído</Text>
                         }
                         </Text>
 
                       </VStack>
-                      <VStack backgroundColor="red.100" borderRadius="full" padding={2} ml={4}>
+                      <VStack backgroundColor="#00ADB5" borderRadius="full" padding={2} ml={4}>
                         <Link>
-                          <ArrowForwardIcon color="#000"/>
+                          <ArrowForwardIcon color="#FFF"/>
                         </Link>
                       </VStack>
                     </HStack>
@@ -131,7 +127,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 5
   },
   hCard : {
-    backgroundColor: '#56DDFF',
+    backgroundColor: '#FEF',
+    borderColor: '#00ADB5',
+    borderWidth: 2,
     marginVertical: 6,
     paddingHorizontal: 12,
     paddingVertical: 8,

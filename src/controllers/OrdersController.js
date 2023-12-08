@@ -55,7 +55,10 @@ module.exports = {
 
   async index(request, response) {
     const { id } = request.params;
-    const order = await connection('pedido').where('id', id).select('*');
+    const order = await connection('pedido')
+      .where('pedido.id', id)
+      .select('pedido.*', 'colaborador.nome as colaborador')
+      .leftJoin('colaborador', 'colaborador.id', 'pedido.id_colaborador');
 
     return response.json(order);
   }

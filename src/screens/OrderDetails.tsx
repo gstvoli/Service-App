@@ -14,18 +14,43 @@ import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Loading } from '../components/Loading';
 
+type ParamsProps = {
+  orderId: number;
+}
+
 export default function OrderDetails(){
+
+  const route = useRoute();
+  const navigation = useNavigation();
+  const [orderData, setOrderData] = useState<OrderData>();
+
+  useEffect(() => {
+    async function getOrderData() {
+      try {
+        const { orderId } = route.params as ParamsProps;
+        const response = await api.get(`/order/${orderId}`);
+        const dados = response.data[0];
+        setOrderData(dados);
+      } catch (error) {
+        console.error('Erro ao buscar dados do pedido: ', error);
+      }
+    }
+
+    getOrderData();
+  }, [])
+
   return (
     <View>
-    {(serviceData != null) ? 
+    {(orderData != null) ? 
     <ScrollView showsVerticalScrollIndicator={false}>
       <VStack alignItems='center' maxW={'full'} w={'full'}>
         <VStack mb={10}>
           <Ellipse />
-          <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>{serviceData.descricao}</Heading>
+          <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>Pedido Nº {orderData.id}</Heading>
         </VStack>
 
-        <Heading textAlign="center" color="#000">{workerData.nome}</Heading>
+        <Heading textAlign="center" color="#000">{orderData.servico}</Heading>
+        <Text textAlign="center" color="#000" bold fontSize={"lg"}>Responsável: {orderData.colaborador}</Text>
 
         <VStack style={styles.hCard}>
           <HStack alignItems="center">
@@ -34,39 +59,21 @@ export default function OrderDetails(){
             </VStack>
 
             <VStack paddingX={4}>
-              <Text style={styles.textData} mb={1}>{workerData.cidade} - {workerData.uf}</Text>
-              <Text style={styles.textData} mb={1}>Serviços realizados: {workerData.pedidos_realizados}</Text>
+              <Text style={styles.textData} mb={1}>{orderData.colaborador}</Text>
+              <Text style={styles.textData} mb={1}>Serviços realizados:</Text>
               <HStack mb={1}>
-                <Text style={styles.textData} mr={2}>Avaliação: {workerData.avaliacao}</Text>
+                <Text style={styles.textData} mr={2}>Avaliação:</Text>
                 <Star />
               </HStack>
-              <Text style={styles.textData}>Valor: R$ {serviceData.preco}</Text>
+              <Text style={styles.textData}>Valor: R$ </Text>
             </VStack>
           </HStack>
         </VStack>
 
         <VStack maxWidth={'full'} mx={4} >
           <Heading size={'md'} mb={3} textAlign={"center"}>Informe os dados sobre seu pedido</Heading>
-
-          <HStack h={12}>
-            <Button fs="lg" backgroundColor={"#00ADB5"} color={'#fff'} mt={0} mb={0} h={12} title={'Data do Pedido'} onPress={showMode} w={'1/2'}/>
-            {show && (
-              <DateTimePicker 
-              value={data.data_abertura}
-              mode="date" 
-              onChange={onChange}
-              /> 
-            )}
-            <Input placeholder={'Data do pedido'} value={data.data_abertura.toLocaleDateString()} isReadOnly w={'1/2'}/>
-          </HStack>
           
-          <VStack my={4} mx={2} >
-            <Checkbox value="sameAddress" isChecked={checked} onChange={setChecked}>
-              <Text fontSize="sm" bold>O serviço é no meu próprio endereço</Text>
-            </Checkbox>
-          </VStack>
-          
-          { !checked ?
+          {/* { !checked ?
           <VStack>
             <Input placeholder={'Endereço do serviço'} value={data.rua_servico} onChangeText={rua => handleChange('rua_servico', rua)}/>
 
@@ -83,15 +90,10 @@ export default function OrderDetails(){
             <Input placeholder={'Complemento'} value={data.complemento_servico} onChangeText={complemento => handleChange('complemento_servico', complemento)} mb={2}/>
           </VStack>
           : null 
-        }
+        } */}
         
-          <Input placeholder={'Observação'} value={data.observacao} onChangeText={observacao => handleChange('observacao', observacao)} mb={2} />                                       
+          {/* <Input placeholder={'Observação'} value={data.observacao} onChangeText={observacao => handleChange('observacao', observacao)} mb={2} />                                        */}
         </VStack>
-
-        <VStack>
-          <Button fs="lg" backgroundColor={"#FFC700"} color={"#000"} mt={0} mb={0} h={12} title={'Confirmar Pedido'} onPress={handleNewOrder}/>
-        </VStack>
-
       </VStack>
     </ScrollView>
   : <VStack>
@@ -121,6 +123,7 @@ const styles = StyleSheet.create({
   hCard : {
     justifyContent: 'center',
     alignContent: 'center',
+    marginTop: 12,
     marginBottom: 18,
     paddingHorizontal: 24,
     paddingVertical: 10,
