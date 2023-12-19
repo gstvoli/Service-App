@@ -13,6 +13,7 @@ import { CadastroData, ServiceData, WorkerData, OrderData } from '../@types/Tipo
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Loading } from '../components/Loading';
+import { DataValue } from '../components/DataValue';
 
 type ParamsProps = {
   orderId: number;
@@ -33,7 +34,7 @@ export default function OrderDetails(){
         setOrderData(dados);
       } catch (error) {
         console.error('Erro ao buscar dados do pedido: ', error);
-      }
+      } 
     }
 
     getOrderData();
@@ -42,61 +43,54 @@ export default function OrderDetails(){
   return (
     <View>
     {(orderData != null) ? 
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <VStack alignItems='center' maxW={'full'} w={'full'}>
-        <VStack mb={10}>
-          <Ellipse />
-          <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>Pedido Nº {orderData.id}</Heading>
-        </VStack>
-
-        <Heading textAlign="center" color="#000">{orderData.servico}</Heading>
-        <Text textAlign="center" color="#000" bold fontSize={"lg"}>Responsável: {orderData.colaborador}</Text>
-
-        <VStack style={styles.hCard}>
-          <HStack alignItems="center">
-            <VStack backgroundColor="#ccc" w={120} h={120} borderRadius="full" alignItems="center" justifyContent="center">
-              <BigUser />
-            </VStack>
-
-            <VStack paddingX={4}>
-              <Text style={styles.textData} mb={1}>{orderData.colaborador}</Text>
-              <Text style={styles.textData} mb={1}>Serviços realizados:</Text>
-              <HStack mb={1}>
-                <Text style={styles.textData} mr={2}>Avaliação:</Text>
-                <Star />
-              </HStack>
-              <Text style={styles.textData}>Valor: R$ </Text>
-            </VStack>
-          </HStack>
-        </VStack>
-
-        <VStack maxWidth={'full'} mx={4} >
-          <Heading size={'md'} mb={3} textAlign={"center"}>Informe os dados sobre seu pedido</Heading>
-          
-          {/* { !checked ?
-          <VStack>
-            <Input placeholder={'Endereço do serviço'} value={data.rua_servico} onChangeText={rua => handleChange('rua_servico', rua)}/>
-
-            <HStack my={2} h={12}>
-              <Input placeholder={'Bairro'} value={data.bairro_servico} onChangeText={bairro => handleChange('bairro_servico', bairro)} w={'3/4'} mr={2}/>
-              <Input placeholder={'Nº'} value={(data.numcasa_servico.toString() == '0' ? '' : data.numcasa_servico.toString())} onChangeText={numero => handleChange('numcasa_servico', numero)} w={'20'}/>
-            </HStack>
-            
-            <HStack mb={2} h={12}>
-              <Input placeholder={'Cidade'} value={data.cidade_servico} onChangeText={cidade => handleChange('cidade_servico', cidade)} w={'3/4'} mr={2}/>
-              <Input placeholder={'UF'} value={data.uf_servico} onChangeText={uf => handleChange('uf_servico', uf)} w={'20'} maxLength={2}/>
-            </HStack>
-
-            <Input placeholder={'Complemento'} value={data.complemento_servico} onChangeText={complemento => handleChange('complemento_servico', complemento)} mb={2}/>
+    <VStack style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <VStack maxW={'full'} w={'full'}>
+          <VStack mb={10}>
+            <Ellipse />
+            <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>Pedido Nº {orderData.id}</Heading>
           </VStack>
-          : null 
-        } */}
-        
-          {/* <Input placeholder={'Observação'} value={data.observacao} onChangeText={observacao => handleChange('observacao', observacao)} mb={2} />                                        */}
+
+          <Heading textAlign="center" color="#000">{orderData.servico}</Heading>
+          <Text textAlign="center" color="#000" bold fontSize={"lg"}>Responsável: {orderData.colaborador}</Text>
+
+          <VStack style={styles.hCard}>
+              <VStack backgroundColor="#ccc" w={120} h={120} borderRadius="full" alignItems="center" justifyContent="center">
+                <BigUser />
+              </VStack>
+          </VStack>
+
+          <VStack maxWidth={'full'} mx={4}>
+            <Heading size={'lg'} mb={2} textAlign={"center"}>Detalhes do pedido</Heading>
+
+            <VStack mx={6}>
+              <DataValue my={1} detail={'Data do Pedido: '} dColor={''} vColor={''} value={orderData.data_abertura.toLocaleDateString()} />
+
+              <DataValue my={1} detail={'Endereço: '} value={orderData.rua_servico} /> 
+
+              <DataValue my={1} detail={'Número: '} value={orderData.numcasa_servico} />
+
+              <DataValue my={1} detail={'Bairro: '} value={orderData.bairro_servico} />
+              
+              <HStack>
+                <DataValue my={1} detail={'Cidade: '} value={orderData.cidade_servico} />
+
+                <DataValue my={1} mx={2} detail={'UF: '} value={orderData.uf_servico} />
+              </HStack>
+
+              <DataValue detail={'Complemento: '} value={orderData.complemento_servico} />
+
+              <HStack alignItems={'center'} justifyContent={"space-between"} my={2}>
+                <Button bg={'#00D66E'} color={'#FFF'} mt={0} mb={0} fs={'md'} w={24} h={10} title={'Finalizar'}></Button>
+                <Button bg={'#D62B00'} color={'#FFF'} mt={0} mb={0} fs={'md'} w={24} h={10} title={'Cancelar'}></Button>
+                <Button bg={'#4A4BCA'} color={'#FFF'} mt={0} mb={0} fs={'md'} w={24} h={10} title={'Chat'}></Button>
+              </HStack>
+            </VStack>
+          </VStack>
         </VStack>
-      </VStack>
-    </ScrollView>
-  : <VStack>
+      </ScrollView>
+    </VStack>
+  : <VStack alignItems={"center"} justifyContent={"center"}>
       <Loading />
     </VStack>
   }
@@ -121,19 +115,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 5
   },
   hCard : {
-    justifyContent: 'center',
-    alignContent: 'center',
+    alignItems: 'center',
     marginTop: 12,
     marginBottom: 18,
-    paddingHorizontal: 24,
     paddingVertical: 10,
     borderRadius: 10,
-    borderBottomWidth: 3,
-    borderColor: '#00ADB5' 
+    borderBottomWidth: 4,
+    borderColor: '#00ADB5'
   },
   textData : {
     color: '#000',
     fontWeight: 'bold',
-    fontSize: 18
+    fontSize: 20
   }
 })
