@@ -28,7 +28,6 @@ export default function Order(){
   const { userId, workerId } = route.params as ParamsProps;
   const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
-  const [date, setDate] = useState(new Date());
   const [checked, setChecked] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [serviceData, setServiceData] = useState<ServiceData | null>(null);
@@ -111,32 +110,65 @@ export default function Order(){
   }
 
 useEffect(() => { 
+
+    async function getWorkerData(){
+      try {
+        const { workerId } = route.params as ParamsProps;
+        const responseW = await api.get(`/worker/${workerId}`);
+        const dataW = responseW.data[0];
+        setWorkerData(dataW);
+        console.log(dataW);
+      } catch (error : any) {
+        setErrorMessage('Erro ao buscar dados do trabalhador: ' + error);
+      }
+    }
+
+    async function getServiceData() {
+      try {
+        const { serviceId } = route.params as ParamsProps;
+        const responseS = await api.get(`/service/${serviceId}`);
+        const dataS = responseS.data[0];
+        setServiceData(dataS);
+        console.log(dataS);   
+      } catch (error : any) {
+        setErrorMessage('Erro ao buscar dados do serviço: ' + error);
+      }
+    }
+
+    async function getUserData(){
+      try {
+        const responseU = await api.get(`/users/${userId}`);
+        const dataU = responseU.data[0];
+        setUserData(dataU);
+        console.log(dataU);    
+      } catch (error : any) {
+        setErrorMessage('Erro ao buscar dados do usuário: ' + error);
+      }
+    }
+
   async function getData() {
     try {
-      const { workerId } = route.params as ParamsProps;
-      const responseW = await api.get(`/worker/${workerId}`);
-      const dataW = responseW.data[0];
-      setWorkerData(dataW);
-      console.log(dataW);
-
-      const { serviceId } = route.params as ParamsProps;
-      const responseS = await api.get(`/service/${serviceId}`);
-      const dataS = responseS.data[0];
-      setServiceData(dataS);
-      console.log(dataS);      
-
-      const responseU = await api.get(`/users/${userId}`);
-      const dataU = responseU.data[0];
-      setUserData(dataU);
-      console.log(dataU);      
-
+      setIsLoading(true);
+      await Promise.all([getWorkerData(), getServiceData(), getUserData()]);
+      setIsLoading(false);
     } catch (error : any) {
       console.log('Erro ao buscar dados dos serviços:', error);
+      setErrorMessage('Erro ao buscar dados! Entre em contato conosco!');
+    } finally {
+      setIsLoading(false);
     }
   }
 
   getData();
 }, [])
+
+  if(errorMessage){
+    return(
+      <VStack flex={1} alignItems={"center"} justifyContent={"center"}>
+        <Heading>{errorMessage}</Heading>
+      </VStack>
+    )
+  }
 
   if(isLoading){
     return (
@@ -147,9 +179,8 @@ useEffect(() => {
   }
 
     return(
-    <KeyboardAvoidingView behavior="position" enabled>
       <View>
-        <VStack flex={1} justifyContent={'center'}>
+        <VStack>
           {(workerData != null) && (serviceData != null) && (userData != null) ? 
           <ScrollView showsVerticalScrollIndicator={false}>
             <VStack alignItems='center' maxW={'full'} w={'full'}>
@@ -228,13 +259,12 @@ useEffect(() => {
             </VStack>
           </ScrollView>
         : <VStack alignItems={"center"} justifyContent={"center"}>
-            <Loading />
+            <Text>Oi</Text>
           </VStack>
         }
       </VStack>
 
       </View>
-</KeyboardAvoidingView>
     )
 }
 
@@ -251,7 +281,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 18,
-    marginHorizontal: 5
+    marginHorizontal: 5,
+    fontFamily: 'Roboto-Bold'
   },
   hCard : {
     justifyContent: 'center',

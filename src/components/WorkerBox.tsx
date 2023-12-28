@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   dataText : {
     fontSize : 14,
     color: '#FFF',
-    fontWeight: 'bold',
+    fontFamily: 'Inter_700Bold',
     textAlign: 'center'
   }
 })
