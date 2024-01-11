@@ -1,4 +1,3 @@
-import { Roboto_500Medium } from '@expo-google-fonts/roboto';
 import { Input as NBInput, IInputProps, Fade } from 'native-base'
 
 type Props = IInputProps & {

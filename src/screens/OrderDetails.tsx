@@ -61,7 +61,7 @@ export default function OrderDetails(){
           </VStack>
 
           <VStack maxWidth={'full'} mx={4}>
-            <Heading size={'lg'} mb={2} textAlign={"center"}>Detalhes do pedido</Heading>
+            <Heading style={styles.header}>Detalhes do pedido</Heading>
 
             <VStack mx={6}>
               <DataValue my={1} detail={'Data do Pedido: '} dColor={''} vColor={''} value={orderData.data_abertura.toLocaleDateString()} />
@@ -123,8 +123,15 @@ const styles = StyleSheet.create({
     borderBottomWidth: 4,
     borderColor: '#00ADB5'
   },
+  header:{
+    fontFamily: 'Inter_600SemiBold',
+    fontSize: 24,
+    textAlign: 'center',
+    marginBottom: 4
+  },
   textData : {
     color: '#000',
+    fontFamily: 'Inter_400Regular',
     fontWeight: 'bold',
     fontSize: 20
   }

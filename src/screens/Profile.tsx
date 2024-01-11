@@ -67,7 +67,7 @@ export default function Profile(){
             </VStack>
 
             <VStack mt={6} width="80%">
-              <Heading textAlign='center'>22 anos</Heading>
+              <Heading textAlign='center'>{userData.idade} anos</Heading>
               <Heading textAlign='center' fontSize='xl' pb={4} mb={4} borderBottomWidth={3} borderBottomColor="#000">{userData.cidade} - {userData.uf}</Heading>
             </VStack>
 

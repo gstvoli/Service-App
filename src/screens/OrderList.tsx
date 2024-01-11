@@ -12,6 +12,7 @@ import Star from '../imgs/star.svg';
 import api from '../services/api';
 import { CadastroData, OrderData, WorkerData } from '../@types/Tipos';
 import { Loading } from '../components/Loading';
+import { Inter_500Medium, Inter_600SemiBold } from '@expo-google-fonts/inter';
 
 export default function OrderList(){
 
@@ -77,15 +78,15 @@ export default function OrderList(){
                         <BigUser />
                       </VStack>
                       <VStack paddingX={3}>
-                        <Text fontSize='md' color='#00ADB5' bold>Ordem Nº:{order.id}</Text>
-                        <Text fontSize='md' color='#333' fontWeight='medium'>Responsável: {order.colaborador}</Text>
-                        <Text fontSize='sm' color='#333' fontWeight='medium' mr={2}>Data: {order.servico}</Text>
-                        <Text bold color='#222' fontSize={'md'}>
-                          Status:                      
+                        <Text style={styles.BoldText} color='#00ADB5'>Ordem Nº:{order.id}</Text>
+                        <Text style={styles.mediumText} color='#333'>Responsável: {order.colaborador}</Text>
+                        <Text style={styles.mediumText} color='#333' mr={2}>Data: {order.servico}</Text>
+                        <Text style={styles.mediumText} color='#333'>
+                          Status:                       
                         {order.status == 0 ? 
-                          <Text style={{backgroundColor: '#00D672', padding: 4, borderRadius: 14 }} fontSize='sm' color="#333" fontWeight='medium'>Em andamento</Text> 
+                          <Text style={styles.BoldText} color="#00D672">Em andamento</Text> 
                           :
-                          <Text style={{backgroundColor: '#FBA94C', padding: 4, borderRadius: 14}}  fontSize='sm' color="#333" backgroundColor={'#00D6B8'} fontWeight='medium'>Concluído</Text>
+                          <Text style={styles.BoldText} color='#00D6B8'>Concluído</Text>
                         }
                         </Text>
 
@@ -127,7 +128,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 5
   },
   hCard : {
-    backgroundColor: '#FEF',
     borderColor: '#00ADB5',
     borderWidth: 2,
     marginVertical: 6,
@@ -135,5 +135,13 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 10,
     width: '100%'
+  },
+  BoldText: {
+    fontSize: 16,
+    fontFamily: 'Inter_600SemiBold'
+  },
+  mediumText: {
+    fontSize: 14,
+    fontFamily: 'Inter_500Medium'
   }
 })

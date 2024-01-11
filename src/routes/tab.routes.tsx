@@ -26,7 +26,7 @@ export function TabRoutes() {
         <Screen name="register" component={Register} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="signinfinish" component={SignInFinish} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="login" component={Login} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
-        <Screen name="servicesList" component={ServicesList} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
+        <Screen name="serviceslist" component={ServicesList} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
         <Screen name="service" component={Service} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
         <Screen name="order" component={Order} options={{ tabBarButton: props => null}}/> 
         <Screen name="orderfinish" component={OrderFinish} options={{ tabBarButton: props => null}}/> 

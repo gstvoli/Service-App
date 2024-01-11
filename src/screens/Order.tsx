@@ -14,6 +14,7 @@ import { CadastroData, ServiceData, WorkerData, OrderData } from '../@types/Tipo
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Loading } from '../components/Loading';
+import { Inter_400Regular } from '@expo-google-fonts/inter';
 
 type ParamsProps = {
   userId: number;
@@ -282,7 +283,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 18,
     marginHorizontal: 5,
-    fontFamily: 'Roboto-Bold'
+    fontFamily: 'Inter_700Bold'
   },
   hCard : {
     justifyContent: 'center',
@@ -296,6 +297,7 @@ const styles = StyleSheet.create({
   },
   textData : {
     color: '#000',
+    fontFamily: 'Inter_400Regular',
     fontWeight: 'bold',
     fontSize: 18
   }

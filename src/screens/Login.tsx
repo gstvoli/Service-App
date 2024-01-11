@@ -11,7 +11,6 @@ import { Input } from "../components/Input";
 import { Button as CButton } from "../components/Button";
 
 import api from "../services/api";
-import { Roboto_100Thin_Italic, Roboto_500Medium, Roboto_900Black } from "@expo-google-fonts/roboto";
 
 export default function Login(){
   const [isLoading, setIsLoading] = useState(false);
