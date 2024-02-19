@@ -34,7 +34,7 @@ export default function SignInFinish(){
 
   return (
       <LinearGradient
-        colors={['#00ADB5', '#63DADF']}
+        colors={['#30ADB5', '#30ADB5']}
         style={styles.container}
       >
         <HStack alignItems='center'>

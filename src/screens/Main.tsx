@@ -30,15 +30,16 @@ type ParamsProps = {
 export default function Main(){
 const route = useRoute();
 const navigation = useNavigation();
+const { userId } = route.params as ParamsProps;
 const [ userData, setUserData ] = useState<CadastroData | null>(null);
 const [ workerData, setWorkerData ] = useState<WorkerData[]>([]);
 const [ workerModalData, setWorkerModalData ] = useState<WorkerData | null>(null);
 const [ serviceData, setServiceData ] = useState<ServiceData[]>([]);
 const [ showModal, setShowModal ] = useState(false);
 
-const openCategory = (id : number) => {
+const openCategory = (id : number, uId : number) => {
     console.log('Abriu serviço nº:', id);
-    navigation.navigate('service', {serviceId: id});
+    navigation.navigate('service', {serviceId: id, userId: uId});
 };
 
 async function getWorker(id : number){
@@ -62,7 +63,6 @@ function openWorkerModal(id : number){
 
 function gotoNewOrder(id: number, code: number){
   setShowModal(false);
-  const { userId } = route.params as ParamsProps;
   const workerId = id;
   const serviceId = code;
 
@@ -73,7 +73,6 @@ function gotoNewOrder(id: number, code: number){
 useEffect(() => {
   async function getUserData(){
     try {
-      const { userId } = route.params as ParamsProps;
       const response = await api.get(`/users/${userId}`);
       const dados = response.data[0];
       setUserData(dados);
@@ -83,7 +82,7 @@ useEffect(() => {
   }
   
   getUserData();
-}, [userData])
+}, [])
 
 useEffect(() => {
 
@@ -98,7 +97,7 @@ useEffect(() => {
   }
 
   getServicesData();
-}, [serviceData])
+}, [])
 
 useEffect(() => {
 
@@ -112,14 +111,13 @@ useEffect(() => {
     }
   }
   getWorkerData();
-}, [workerData])
+}, [])
 
   return (
     <View style={styles.container}>
-      <VStack>
-        { (userData !== null) && (workerData !== null) && (serviceData !== null) ?  
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <VStack alignItems='center'>
+    { (userData !== null) && (workerData !== null) && (serviceData !== null) ?  
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <VStack alignItems='center'>
 
           <VStack mt={-12}>
             <Ellipse />
@@ -132,7 +130,7 @@ useEffect(() => {
             
               {serviceData.map(service => { 
                 return (
-                  <Link onPress={() => {openCategory(service.id)}} key={service.id}>
+                  <Link onPress={() => {openCategory(service.id, userId)}} key={service.id}>
                     <Service title={service.titulo} path={service.imagem}/>
                   </Link>
                   )
@@ -231,8 +229,8 @@ useEffect(() => {
               <Text color='#1A82E2' fontSize='lg' bold mr={1} mt={-2} mb={3}>Lista de Pintores(as)</Text>
               <CircleRight />
             </Link>
-          </VStack>
-
+        </VStack>
+        
           <Heading textAlign='center' fontSize="lg">Disponíveis no momento</Heading>
 
           <ScrollView showsVerticalScrollIndicator={false}>
@@ -251,12 +249,11 @@ useEffect(() => {
           <VStack alignItems={'center'} paddingBottom={2}>
             <Button mt={2} mb={0} color="#000" bgColor={'#FFC700'} pbgColor={'#FFF100'} title={'Crie uma solicitação'} w={260} />
           </VStack>
-        </ScrollView>
-        : <VStack alignItems={"center"} justifyContent={"center"}>
-            <Loading />  
-          </VStack>
-        }
-      </VStack>
+      </ScrollView>
+      : <VStack style={styles.container}>
+          <Loading />  
+        </VStack>
+      } 
     </View>
   )
 }
@@ -264,8 +261,7 @@ useEffect(() => {
 const styles = StyleSheet.create({
   container : {
     justifyContent : 'center',
-    alignItems : 'center',
-    paddingBottom: 10
+    alignItems : 'center'
   },
   box : {
     width: 95,

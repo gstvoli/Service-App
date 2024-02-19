@@ -48,6 +48,7 @@ export default function Register(){
   const handleClick = () => {
     const newValue = !checked;
     setChecked(newValue);
+    // console.log(newValue);
   }
 
   const handleRegister = async () => {
@@ -187,10 +188,10 @@ export default function Register(){
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     backgroundColor: '#EEE',
     alignItems: 'center',
-    // justifyContent: 'center',
+    justifyContent: 'center',
     textAlign: 'center'
   }
 })

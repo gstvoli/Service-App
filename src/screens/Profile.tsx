@@ -51,7 +51,6 @@ export default function Profile(){
   return (
     <View style={styles.container}>
       { ((userData) !== null) && !(isLoading)? 
-      <VStack>
         <ScrollView showsVerticalScrollIndicator={false}>
           <VStack alignItems="center">
 
@@ -114,8 +113,7 @@ export default function Profile(){
             </VStack>
           </VStack>
         </ScrollView>
-      </VStack>
-      : <VStack alignItems={"center"} justifyContent={"center"}>
+      : <VStack style={styles.container}>
           <Loading />  
         </VStack>
       }
@@ -126,7 +124,7 @@ export default function Profile(){
 
 const styles = StyleSheet.create({
   container : {
-    // justifyContent : 'center',
+    justifyContent : 'center',
     alignItems : 'center'
   }
 })

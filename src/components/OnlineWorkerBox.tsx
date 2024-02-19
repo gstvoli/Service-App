@@ -18,29 +18,29 @@ import Star from '../imgs/star.svg';
 export function OnlineWorkerBox({name, job, jobCount, city, uf, rating, ...rest} : Props){
   return(
     <VStack alignItems='center'>          
-    <VStack style={styles.hCard}>
-      <HStack alignItems='center'>
-        <VStack>
-        <BigUser />
+      <VStack style={styles.hCard}>
+        <HStack alignItems='center'>
+          <VStack>
+            <BigUser />
+          </VStack>
 
-        </VStack>
-        <VStack paddingX={5}>
-          <Text style={styles.dataText}>Gustavo Oliveira Souza</Text>
-          <Text style={styles.dataText}>Progamador Mobile/Web</Text>
-          <Text style={styles.dataText}>Muriaé - MG</Text>
-          
-          <HStack paddingY={2}>
-            <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
+          <VStack paddingX={5}>
+            <Text style={styles.dataText}>Gustavo Oliveira Souza</Text>
+            <Text style={styles.dataText}>Progamador Mobile/Web</Text>
+            <Text style={styles.dataText}>Muriaé - MG</Text>
             
-            <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-            <Star />
-          </HStack>
-        
-          <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
-        </VStack>
-      </HStack>
-    </VStack>
-  </VStack>  
+            <HStack paddingY={2}>
+              <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
+              
+              <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
+              <Star />
+            </HStack>
+          
+            <Button mt={0} mb={0} bgColor={'#FFC700'} color={'#000'} title={'Solicitar Serviço'} h={10} fs='lg' pbgColor='#FFF100'/>
+          </VStack>
+        </HStack>
+      </VStack>
+    </VStack>  
   )
 }
 

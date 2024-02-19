@@ -90,7 +90,7 @@ export default function OrderDetails(){
         </VStack>
       </ScrollView>
     </VStack>
-  : <VStack alignItems={"center"} justifyContent={"center"}>
+  : <VStack style={styles.container}>
       <Loading />
     </VStack>
   }

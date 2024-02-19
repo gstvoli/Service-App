@@ -49,7 +49,7 @@ export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
     <KeyboardAvoidingView contentContainerStyle={styles.container} behavior="position" enabled>
 
     <View>
-      <VStack alignItems="center">
+      <VStack alignItems={'center'}>
         <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 1/4</Text>
         <Stage1 />
 
@@ -60,29 +60,33 @@ export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
 
 
         <Text color="#000" fontSize="md" bold my={3}>Informe os dados abaixo</Text>
-        <Input autoCapitalize="sentences" placeholder="Seu nome completo" value={data.nome} onChangeText={nome => handleChange('nome', nome)} w="full" my={1} />
+        <Input autoCapitalize="sentences" placeholder="Seu nome completo" value={data.nome} onChangeText={nome => handleChange('nome', nome)} my={1} />
 
-        <HStack alignItems="center" maxW="full" mt={0.5}>
-          <Input placeholder="Seu nº de celular" value={data.telefone} onChangeText={telefone => handleChange('telefone', telefone)} w="50%" mr={2} keyboardType="numeric" my={1} />
+        <VStack>
+          <HStack mt={0.5} justifyContent={"center"} alignItems={"center"}>
+            <Input placeholder="Seu nº de celular" value={data.telefone} onChangeText={telefone => handleChange('telefone', telefone)} keyboardType="numeric" my={1} w={"1/2"} mr={1}/>
 
-          <Input placeholder="Seu CPF" value={data.cpf} onChangeText={cpf => handleChange('cpf', cpf)} keyboardType="numeric" w="47%" my={1} />
-        </HStack>
+            <Input placeholder="Seu CPF" value={data.cpf} onChangeText={cpf => handleChange('cpf', cpf)} keyboardType="numeric" my={1} w={"1/2"} />
+          </HStack>
+        </VStack>
 
-        <HStack alignItems="center" maxW="full" mt={0.5}>
+        <VStack>
+          <HStack mt={0.5}  w={"full"} justifyContent={"center"} alignItems={"center"}>
 
-        <Button fs={"md"} backgroundColor={"#00ADB5"} h={10} w={"3/6"} color={"#fff"} title={"Data de nascimento"} onPress={showMode} mt={0} mb={0} />  
-        {show && (
-          <DateTimePicker
-          value={data.aniversario}
-          mode="date"
-          onChange={onChange}
-          />
-          )}
+            <Button fs={"md"} backgroundColor={"#00ADB5"} color={"#fff"} title={"Data de nascimento"} onPress={showMode} mt={0} mb={0} h={"16"} w={"40"}/>  
+            {show && (
+              <DateTimePicker
+              value={data.aniversario}
+              mode="date"
+              onChange={onChange}
+              />
+              )}
 
-        <Input placeholder="Sua data de nascimento" value={data.aniversario.toLocaleDateString()} isReadOnly w="48%" my={1} ml={2}/>
-          {/* <Input placeholder="Sua idade" value={data.idade.toString()} onChangeText={telefone => handleChange('telefone', telefone)} w="50%" mr={2} keyboardType="numeric" my={1} /> */}
+            <Input placeholder="Sua data de nascimento" value={data.aniversario.toLocaleDateString()} isReadOnly  my={1} ml={2} w="1/2"/>
+            {/* <Input placeholder="Sua idade" value={data.idade.toString()} onChangeText={telefone => handleChange('telefone', telefone)} w="50%" mr={2} keyboardType="numeric" my={1} /> */}
+            </HStack>
+          </VStack>
 
-        </HStack>
 
         <Input placeholder="Seu e-mail" value={data.email} onChangeText={email => handleChange('email', email)} keyboardType="email-address" mt={2} mb={1} />
         

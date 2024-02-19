@@ -3,16 +3,15 @@ import { StyleSheet } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
-import { ArrowForwardIcon, VStack, HStack, Heading, Text, ScrollView, Link } from 'native-base';
+import { VStack, HStack, Heading, Text, ScrollView, Link, Center, FlatList } from 'native-base';
 
 import  Ellipse from '../imgs/ellipse3.svg';
-import BigUser from '../imgs/bigUser.svg';
-import Star from '../imgs/star.svg';
 
 import api from '../services/api';
-import { CadastroData, OrderData, WorkerData } from '../@types/Tipos';
+import { CadastroData, OrderData } from '../@types/Tipos';
 import { Loading } from '../components/Loading';
-import { Inter_500Medium, Inter_600SemiBold } from '@expo-google-fonts/inter';
+import { Filter } from '../components/Filter';
+import { OrderItem } from '../components/OrderItem';
 
 export default function OrderList(){
 
@@ -22,12 +21,15 @@ export default function OrderList(){
   const [fDateEnd, setDateEnd] = useState([]);
   const [userData, setUserData] = useState<CadastroData | null>(null);
   const [orderData, setOrderData] = useState<OrderData[]>([]);
+  const [fOrders, setFOrders] = useState<OrderData[]>([]);
+  const [statusSelected, setStatusSelected] = useState<0 | 1>(0);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  function openDetails(id : number){
-    navigation.navigate('orderdetails', {orderId : id})
-  }
+  
+function openDetails(id : number){
+  navigation.navigate('orderdetails', {orderId : id})
+}
 
   useEffect(() => {
     async function getUserData(){
@@ -57,52 +59,59 @@ export default function OrderList(){
     }
 
     getOrdersData();
+    const filtrados: typeof orderData = orderData.filter(order => order.status == statusSelected)
+    setFOrders(filtrados);
   }, [orderData]);
 
   return(
     <View>
       { orderData && userData ?
       <VStack style={styles.container}>
-        <VStack mb={10}>
+        <VStack mb={10} w='full'>
           <Ellipse />
           <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>Meus pedidos</Heading>
         </VStack>
 
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {orderData.map(order => { 
-              return (
-                <Link mx={2} key={order.id} onPress={() => {order.id ? openDetails(order.id) : null}}>
-                  <VStack style={styles.hCard}>
-                    <HStack alignItems='center'>
-                      <VStack px={4}>
-                        <BigUser />
-                      </VStack>
-                      <VStack paddingX={3}>
-                        <Text style={styles.BoldText} color='#00ADB5'>Ordem Nº:{order.id}</Text>
-                        <Text style={styles.mediumText} color='#333'>Responsável: {order.colaborador}</Text>
-                        <Text style={styles.mediumText} color='#333' mr={2}>Data: {order.servico}</Text>
-                        <Text style={styles.mediumText} color='#333'>
-                          Status:                       
-                        {order.status == 0 ? 
-                          <Text style={styles.BoldText} color="#00D672">Em andamento</Text> 
-                          :
-                          <Text style={styles.BoldText} color='#00D6B8'>Concluído</Text>
-                        }
-                        </Text>
+        <VStack>
+          <HStack mb={8}>
+              <Filter
+                type='open'
+                title="em andamento"
+                onPress={() => setStatusSelected(0)}
+                isActive={statusSelected === 0}
+              />
 
-                      </VStack>
-                      <VStack backgroundColor="#00ADB5" borderRadius="full" padding={2} ml={4}>
-                        <Link>
-                          <ArrowForwardIcon color="#FFF"/>
-                        </Link>
-                      </VStack>
-                    </HStack>
-                  </VStack>
-                </Link>
+              <Filter 
+                type="closed"
+                title="finalizados"
+                onPress={() => setStatusSelected(1)}
+                isActive={statusSelected === 1}
+                />
+            </HStack>  
+          </VStack>
+
+        {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+        <FlatList
+          data={orderData}
+          // keyExtractor={(item) =>  (item.id ? item.id : item.id)}
+          renderItem={({ item } : {item : any}) => <OrderItem data={item} onPress={() => openDetails(item.id)}/>}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 100 }}
+          ListEmptyComponent={() => (
+            <Center>
+              <Text color="gray.700" fontSize="xl" mt={6} textAlign="center">
+                Você ainda não possui {'\n'}
+                solicitações {statusSelected === 0 ? 'em andamento!' : 'finalizadas!'}
+              </Text>
+            </Center>
+          )}
+        />
+          {/* {orderData.map(order => { 
+              return (
                 )
               })
-            }
-        </ScrollView>
+            } */}
+        {/* </ScrollView> */}
       </VStack>
         : <VStack style={styles.container}>
             <Loading />
@@ -115,8 +124,7 @@ export default function OrderList(){
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%'
+    justifyContent: 'center'
   },
   card : {
     width: 140,

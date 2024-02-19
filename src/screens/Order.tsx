@@ -298,7 +298,6 @@ const styles = StyleSheet.create({
   textData : {
     color: '#000',
     fontFamily: 'Inter_400Regular',
-    fontWeight: 'bold',
-    fontSize: 18
+    fontSize: 16
   }
 })
