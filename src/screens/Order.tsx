@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { Alert, BackHandler, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 import { VStack, HStack, Heading, Text, ScrollView, Checkbox } from 'native-base';
@@ -23,7 +23,7 @@ type ParamsProps = {
 }
 
 export default function Order(){
-
+  
   const route = useRoute();
   const navigation = useNavigation();
   const { userId, workerId } = route.params as ParamsProps;
@@ -109,6 +109,27 @@ export default function Order(){
       }
     }
   }
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert('Sair', 'Tem certeza que deseja sair do novo pedido?', [
+        {
+          text: 'Continuar',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {text: 'SAIR', onPress: () => navigation.goBack()},
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
 useEffect(() => { 
 
@@ -259,9 +280,7 @@ useEffect(() => {
 
             </VStack>
           </ScrollView>
-        : <VStack alignItems={"center"} justifyContent={"center"}>
-            <Text>Oi</Text>
-          </VStack>
+        : null
         }
       </VStack>
 

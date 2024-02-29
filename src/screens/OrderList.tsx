@@ -75,14 +75,14 @@ function openDetails(id : number){
         <VStack>
           <HStack mb={8}>
               <Filter
-                type='open'
+                type={0}
                 title="em andamento"
                 onPress={() => setStatusSelected(0)}
                 isActive={statusSelected === 0}
               />
 
               <Filter 
-                type="closed"
+                type={1}
                 title="finalizados"
                 onPress={() => setStatusSelected(1)}
                 isActive={statusSelected === 1}
@@ -92,7 +92,7 @@ function openDetails(id : number){
 
         {/* <ScrollView showsVerticalScrollIndicator={false}> */}
         <FlatList
-          data={orderData}
+          data={orderData.filter(item => item.status === statusSelected)}
           // keyExtractor={(item) =>  (item.id ? item.id : item.id)}
           renderItem={({ item } : {item : any}) => <OrderItem data={item} onPress={() => openDetails(item.id)}/>}
           showsVerticalScrollIndicator={false}

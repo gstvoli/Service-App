@@ -166,7 +166,7 @@ useEffect(() => {
                       <BigUser />
                     </VStack>
                     
-                    <VStack paddingX={6}>
+                    <VStack paddingX={4}>
                       <Text style={styles.dataText}>{workerModalData?.nome}</Text>
                       <Text style={styles.dataText}>{workerModalData?.profissao}</Text>
                       <Text style={styles.dataText}>{workerModalData?.cidade} - {workerModalData?.uf}</Text>
@@ -184,9 +184,9 @@ useEffect(() => {
                   </VStack>
 
                   <HStack display= 'flex' justifyContent='center' mx={12} alignItems={'center'}>
-                    <NBButton  onPress={() => { setShowModal(!showModal); } } style={{backgroundColor: '#FFD', marginTop: 10, padding: 4, height: 40, width: 40, borderRadius: 100 }}>
-                    <Text textAlign={'center'} style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>X</Text>
-                  </NBButton>
+                    <NBButton  onPress={() => { setShowModal(!showModal); } } style={{backgroundColor: '#FFD', marginTop: 10, padding: 4, height: 40, width: 35, borderRadius: 100 }}>
+                      <Text textAlign={'center'} style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>X</Text>
+                    </NBButton>
                   </HStack>                
                 </VStack>
               </VStack>

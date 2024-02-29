@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native'
-import { ArrowForwardIcon, VStack, HStack, Link, Text, ITextProps, IPressableProps } from "native-base";
+import { VStack, HStack, Text, ITextProps, IPressableProps } from "native-base";
 
 import BigUser from '../imgs/bigUser.svg';
 
@@ -30,7 +30,7 @@ export function OrderItem({ data, ...rest } : Props){
               <Text style={styles.mediumText} color='#333' mr={2}>Data: {data.service}</Text>
               <Text style={styles.mediumText} color='#333'>
                 Status:                       
-              {data.status == 0 ? 
+              {data.status === 0 ? 
                 <Text style={styles.BoldText} color="#00D672">Em andamento</Text> 
                 :
                 <Text style={styles.BoldText} color='#00D6B8'>Concluído</Text>

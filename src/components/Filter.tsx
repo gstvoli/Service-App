@@ -3,12 +3,12 @@ import { Text, Button, IButtonProps, useTheme } from 'native-base';
 type Props = IButtonProps & {
   title: string;
   isActive?: boolean;
-  type: 'open' | 'closed';
+  type: number;
 }
 export function Filter({ title, isActive = false, type, ...rest }: Props) {
   const { colors } = useTheme();
 
-  const colorType = type === 'open' ? colors.yellow[200] : colors.green[300];
+  const colorType = type === 0 ? colors.yellow[200] : colors.green[300];
 
   return (
     <Button

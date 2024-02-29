@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet } from "react-native"
+import { Alert, BackHandler, StyleSheet } from "react-native"
+import { useNavigation } from '@react-navigation/native'
 import { ScrollView, Heading, VStack, HStack, Text, Link } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView as View } from 'react-native-safe-area-context';
 
 import api from "../services/api";
 import { CadastroData } from '../@types/Tipos';
-import { Loading } from '../components/Loading';
 
 import Ellipse from '../imgs/ellipse2.svg';
 import BigUser from '../imgs/bg-user-solid.svg';
@@ -19,9 +19,9 @@ import SMHandshake from '../imgs/handshake-sm.svg';
 import SMEditPen from '../imgs/edit-pen-sm.svg';
 
 export default function Profile(){
+  const [ idade, setIdade ] = useState(0);
   const [ isLoading, setIsLoading ] = useState(true);
   const [ userData, setUserData ] = useState<CadastroData | null>(null);
-  const [ formatDate, setFormatDate ] = useState('');
 
   useEffect(() => {
     async function getUserData(){
@@ -46,6 +46,12 @@ export default function Profile(){
     }
 
   getUserData();
+  const today = new Date();
+  if (userData) {
+    if (userData.aniversario) {
+      setIdade(today.getFullYear()- userData.aniversario.getFullYear());
+    } 
+  }
 }, [userData]);
 
   return (
@@ -66,7 +72,7 @@ export default function Profile(){
             </VStack>
 
             <VStack mt={6} width="80%">
-              <Heading textAlign='center'>{userData.idade} anos</Heading>
+              <Heading textAlign='center'>{idade} anos</Heading>
               <Heading textAlign='center' fontSize='xl' pb={4} mb={4} borderBottomWidth={3} borderBottomColor="#000">{userData.cidade} - {userData.uf}</Heading>
             </VStack>
 
@@ -113,9 +119,7 @@ export default function Profile(){
             </VStack>
           </VStack>
         </ScrollView>
-      : <VStack style={styles.container}>
-          <Loading />  
-        </VStack>
+      : null
       }
     </View>
 
