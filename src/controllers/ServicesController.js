@@ -3,13 +3,14 @@ const connection = require('../database/connection');
 module.exports = {
   async index(request, response) {
     const { id } = request.params;
+
     const service = await connection('servico').where('id', id).select('*');
 
     return response.json(service);
   },
 
   async list(request, response) {
-    const services = await connection('servico').select('*');
+    const services = await connection('servico').select('*').groupBy('id');
 
     return response.json(services);
   },

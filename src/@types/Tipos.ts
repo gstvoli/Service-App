@@ -67,4 +67,4 @@ export interface OrderData {
   id_cliente: number;
   id_colaborador: number;
   colaborador?: string;
-}
+} 

@@ -48,14 +48,14 @@ export default function SignInFinish(){
           <Text style={styles.boldFont} mb={6}>Ficamos felizes por fazer parte de nossa comunidade!</Text>
           <UsersIcon />
           <Text color="#fff" bold fontSize="2xl" mt={8} mb={1}>Faça seu login para</Text>
-          <Text color="#fff" bold fontSize="2xl" borderBottomWidth={4} borderBottomColor='#fff' w={200} pb={1.5} textAlign="center">acessar o app!</Text>
+          <Text color="#fff" bold fontSize="2xl" w={200} pb={1.5} textAlign="center">acessar o app!</Text>
 
         </VStack>
 
         <HStack my={4}>
           <Link onPress={openScreen}>
             <RightToBracket />
-            <Text color="#444" bold fontSize="2xl" mt={1} ml={2}>Fazer login</Text>
+            <Text color="#fff" bold fontSize="2xl" mt={1} ml={2}>Fazer login</Text>
           </Link>
           
         </HStack>

@@ -17,14 +17,17 @@ type ParamsProps = {
 export default function Services(){
 
   const route = useRoute();
-  const [serviceData, setServiceData] = useState<ServiceData | null>(null);
+  const [serviceData, setServiceData] = useState<ServiceData[]>([]);
+  const { serviceId } = route.params as ParamsProps;
 
   useEffect(() => { 
     async function getServicesData() {
       try {
-        const { serviceId } = route.params as ParamsProps;
-        const response = await api.get(`/service/${serviceId}`);
-        const dados = response.data[0];
+        
+        const wichList = (serviceId ? api.get(`/service/${serviceId}`) : api.get(`/services`))
+        const response = await wichList;
+
+        const dados = response.data;
         setServiceData(dados);
         console.log('Dados', serviceData);
       } catch (error) {
@@ -33,7 +36,7 @@ export default function Services(){
     }
 
     getServicesData();
-  }, [serviceData])
+  }, [])
 
   return(
     <View >
@@ -41,162 +44,23 @@ export default function Services(){
       <VStack style={styles.container}>
         <VStack mb={10}>
           <Ellipse />
-          <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>{serviceData.titulo}</Heading>
+          <Heading mt={-16} color='#fff' textAlign='center' fontSize={28}>
+            {serviceId ? serviceData[0].titulo : 'Lista de Serviços'}</Heading>
         </VStack>
 
-        <Heading paddingY={2} color="#000">Trabalhadores</Heading>
+        <Heading paddingY={2} color="#000">Serviços disponíveis</Heading>
 
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Link>
-          <VStack style={styles.hCard}>
-            <HStack alignItems='center'>
-              <VStack>
-                <BigUser />
+        {serviceData.length > 0 ? serviceData.map(service => {
+          return (
+            <Link key={service.id}>
+              <VStack paddingY={4}>
+                <Text>{service.titulo}</Text>  
               </VStack>
-              <VStack paddingX={3}>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
-                
-                <HStack paddingY={2}>
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
-                  
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-                  <Star />
-                </HStack>
-              </VStack>
-              <VStack backgroundColor="red.100" borderRadius="full" padding={1}>
-                <Link>
-                  <ArrowForwardIcon color="#000"/>
-                </Link>
-              </VStack>
-            </HStack>
-          </VStack>
           </Link>
-          <Link>
-          <VStack style={styles.hCard}>
-            <HStack alignItems='center'>
-              <VStack>
-                <BigUser />
-              </VStack>
-              <VStack paddingX={3}>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
-                
-                <HStack paddingY={2}>
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
-                  
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-                  <Star />
-                </HStack>
-              </VStack>
-              <VStack backgroundColor="red.100" borderRadius="full" padding={1}>
-                <Link>
-                  <ArrowForwardIcon color="#000"/>
-                </Link>
-              </VStack>
-            </HStack>
-          </VStack>
-          </Link>
-          <Link>
-          <VStack style={styles.hCard}>
-            <HStack alignItems='center'>
-              <VStack>
-                <BigUser />
-              </VStack>
-              <VStack paddingX={3}>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
-                
-                <HStack paddingY={2}>
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
-                  
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-                  <Star />
-                </HStack>
-              </VStack>
-              <VStack backgroundColor="red.100" borderRadius="full" padding={1}>
-                <Link>
-                  <ArrowForwardIcon color="#000"/>
-                </Link>
-              </VStack>
-            </HStack>
-          </VStack>
-          </Link>
-          <Link>
-          <VStack style={styles.hCard}>
-            <HStack alignItems='center'>
-              <VStack>
-                <BigUser />
-              </VStack>
-              <VStack paddingX={3}>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
-                
-                <HStack paddingY={2}>
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
-                  
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-                  <Star />
-                </HStack>
-              </VStack>
-              <VStack backgroundColor="red.100" borderRadius="full" padding={1}>
-                <Link>
-                  <ArrowForwardIcon color="#000"/>
-                </Link>
-              </VStack>
-            </HStack>
-          </VStack>
-          </Link>
-          <Link>
-          <VStack style={styles.hCard}>
-            <HStack alignItems='center'>
-              <VStack>
-                <BigUser />
-              </VStack>
-              <VStack paddingX={3}>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
-                
-                <HStack paddingY={2}>
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
-                  
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-                  <Star />
-                </HStack>
-              </VStack>
-              <VStack backgroundColor="red.100" borderRadius="full" padding={1}>
-                <Link>
-                  <ArrowForwardIcon color="#000"/>
-                </Link>
-              </VStack>
-            </HStack>
-          </VStack>
-          </Link>
-          <Link>
-          <VStack style={styles.hCard}>
-            <HStack alignItems='center'>
-              <VStack>
-                <BigUser />
-              </VStack>
-              <VStack paddingX={3}>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Gustavo Oliveira Souza</Text>
-                <Text fontSize='md' color='#FFF' fontWeight='medium'>Muriaé - MG</Text>
-                
-                <HStack paddingY={2}>
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={2}>Serviços feitos: 0</Text>
-                  
-                  <Text fontSize='sm' color='#FFF' fontWeight='medium' mr={1}>Avaliação: 5.0</Text>
-                  <Star />
-                </HStack>
-              </VStack>
-              <VStack backgroundColor="red.100" borderRadius="full" padding={1}>
-                <Link>
-                  <ArrowForwardIcon color="#000"/>
-                </Link>
-              </VStack>
-            </HStack>
-          </VStack>
-          </Link>
+            ) 
+          }) : <Text>Não existem serviços para exibir no momento! </Text>
+        }
         </ScrollView>
       </VStack>
         : <Heading>Carregando dados do usuário...</Heading>

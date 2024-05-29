@@ -139,7 +139,7 @@ useEffect(() => {
 
           </ScrollView> 
 
-          <Link onPress={() => {navigation.navigate('serviceslist')}} mt={3}>
+          <Link onPress={() => {navigation.navigate('serviceslist', {serviceId: 0})}} mt={3}>
             <Text color='#1A82E2' fontSize='lg' fontWeight='bold' mr={1} mt={-2}>Todos os serviços</Text>
             <CircleRight />
           </Link>
