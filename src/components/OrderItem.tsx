@@ -25,7 +25,7 @@ export function OrderItem({ data, ...rest } : Props){
               <BigUser />
             </VStack>
             <VStack paddingX={3}>
-              <Text style={styles.BoldText} color='#00ADB5'>Ordem Nº:{data.id}</Text>
+              <Text style={styles.BoldText} color='#00ABD5'>Ordem Nº:{data.id}</Text>
               <Text style={styles.mediumText} color='#333'>Responsável: {data.worker}</Text>
               <Text style={styles.mediumText} color='#333' mr={2}>Data: {data.service}</Text>
               <Text style={styles.mediumText} color='#333'>
@@ -38,7 +38,7 @@ export function OrderItem({ data, ...rest } : Props){
               </Text>
 
             </VStack>
-            <VStack backgroundColor="#00ADB5" borderRadius="full" padding={2} ml={4}>
+            <VStack backgroundColor="#00ABD5" borderRadius="full" padding={2} ml={4}>
               {/* <Link onPress={() => {data.id ? openDetails(data.id) : null}}>
                 <ArrowForwardIcon color="#FFF"/>
               </Link> */}
@@ -57,14 +57,14 @@ const styles = StyleSheet.create({
   card : {
     width: 140,
     height: 200,
-    backgroundColor : '#00ADB5',
+    backgroundColor : '#00ABD5',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 18,
     marginHorizontal: 5
   },
   hCard : {
-    borderColor: '#00ADB5',
+    borderColor: '#00ABD5',
     borderWidth: 2,
     marginVertical: 6,
     paddingHorizontal: 12,

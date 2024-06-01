@@ -37,12 +37,12 @@ export default function SignIn({data, handleChange} : Etapa2Props){
 
     <View>
       <VStack alignItems="center">
-        <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 2/4</Text>
+        <Text color="#00ABD5" fontSize="xl" bold mb={2}>Etapa 2/4</Text>
         <Stage1 />
 
         <HStack alignItems="center" mt={4}>
           <UserLarge />
-          <Text color="#00ADB5" fontSize="2xl" bold mt={2} ml={2}>Criar conta</Text>
+          <Text color="#00ABD5" fontSize="2xl" bold mt={2} ml={2}>Criar conta</Text>
         </HStack>
 
         <Text color="#000" fontSize="md" bold my={3}>Informe seus dados complementares abaixo</Text>

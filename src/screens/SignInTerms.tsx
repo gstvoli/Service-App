@@ -11,12 +11,12 @@ export default function SignInTerms(){
   return (
     <View style={styles.container}>
       <VStack alignItems="center">
-        <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 3/4</Text>
+        <Text color="#00ABD5" fontSize="xl" bold mb={2}>Etapa 3/4</Text>
         <Stage2 />
 
         <HStack alignItems="center" mt={4}>
           <Terms />
-          <Text color="#00ADB5" fontSize="2xl" bold  ml={2}>Termos e Condições</Text>
+          <Text color="#00ABD5" fontSize="2xl" bold  ml={2}>Termos e Condições</Text>
         </HStack>
 
 

@@ -84,7 +84,7 @@ export default function Login(){
   return (
     <KeyboardAvoidingView behavior="position" enabled>
       <View style={styles.container}>
-      {/*  <View colors={['#00ADB5', '#FFF']} locations={[0 , 0.41]} style={styles.container}> */}
+      {/*  <View colors={['#00ABD5', '#FFF']} locations={[0 , 0.41]} style={styles.container}> */}
         <VStack mb={20}>
           <Ellipse />
           <Text style={styles.menuText} pt={2} mt={-20} color='#FFF' textAlign='center' fontSize={28}>Faça seu login!</Text>
@@ -105,7 +105,7 @@ export default function Login(){
           </Checkbox>
         </HStack>
 
-        <CButton mt={6} mb={6} color={"#FFF"} bgColor={"#00ADB5"} title={"Entrar"} w="full" onPress={handleLogin}/>
+        <CButton mt={6} mb={6} color={"#FFF"} bgColor={"#00ABD5"} title={"Entrar"} w="full" onPress={handleLogin}/>
 
         {/* <Text bold fontSize="md" >ou</Text>
         
@@ -122,7 +122,7 @@ export default function Login(){
         <Text style={styles.menuText} color="#444" fontSize="lg" my={1}>Ainda não tem uma conta?</Text>
 
         <Link onPress={openRegister}>
-          <Text style={styles.menuText} color="#00ADB5" fontSize="lg" borderBottomWidth={4} borderBottomColor='#00ADB5' my={1} px={4} pb={1}>Cadastre-se agora!</Text>
+          <Text style={styles.menuText} color="#00ABD5" fontSize="lg" borderBottomWidth={4} borderBottomColor='#00ABD5' my={1} px={4} pb={1}>Cadastre-se agora!</Text>
         </Link>
       </View>
     </KeyboardAvoidingView>

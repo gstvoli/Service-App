@@ -50,12 +50,12 @@ export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
 
     <View>
       <VStack alignItems={'center'}>
-        <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 1/4</Text>
+        <Text color="#00ABD5" fontSize="xl" bold mb={2}>Etapa 1/4</Text>
         <Stage1 />
 
         <HStack alignItems="center" mt={4}>
           <UserLarge />
-          <Text color="#00ADB5" fontSize="2xl" bold mt={2} ml={2}>Criar conta</Text>
+          <Text color="#00ABD5" fontSize="2xl" bold mt={2} ml={2}>Criar conta</Text>
         </HStack>
 
 
@@ -73,7 +73,7 @@ export default function SignIn({data, handleChange, handleDate} : Etapa1Props){
         <VStack>
           <HStack mt={0.5}  w={"full"} justifyContent={"center"} alignItems={"center"}>
 
-            <Button fs={"md"} backgroundColor={"#00ADB5"} color={"#fff"} title={"Data de nascimento"} onPress={showMode} mt={0} mb={0} h={"16"} w={"40"}/>  
+            <Button fs={"md"} backgroundColor={"#00ABD5"} color={"#fff"} title={"Data de nascimento"} onPress={showMode} mt={0} mb={0} h={"16"} w={"40"}/>  
             {show && (
               <DateTimePicker
               value={data.aniversario}

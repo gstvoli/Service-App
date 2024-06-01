@@ -175,7 +175,7 @@ export default function Register(){
       {/* </VStack> */}
       <VStack alignItems={"center"} mb={5}>
 
-        <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={4} mb={1} onPress={goToNextStep} >
+        <Button h={16} w={16} rounded="full" bgColor="#00ABD5" mt={4} mb={1} onPress={goToNextStep} >
           <ArrowRight />
         </Button>
 

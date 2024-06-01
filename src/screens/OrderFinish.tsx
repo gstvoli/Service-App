@@ -59,7 +59,7 @@ export default function OrderFinish(){
 
   return (
       <LinearGradient
-        colors={['#00ADB5', '#63DADF']}
+        colors={['#00ABD5', '#63DADF']}
         style={styles.container}
       >
         <VStack alignItems="center">

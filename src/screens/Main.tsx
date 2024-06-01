@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
   box : {
     width: 95,
     height: 95,
-    backgroundColor : '#00ADB5',
+    backgroundColor : '#00ABD5',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 18,
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
   card : {
     width: 150,
     height: 200,
-    backgroundColor : '#00ADB5',
+    backgroundColor : '#00ABD5',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 18,

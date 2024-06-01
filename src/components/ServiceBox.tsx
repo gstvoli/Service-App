@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   box : {
     width: 95,
     height: 95,
-    backgroundColor : '#00ADB5',
+    backgroundColor : '#00ABD5',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 18,

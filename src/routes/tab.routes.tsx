@@ -8,6 +8,7 @@ import SignInStart from '../screens/SignInStart';
 import SignInFinish from '../screens/SignInFinish';
 import Login from '../screens/Login';
 import ServicesList from '../screens/ServicesList';
+import WorkersList from '../screens/WorkersList';
 import Service from '../screens/Service';
 import Main from '../screens/Main';
 import Profile from '../screens/Profile';
@@ -20,12 +21,13 @@ import OrderDetails from '../screens/OrderDetails';
 export function TabRoutes() {
 
   return (
-    <Navigator screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor:"#00ADB5", height: 52, paddingBottom: 2}}} backBehavior='history'>
+    <Navigator screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor:"#00ABD5", height: 52, paddingBottom: 2}}} backBehavior='history'>
         <Screen name="home" component={Home} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}} />
         <Screen name="signinstart" component={SignInStart} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="register" component={Register} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="signinfinish" component={SignInFinish} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null }}/>
         <Screen name="login" component={Login} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
+        <Screen name="workerslist" component={WorkersList} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
         <Screen name="serviceslist" component={ServicesList} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
         <Screen name="service" component={Service} options={{ tabBarStyle:{display: 'none'}, tabBarButton: props => null}}/>
         <Screen name="order" component={Order} options={{ tabBarButton: props => null}}/> 

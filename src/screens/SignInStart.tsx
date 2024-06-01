@@ -16,11 +16,11 @@ export default function SignInStart(){
   return (
     <View style={styles.container}>
       <VStack alignItems="center">
-        <Heading textAlign={'center'} color="#00ADB5" fontSize={'3xl'}>Crie sua conta!</Heading>
+        <Heading textAlign={'center'} color="#00ABD5" fontSize={'3xl'}>Crie sua conta!</Heading>
         <Text color="#000" my={10} bold fontSize={'lg'}>Preencha os dados para criar sua conta!</Text>
 
         
-        <Button h={16} w={16} rounded="full" bgColor="#00ADB5" mt={8} onPress={openRegister}>
+        <Button h={16} w={16} rounded="full" bgColor="#00ABD5" mt={8} onPress={openRegister}>
           <ArrowRight />
         </Button>
 

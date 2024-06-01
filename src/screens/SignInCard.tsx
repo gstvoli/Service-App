@@ -22,12 +22,12 @@ export default function SignInCard(){
   return (
     <View style={styles.container}>
       <VStack alignItems="center">
-      <Text color="#00ADB5" fontSize="xl" bold mb={2}>Etapa 4/4</Text>
+      <Text color="#00ABD5" fontSize="xl" bold mb={2}>Etapa 4/4</Text>
         <Stage3 />
 
       <HStack alignItems="center" mt={4}>
         <CreditCard  />
-        <Text color="#00ADB5" fontSize="2xl" bold mt={2} ml={2}>Dados Financeiros</Text>
+        <Text color="#00ABD5" fontSize="2xl" bold mt={2} ml={2}>Dados Financeiros</Text>
       </HStack>
 
       <Text color="#000" fontSize="md" bold my={3}>Informe seus dados financeiros abaixo.</Text>

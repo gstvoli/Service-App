@@ -113,7 +113,7 @@ export default function Profile(){
               <HStack justifyContent="center" mt={5} mb={4}>
                 <Link>
                   <SMEditPen />
-                  <Text ml={2} fontSize='lg' color="#00ADB5" bold>Editar Perfil</Text>
+                  <Text ml={2} fontSize='lg' color="#00ABD5" bold>Editar Perfil</Text>
                 </Link>
               </HStack>
             </VStack>

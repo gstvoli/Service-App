@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   card : {
     width: 140,
     height: 200,
-    backgroundColor : '#00ADB5',
+    backgroundColor : '#00ABD5',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 18,
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 10,
     borderBottomWidth: 4,
-    borderColor: '#00ADB5'
+    borderColor: '#00ABD5'
   },
   header:{
     fontFamily: 'Inter_600SemiBold',

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   card: {
     paddingHorizontal: 22,
     paddingVertical: 8,
-    backgroundColor : '#00ADB5',
+    backgroundColor : '#00ABD5',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 18,

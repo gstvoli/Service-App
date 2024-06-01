@@ -235,7 +235,7 @@ useEffect(() => {
                 <Heading size={'md'} mb={3} textAlign={"center"}>Informe os dados sobre seu pedido</Heading>
 
                 <HStack h={12}>
-                  <Button fs="lg" backgroundColor={"#00ADB5"} color={'#fff'} mt={0} mb={0} h={12} title={'Data do Pedido'} onPress={showMode} w={'1/2'}/>
+                  <Button fs="lg" backgroundColor={"#00ABD5"} color={'#fff'} mt={0} mb={0} h={12} title={'Data do Pedido'} onPress={showMode} w={'1/2'}/>
                   {show && (
                     <DateTimePicker 
                     value={data.data_abertura}
@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
   card : {
     width: 140,
     height: 200,
-    backgroundColor : '#00ADB5',
+    backgroundColor : '#00ABD5',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 18,
@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 10,
     borderBottomWidth: 3,
-    borderColor: '#00ADB5' 
+    borderColor: '#00ABD5' 
   },
   textData : {
     color: '#000',
