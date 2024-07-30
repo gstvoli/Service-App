@@ -1,52 +1,27 @@
 {
   "expo": {
-    "name": "ServiceApp",
-    "slug": "ServiceApp",
+    "name": "Service-App",
+    "slug": "Service-App",
     "version": "1.0.0",
-    "platforms": [
-      "ios",
-      "android"
-    ],
     "orientation": "portrait",
-    "icon": "assets/icon.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-
+    "ios": {
+      "supportsTablet": true
+    },
     "android": {
-      "package": "com.gstv.serviceapp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
-    "extra": {
-      "eas": {
-        "projectId": "e4057ab6-f712-49e3-878d-40e7db5c9d56"
-      }
-    },
-    "packagerOpts": {
-      "config": "metro.config.js",
-      "sourceExts": [
-        "expo.ts",
-        "expo.tsx",
-        "expo.js",
-        "expo.jsx",
-        "ts",
-        "tsx",
-        "js",
-        "jsx",
-        "json",
-        "wasm",
-        "svg"
-      ]
+    "web": {
+      "favicon": "./assets/favicon.png"
     }
   }
 }
-
